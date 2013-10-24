@@ -1,0 +1,8 @@
+<res>
+  <item name="png.flat.btn_metro" compress="0" quality="80" props="labelColors=0xffffff&#xA;labelSize=14&#xA;label=文本&#xA;labelFont=Microsoft YaHei&#xA;labelMargin=,18,,&#xA;buttonMode=true"/>
+  <item name="png.flat.btn_close" compress="0" quality="80" props="label="/>
+  <item name="png.flat.btn_contact" compress="0" quality="80" props="label="/>
+  <item name="png.flat.btn_max" compress="0" quality="80" props="label="/>
+  <item name="png.flat.btn_min" compress="0" quality="80" props="label="/>
+  <item name="png.flat.btn_question" compress="0" quality="80" props="label="/>
+</res>
