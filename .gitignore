@@ -2,16 +2,16 @@
 bin/
 
 # Other files and folders
-.settings/
+*.settings/
 
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-.as3proj
+*.as3proj
 
 # should NOT be excluded as they contain compiler settings and other important
 
 # information for Eclipse / Flash Builder.
 obj/
 bat/
-.bat
-.morn
+*.bat
+*.morn
