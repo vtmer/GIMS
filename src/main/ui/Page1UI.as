@@ -1,6 +1,8 @@
 /**Created by the Morn,do not modify.*/
-package game.ui {
+package main.ui {
 	import morn.core.components.*;
+	import main.ui.drawerUI;
+	import main.ui.listUI;
 	public class Page1UI extends View {
 		public var btn_new:Button;
 		public var btn_arrange:Button;
@@ -11,7 +13,7 @@ package game.ui {
 		public var btn_min:Button;
 		public var btn_restore:Button;
 		protected var uiXML:XML =
-			<View sceneAlpha="0" alpha="1" visible="true" left="0" top="0" bottom="0" right="0" name="render">
+			<View sceneAlpha="0" alpha="1" visible="true" left="0" top="0" bottom="0" right="0">
 			  <Container left="0" right="0" top="0" bottom="0">
 			    <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26"/>
 			  </Container>
@@ -41,22 +43,15 @@ package game.ui {
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
 			  <Image url="png.flat.search_close" x="742" y="157"/>
-			  <List x="228" y="243" repeatX="1" repeatY="10">
-			    <Box name="render" width="755" height="47" x="0" y="0">
-			      <Label text="陈丽婷" x="106" y="1" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,,"/>
-			      <Label text="东区12-608" x="205" y="1" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left"/>
-			      <Label text="13560478360 " x="346" y="1" width="107" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14"/>
-			      <Label text="( 638360 )" x="451" y="1" width="94" height="47" margin=",14,," font="Microsoft YaHei" color="0x666666" align="left" size="14"/>
-			      <Label text="armchanel@msn.com" x="545" width="228" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666"/>
-			      <CheckBox skin="png.flat.checkbox" y="18"/>
-			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center"/>
-			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2"/>
-			    </Box>
-			    <VScrollBar skin="png.flat.vscroll" x="754" y="0" name="scrollBar" width="17" height="480"/>
+			  <List x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
+			    <list name="render" runtime="main.ui.listUI"/>
 			  </List>
+			  <drawer x="674" y="39" runtime="main.ui.drawerUI"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
+			viewClassMap["main.ui.drawerUI"] = drawerUI;
+			viewClassMap["main.ui.listUI"] = listUI;
 			createView(uiXML);
 		}
 	}

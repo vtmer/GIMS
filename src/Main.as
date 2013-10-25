@@ -1,7 +1,7 @@
 package 
 {
 	import flash.display.Sprite;
-	import game.view.Page1;
+	import main.view.Page1;
 	import morn.core.handlers.Handler;
 	
 	/**

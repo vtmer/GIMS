@@ -1,9 +1,9 @@
-package game.view
+package main.view
 {
 	import flash.display.NativeWindowResize;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
-	import game.ui.Page1UI;
+	import main.ui.Page1UI;
 	
 	/**
 	 * ...
