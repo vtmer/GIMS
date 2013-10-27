@@ -2,6 +2,7 @@
 package main.ui {
 	import morn.core.components.*;
 	public class drawerUI extends View {
+		public var input_name:TextInput;
 		protected var uiXML:XML =
 			<View>
 			  <Image url="png.flat.information" x="0" y="0"/>
@@ -10,7 +11,7 @@ package main.ui {
 			  <Label text="........................................................................................................." x="25" y="279" color="0xc9cdcc"/>
 			  <Label text="相片编码：" x="27" y="313" color="0x333333" font="Microsoft YaHei" size="12"/>
 			  <Label text="_________________________________________" x="24" y="54" color="0xc9cdcc"/>
-			  <TextInput text="请输入姓名" skin="png.flat.textinput" x="69" y="79" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei"/>
+			  <TextInput skin="png.flat.textinput" x="69" y="79" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="false" var="input_name" text="请输入姓名"/>
 			  <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="92" y="199" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12"/>
 			  <RadioButton skin="png.flat.radio" x="151" y="125" label="是" labelFont="Microsoft YaHei" labelColors="0x333333,0x333333,0x333333,0x333333"/>
 			  <TextInput text="宿舍号" skin="png.flat.textinput" x="167" y="159" width="139" height="28" color="0xc9cdcc" margin="5,5" font="Microsoft YaHei" size="12"/>

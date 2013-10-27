@@ -3,6 +3,8 @@ package main.view
 	import flash.display.NativeWindowResize;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
+	import main.events.DataActionEvent;
+	import main.events.DataActionEventKind;
 	import main.ui.Page1UI;
 	
 	/**
@@ -13,6 +15,45 @@ package main.view
 	{
 		
 		public function Page1()
+		{
+			//窗口操作
+			windowsBtn();
+			//新建提示信息
+			
+
+			
+		}
+		
+		//新建数据派发事件
+		//protected function onActionHandler(kind:String):void {
+			//var event:DataActionEvent;
+			//switch(kind) {
+				//case DataActionEventKind.KIND_CANCEL:
+				    //event = new DataActionEvent(kind);
+				//break;
+				//
+			    //case DataActionEventKind.KIND_SAVE:
+				    //var errors.Array = Validator.validateAll(validatorArray);
+					//if (errors.length)
+					//{
+						//return;
+					//}
+					//event = new DataActionEvent(kind, editUser);
+				//break;	
+			//}
+			//if (event) {
+				//dispatchEvent(evnet);
+			//}
+			//resetForm();
+		//}
+		//
+		//protected function resetForm():void 
+		//{
+			//input_name.text = "";
+			//input_
+		//}
+		//
+		private function windowsBtn():void 
 		{
 			btn_min.addEventListener(MouseEvent.MOUSE_DOWN, md_min);
 			btn_max.addEventListener(MouseEvent.MOUSE_DOWN, md_max);

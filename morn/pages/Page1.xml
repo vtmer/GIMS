@@ -31,5 +31,5 @@
   <List layers="1,1,0" layer="9" x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
     <UIView source="list.xml" layer="1" name="render"/>
   </List>
-  <UIView source="drawer.xml" x="674" y="39" layer="10"/>
+  <UIView source="drawer.xml" x="674" y="39" layer="10" runtime="main.view.MyDrawer"/>
 </View>

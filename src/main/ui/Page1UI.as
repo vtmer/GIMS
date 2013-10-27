@@ -1,8 +1,8 @@
 /**Created by the Morn,do not modify.*/
 package main.ui {
 	import morn.core.components.*;
-	import main.ui.drawerUI;
 	import main.ui.listUI;
+	import main.view.MyDrawer;
 	public class Page1UI extends View {
 		public var btn_new:Button;
 		public var btn_arrange:Button;
@@ -46,12 +46,12 @@ package main.ui {
 			  <List x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
 			    <list name="render" runtime="main.ui.listUI"/>
 			  </List>
-			  <drawer x="674" y="39" runtime="main.ui.drawerUI"/>
+			  <drawer x="674" y="39" runtime="main.view.MyDrawer"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
-			viewClassMap["main.ui.drawerUI"] = drawerUI;
 			viewClassMap["main.ui.listUI"] = listUI;
+			viewClassMap["main.view.MyDrawer"] = MyDrawer;
 			createView(uiXML);
 		}
 	}
