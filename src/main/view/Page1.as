@@ -20,64 +20,69 @@ package main.view
 			//窗口操作
 			windowsBtn();
 			//新建提示信息
-			newTips();
-
-			
+			inputTips(input_name,"请输入姓名");
+			inputTips(input_dorNum,"宿舍号");
+			inputTips(input_phone,"请输入长号或者短号");
+			inputTips(input_email,"请输入Email");
+			inputTips(input_photoId,"电子版相片编码");
+			inputTips(input_printPhotoId,"冲洗版相片编码");
 		}
 		
-		private function newTips():void 
+		private function inputTips(inputField:Object,tipsText:String):void
 		{
-			input_name.addEventListener(FocusEvent.FOCUS_OUT, showTips);
-			input_name.addEventListener(FocusEvent.FOCUS_IN, input);
+			inputField.addEventListener(FocusEvent.FOCUS_OUT, showTips);
+			inputField.addEventListener(FocusEvent.FOCUS_IN, input);
 			
-			}
-			
-			private function input(e:FocusEvent):void 
+			function input(e:FocusEvent):void
 			{
-				if (input_name.text == "请输入姓名"){
-				input_name.text = "";
-				input_name.color = 0x666666;
+				if (inputField.text == tipsText)
+				{
+					inputField.text = "";
+					inputField.color = 0x666666;
 				}
 			}
 			
-			private function showTips(e:FocusEvent):void 
+			function showTips(e:FocusEvent):void
 			{
-				if (input_name.text == ""){
-				input_name.text = "请输入姓名";
-				input_name.color = 0xc9cdcc;
+				if (inputField.text == "")
+				{
+					inputField.text = tipsText;
+					inputField.color = 0xc9cdcc;
 				}
 			}
+		
+		}
 		
 		//新建数据派发事件
 		//protected function onActionHandler(kind:String):void {
-			//var event:DataActionEvent;
-			//switch(kind) {
-				//case DataActionEventKind.KIND_CANCEL:
-				    //event = new DataActionEvent(kind);
-				//break;
-				//
-			    //case DataActionEventKind.KIND_SAVE:
-				    //var errors.Array = Validator.validateAll(validatorArray);
-					//if (errors.length)
-					//{
-						//return;
-					//}
-					//event = new DataActionEvent(kind, editUser);
-				//break;	
-			//}
-			//if (event) {
-				//dispatchEvent(evnet);
-			//}
-			//resetForm();
+		//var event:DataActionEvent;
+		//switch(kind) {
+		//case DataActionEventKind.KIND_CANCEL:
+		//event = new DataActionEvent(kind);
+		//break;
+		//
+		//case DataActionEventKind.KIND_SAVE:
+		//var errors.Array = Validator.validateAll(validatorArray);
+		//if (errors.length)
+		//{
+		//return;
+		//}
+		//event = new DataActionEvent(kind, editUser);
+		//break;	
+		//}
+		//if (event) {
+		//dispatchEvent(evnet);
+		//}
+		//resetForm();
 		//}
 		//
 		//protected function resetForm():void 
 		//{
-			//input_name.text = "";
-			//input_
+		//input_name.text = "";
+		//input_
 		//}
 		//
-		private function windowsBtn():void 
+		private function windowsBtn():void
 		{
 			btn_min.addEventListener(MouseEvent.MOUSE_DOWN, md_min);
 			btn_max.addEventListener(MouseEvent.MOUSE_DOWN, md_max);
@@ -128,7 +133,7 @@ package main.view
 		{
 			this.stage.nativeWindow.close();
 		}
-		
+	
 	}
 
 }
