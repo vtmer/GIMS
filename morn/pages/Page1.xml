@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="morn/views/page1.jpg" layers="10,1,0,0,drawer;9,1,0,0,list;6,1,0,1,search;5,1,0,1,label;4,1,0,1,navigation;1,1,0,1,button;3,1,0,1,image;2,1,0,1,background" alpha="1" visible="true" left="0" top="0" bottom="0" right="0">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="morn/views/page1.jpg" layers="11,1,1,0,第 11 层;9,1,1,1,list;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;1,1,1,1,button;3,1,1,1,image;2,1,1,1,background" alpha="1" visible="true" left="0" top="0" bottom="0" right="0">
   <Container layers="1,1,0" layer="2" left="0" right="0" top="0" bottom="0">
     <Image url="png.flat.bg" x="0" y="0" layer="1" sizeGrid="186,104,26,26"/>
   </Container>
@@ -31,5 +31,24 @@
   <List layers="1,1,0" layer="9" x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
     <UIView source="list.xml" layer="1" name="render"/>
   </List>
-  <UIView source="drawer.xml" x="674" y="39" layer="10" runtime="main.view.MyDrawer"/>
+  <Container layers="1,1,0" layer="11" x="674" y="43" name="drawer">
+    <Image url="png.flat.information" layer="1"/>
+    <Label text="新建" x="27" y="29" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
+    <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
+    <Label text="........................................................................................................." x="25" y="279" layer="1" color="0xc9cdcc"/>
+    <Label text="相片编码：" x="27" y="313" layer="1" color="0x333333" font="Microsoft YaHei" size="12"/>
+    <Label text="_________________________________________" x="24" y="54" layer="1" color="0xc9cdcc"/>
+    <TextInput skin="png.flat.textinput" x="69" y="79" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" text="请输入姓名" var="input_name"/>
+    <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="92" y="199" layer="1" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12"/>
+    <RadioButton skin="png.flat.radio" x="151" y="125" layer="1" label="是" labelFont="Microsoft YaHei" labelColors="0x333333,0x333333,0x333333,0x333333"/>
+    <TextInput text="宿舍号" skin="png.flat.textinput" x="167" y="159" layer="1" width="139" height="28" color="0xc9cdcc" margin="5,5" font="Microsoft YaHei" size="12"/>
+    <TextInput text="请输入姓名" skin="png.flat.textinput" x="69" y="239" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei"/>
+    <RadioButton skin="png.flat.radio" x="202" y="125" layer="1" label="否" labelFont="Microsoft YaHei" labelColors="0x333333,0x333333,0x333333,0x333333"/>
+    <ComboBox labels="label1,label2" skin="png.flat.combobox" x="69" y="159" layer="1"/>
+    <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="89" y="356" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc"/>
+    <TextInput text="电子版相片编码" skin="png.flat.textinput" x="89" y="309" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc"/>
+    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true"/>
+    <Button skin="png.flat.btn_add" x="313" y="357" layer="1" buttonMode="true"/>
+    <Button skin="png.flat.btn_add" x="313" y="310" layer="1" buttonMode="true"/>
+  </Container>
 </View>

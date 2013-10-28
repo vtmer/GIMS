@@ -6,6 +6,7 @@ package main.view
 	import main.events.DataActionEvent;
 	import main.events.DataActionEventKind;
 	import main.ui.Page1UI;
+	import flash.events.FocusEvent;
 	
 	/**
 	 * ...
@@ -19,10 +20,33 @@ package main.view
 			//窗口操作
 			windowsBtn();
 			//新建提示信息
-			
+			newTips();
 
 			
 		}
+		
+		private function newTips():void 
+		{
+			input_name.addEventListener(FocusEvent.FOCUS_OUT, showTips);
+			input_name.addEventListener(FocusEvent.FOCUS_IN, input);
+			
+			}
+			
+			private function input(e:FocusEvent):void 
+			{
+				if (input_name.text == "请输入姓名"){
+				input_name.text = "";
+				input_name.color = 0x666666;
+				}
+			}
+			
+			private function showTips(e:FocusEvent):void 
+			{
+				if (input_name.text == ""){
+				input_name.text = "请输入姓名";
+				input_name.color = 0xc9cdcc;
+				}
+			}
 		
 		//新建数据派发事件
 		//protected function onActionHandler(kind:String):void {

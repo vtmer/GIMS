@@ -2,7 +2,6 @@
 package main.ui {
 	import morn.core.components.*;
 	import main.ui.listUI;
-	import main.view.MyDrawer;
 	public class Page1UI extends View {
 		public var btn_new:Button;
 		public var btn_arrange:Button;
@@ -12,6 +11,7 @@ package main.ui {
 		public var btn_max:Button;
 		public var btn_min:Button;
 		public var btn_restore:Button;
+		public var input_name:TextInput;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" alpha="1" visible="true" left="0" top="0" bottom="0" right="0">
 			  <Container left="0" right="0" top="0" bottom="0">
@@ -46,12 +46,30 @@ package main.ui {
 			  <List x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
 			    <list name="render" runtime="main.ui.listUI"/>
 			  </List>
-			  <drawer x="674" y="39" runtime="main.view.MyDrawer"/>
+			  <Container x="674" y="43" name="drawer">
+			    <Image url="png.flat.information"/>
+			    <Label text="新建" x="27" y="29" size="24" font="Microsoft YaHei" color="0x333333"/>
+			    <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
+			    <Label text="........................................................................................................." x="25" y="279" color="0xc9cdcc"/>
+			    <Label text="相片编码：" x="27" y="313" color="0x333333" font="Microsoft YaHei" size="12"/>
+			    <Label text="_________________________________________" x="24" y="54" color="0xc9cdcc"/>
+			    <TextInput skin="png.flat.textinput" x="69" y="79" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" text="请输入姓名" var="input_name"/>
+			    <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="92" y="199" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12"/>
+			    <RadioButton skin="png.flat.radio" x="151" y="125" label="是" labelFont="Microsoft YaHei" labelColors="0x333333,0x333333,0x333333,0x333333"/>
+			    <TextInput text="宿舍号" skin="png.flat.textinput" x="167" y="159" width="139" height="28" color="0xc9cdcc" margin="5,5" font="Microsoft YaHei" size="12"/>
+			    <TextInput text="请输入姓名" skin="png.flat.textinput" x="69" y="239" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei"/>
+			    <RadioButton skin="png.flat.radio" x="202" y="125" label="否" labelFont="Microsoft YaHei" labelColors="0x333333,0x333333,0x333333,0x333333"/>
+			    <ComboBox labels="label1,label2" skin="png.flat.combobox" x="69" y="159"/>
+			    <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="89" y="356" width="217" height="28" margin="5,5,," color="0xc9cdcc"/>
+			    <TextInput text="电子版相片编码" skin="png.flat.textinput" x="89" y="309" width="217" height="28" margin="5,5,," color="0xc9cdcc"/>
+			    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true"/>
+			    <Button skin="png.flat.btn_add" x="313" y="357" buttonMode="true"/>
+			    <Button skin="png.flat.btn_add" x="313" y="310" buttonMode="true"/>
+			  </Container>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
 			viewClassMap["main.ui.listUI"] = listUI;
-			viewClassMap["main.view.MyDrawer"] = MyDrawer;
 			createView(uiXML);
 		}
 	}
