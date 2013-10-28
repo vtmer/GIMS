@@ -14,21 +14,49 @@ package main.view
 	 */
 	public class Page1 extends Page1UI
 	{
+		private var drawerIn:Boolean = false;
 		
 		public function Page1()
 		{
 			//窗口操作
 			windowsBtn();
-			//新建提示信息
-			inputTips(input_name,"请输入姓名");
-			inputTips(input_dorNum,"宿舍号");
-			inputTips(input_phone,"请输入长号或者短号");
-			inputTips(input_email,"请输入Email");
-			inputTips(input_photoId,"电子版相片编码");
-			inputTips(input_printPhotoId,"冲洗版相片编码");
+			//drawer动画
+			btn_block.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
+			btn_new.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
+			//表单提示信息
+			inputFieldTips();
+			//表单确认
+			//inputEnter();
 		}
 		
-		private function inputTips(inputField:Object,tipsText:String):void
+		private function IOAnimation(e:MouseEvent):void
+		{
+			if (drawerIn)
+			{
+				drawer.x = 674;
+				drawer.alpha = 1;
+				drawerIn = false;
+			}
+			else
+			{
+				drawer.x = 1010;
+				drawer.alpha = .1;
+				drawerIn = true;
+			}
+		}
+		
+		//新建表单提示信息
+		private function inputFieldTips():void
+		{
+			inputTips(input_name, "请输入姓名");
+			inputTips(input_dorNum, "宿舍号");
+			inputTips(input_phone, "请输入长号或者短号");
+			inputTips(input_email, "请输入Email");
+			inputTips(input_photoId, "电子版相片编码");
+			inputTips(input_printPhotoId, "冲洗版相片编码");
+		}
+		
+		private function inputTips(inputField:Object, tipsText:String):void
 		{
 			inputField.addEventListener(FocusEvent.FOCUS_OUT, showTips);
 			inputField.addEventListener(FocusEvent.FOCUS_IN, input);
@@ -53,35 +81,65 @@ package main.view
 		
 		}
 		
+		//表单确认
+		//private function inputEnter():void
+		//{
+			//btn_Enter.addEventListener(MouseEvent.MOUSE_DOWN, enterDown);
+		//}
+		//
+		//private function enterDown(e:MouseEvent):void
+		//{
+			//onActionHandler(DataActionEventKind.KIND_SAVE);
+		//}
+		//
 		//新建数据派发事件
-		//protected function onActionHandler(kind:String):void {
-		//var event:DataActionEvent;
-		//switch(kind) {
-		//case DataActionEventKind.KIND_CANCEL:
-		//event = new DataActionEvent(kind);
-		//break;
-		//
-		//case DataActionEventKind.KIND_SAVE:
-		//var errors.Array = Validator.validateAll(validatorArray);
-		//if (errors.length)
+		//protected function onActionHandler(kind:String):void
 		//{
-		//return;
+			//var event:DataActionEvent;
+			//switch (kind)
+			//{
+				//case DataActionEventKind.KIND_SAVE: 
+					//var errors:Array = Validator.validateAll(validatorArray);
+					//if (errors.length)
+					//{
+						//return;
+					//}
+					//event = new DataActionEvent(kind, editUser);
+					//break;
+			//}
+			//if (event)
+			//{
+				//dispatchEvent(event);
+			//}
+			//resetForm();
 		//}
-		//event = new DataActionEvent(kind, editUser);
-		//break;	
-		//}
-		//if (event) {
-		//dispatchEvent(evnet);
-		//}
-		//resetForm();
-		//}
-		//
-		//protected function resetForm():void 
+		
+		//protected function onActionHandler(kind:String):void
 		//{
-		//input_name.text = "";
-		//input_
+			//var event:DataActionEvent;
+			//switch (kind)
+			//{
+				//case DataActionEventKind.KIND_CANCEL: 
+					//event = new DataActionEvent(kind);
+					//break;
+				//
+				//case DataActionEventKind.KIND_SAVE: 
+					//var errors:Array = Validator.validateAll(validatorArray);
+					//if (errors.length)
+					//{
+						//return;
+					//}
+					//event = new DataActionEvent(kind, editUser);
+					//break;
+			//}
+			//if (event)
+			//{
+				//dispatchEvent(event);
+			//}
+			//resetForm();
 		//}
-		//
+		
+		//窗口操作
 		private function windowsBtn():void
 		{
 			btn_min.addEventListener(MouseEvent.MOUSE_DOWN, md_min);

@@ -31,7 +31,7 @@
   <List layers="1,1,0" layer="9" x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
     <UIView source="list.xml" layer="1" name="render"/>
   </List>
-  <Container layers="1,1,0" layer="11" x="674" y="43" name="drawer">
+  <Container layers="3,1,0,0,block;1,1,0,0,第 1 层" layer="11" x="674" y="43" var="drawer">
     <Image url="png.flat.information" layer="1"/>
     <Label text="新建" x="27" y="29" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
     <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
@@ -45,9 +45,11 @@
     <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="69" y="159" layer="1" buttonMode="true" labelColors="0x333333"/>
     <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="89" y="356" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_printPhotoId" selectable="true"/>
     <TextInput text="电子版相片编码" skin="png.flat.textinput" x="89" y="309" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_photoId" selectable="true"/>
-    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true"/>
-    <Button skin="png.flat.btn_add" x="313" y="357" layer="1" buttonMode="true" name="var_addPrintPhoto"/>
-    <Button skin="png.flat.btn_add" x="313" y="310" layer="1" buttonMode="true" name="var_addPhoto"/>
+    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_Enter"/>
+    <Button skin="png.flat.btn_add" x="313" y="357" layer="1" buttonMode="true" var="btn_addPrintPhoto"/>
+    <Button skin="png.flat.btn_add" x="313" y="310" layer="1" buttonMode="true" var="btn_addPhoto"/>
     <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="137" y="125" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true"/>
+    <Label text=">>" x="9" y="350" layer="1" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
+    <Image url="png.flat.blank" x="5" y="6" layer="3" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
   </Container>
 </View>

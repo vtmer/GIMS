@@ -11,12 +11,17 @@ package main.ui {
 		public var btn_max:Button;
 		public var btn_min:Button;
 		public var btn_restore:Button;
+		public var drawer:Container;
 		public var input_name:TextInput;
 		public var input_phone:TextInput;
 		public var input_dorNum:TextInput;
 		public var input_email:TextInput;
 		public var input_printPhotoId:TextInput;
 		public var input_photoId:TextInput;
+		public var btn_Enter:Button;
+		public var btn_addPrintPhoto:Button;
+		public var btn_addPhoto:Button;
+		public var btn_block:Image;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" alpha="1" visible="true" left="0" top="0" bottom="0" right="0">
 			  <Container left="0" right="0" top="0" bottom="0">
@@ -51,7 +56,7 @@ package main.ui {
 			  <List x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
 			    <list name="render" runtime="main.ui.listUI"/>
 			  </List>
-			  <Container x="674" y="43" name="drawer">
+			  <Container x="674" y="43" var="drawer">
 			    <Image url="png.flat.information"/>
 			    <Label text="新建" x="27" y="29" size="24" font="Microsoft YaHei" color="0x333333"/>
 			    <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
@@ -65,10 +70,12 @@ package main.ui {
 			    <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="69" y="159" buttonMode="true" labelColors="0x333333"/>
 			    <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="89" y="356" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_printPhotoId" selectable="true"/>
 			    <TextInput text="电子版相片编码" skin="png.flat.textinput" x="89" y="309" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_photoId" selectable="true"/>
-			    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true"/>
-			    <Button skin="png.flat.btn_add" x="313" y="357" buttonMode="true" name="var_addPrintPhoto"/>
-			    <Button skin="png.flat.btn_add" x="313" y="310" buttonMode="true" name="var_addPhoto"/>
+			    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_Enter"/>
+			    <Button skin="png.flat.btn_add" x="313" y="357" buttonMode="true" var="btn_addPrintPhoto"/>
+			    <Button skin="png.flat.btn_add" x="313" y="310" buttonMode="true" var="btn_addPhoto"/>
 			    <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="137" y="125" labelColors="0x333333" labelSize="12" labelMargin="5,,10," buttonMode="true"/>
+			    <Label text=">>" x="9" y="350" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
+			    <Image url="png.flat.blank" x="5" y="6" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
 			  </Container>
 			</View>;
 		public function Page1UI(){}
