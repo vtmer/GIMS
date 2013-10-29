@@ -23,7 +23,8 @@ package main.database
 	 */
 	public class UserDatabase extends EventDispatcher
 	{
-		protected var dbFile:File=File.applicationStorageDirectory.resolvePath("userInfo.db"); 
+		//protected var dbFile:File=File.applicationStorageDirectory.resolvePath("userInfo.db"); 
+		protected var dbFile:File=File.desktopDirectory.resolvePath("userInfo.db"); 
 		protected var conn:SQLConnection;
 		protected var resultSql:Responder;
 		protected var insertSql:SQLStatement = new SQLStatement();
@@ -32,8 +33,8 @@ package main.database
 		protected var selectSql:SQLStatement = new SQLStatement();
 		protected var tableSql:SQLStatement = new SQLStatement();
 		protected var insertText:String = "INSERT INTO userinfo(" +
-		"'user_name', 'user_isTown', 'user_dormitory', 'user_dorNumber', 'user_phone','user_email','user_photoId','user_printPhoto') VALUES(" +
-		":userName, :userIsTown, :userDormitory, :userDorNumber, :userPhone, :userEmail, :userPhotoId, :user_PrintPhotoId)";
+		"'user_name', 'user_isTown', 'user_dormitory', 'user_dorNumber', 'user_phone','user_email','user_photoId','user_printPhotoId') VALUES(" +
+		":userName, :userIsTown, :userDormitory, :userDorNumber, :userPhone, :userEmail, :userPhotoId, :userPrintPhotoId)";
 		
 		protected var updateText:String = "UPDATE userinfo SET " + 
 										"user_name=:userName, " + 
@@ -56,7 +57,7 @@ package main.database
 										"user_dorNumber as userDorNumber, " +
 										"user_phone as userPhone, " + 
 										"user_email as userEmail, " + 
-										"user_photoId as userPhotoId " + 
+										"user_photoId as userPhotoId, " + 
 										"user_printPhotoId as userPrintPhotoId " + 
 										"FROM userinfo";
 										
@@ -69,8 +70,7 @@ package main.database
 										"user_phone INTEGER, " +
 										"user_email TEXT, " +
 										"user_photoId TEXT, " +
-										"user_printPhotoId TEXT, " +
-										"user_info TEXT" + 
+										"user_printPhotoId TEXT" +
 										")";
 		public function UserDatabase(target:IEventDispatcher=null) 
 		{

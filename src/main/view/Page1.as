@@ -24,8 +24,8 @@ package main.view
 		public function Page1()
 		{
 			//初始化
+			editUser = new UserInfo();
 			database = new UserDatabase;
-			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
 			//窗口操作
 			windowsBtn();
 			//drawer动画
@@ -35,6 +35,7 @@ package main.view
 			inputFieldTips();
 			//表单确认
 			inputEnter();
+		
 		}
 		
 		//drawer动画
@@ -107,28 +108,12 @@ package main.view
 			editUser.userPhotoId = input_photoId.text;
 			editUser.userPrintPhotoId = input_printPhotoId.text;
 			
+			trace(editUser.userName);
 			onActionHandler(DataActionEventKind.KIND_SAVE);
 		}
 		
-		//处理派发事件
-		private function onDataActionHandler(e:DataActionEvent):void
-		{
-			switch (e.kind)
-			{
-				case DataActionEventKind.KIND_SAVE: 
-					if (editUser.userId)
-					{
-						database.update(editUser);
-					}
-					else
-					{
-						database.insert(editUser);
-					}
-				break;
-			}
-		}
 		
-		//新建数据派发事件
+		//根据操作处理数据
 		protected function onActionHandler(kind:String):void
 		{
 			var event:DataActionEvent;
@@ -136,20 +121,38 @@ package main.view
 			{
 				case DataActionEventKind.KIND_SAVE: 
 					event = new DataActionEvent(kind, editUser);
+					event.kind = kind;
 					break;
 			}
-			if (event)
-			{
-				dispatchEvent(event);
-			}
+			//if (event)
+			//{
+				//dispatchEvent(event);
+				//trace("派发事件");
+			//}
 			resetForm();
+			
+			switch (event.kind)
+			{
+				case DataActionEventKind.KIND_SAVE: 
+					if (editUser.userId)
+					{
+						trace("数据更新");
+						database.update(editUser);
+					}
+					else
+					{
+						trace("数据插入");
+						database.insert(editUser);
+					}
+					break;
+			}
 		}
 		
 		protected function resetForm():void
 		{
 			input_name.text = "";
 			input_isTown.selectedIndex = 0;
-			input_dor.selectedIndex = 4;
+			input_dor.selectedIndex = -1;
 			input_dorNum.text = "";
 			input_phone.text = "";
 			input_email.text = "";
@@ -164,6 +167,18 @@ package main.view
 			btn_max.addEventListener(MouseEvent.MOUSE_DOWN, md_max);
 			btn_close.addEventListener(MouseEvent.MOUSE_DOWN, md_close);
 			btn_restore.addEventListener(MouseEvent.MOUSE_DOWN, md_restore);
+			block_remove.addEventListener(MouseEvent.MOUSE_DOWN, md_remove);
+			block_resize.addEventListener(MouseEvent.MOUSE_DOWN, md_resize);
+		}
+		
+		private function md_resize(e:MouseEvent):void
+		{
+			this.stage.nativeWindow.startResize(NativeWindowResize.BOTTOM_RIGHT);
+		}
+		
+		private function md_remove(e:MouseEvent):void
+		{
+			this.stage.nativeWindow.startMove();
 		}
 		
 		private function md_restore(e:MouseEvent):void

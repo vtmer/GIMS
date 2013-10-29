@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="morn/views/page1.jpg" layers="11,1,1,0,第 11 层;9,1,1,1,list;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;1,1,1,1,button;3,1,1,1,image;2,1,1,1,background" alpha="1" visible="true" left="0" top="0" bottom="0" right="0">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="morn/views/page1.jpg" layers="12,1,7,1,control;11,1,7,1,drawer;1,1,7,1,button;9,1,7,1,list;6,1,7,1,search;5,0,7,1,label;4,1,7,1,navigation;13,1,7,0,remove;3,1,7,1,image;2,1,7,1,background" visible="true" left="0" top="0" bottom="0" right="0">
   <Container layers="1,1,0" layer="2" left="0" right="0" top="0" bottom="0">
     <Image url="png.flat.bg" x="0" y="0" layer="1" sizeGrid="186,104,26,26"/>
   </Container>
@@ -11,6 +11,17 @@
   <Image url="png.flat.text_home" x="248" y="42" layer="3"/>
   <Image url="png.flat.text_other" x="406" y="42" layer="3"/>
   <Image url="png.flat.icon6" x="367" y="48" layer="3"/>
+  <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
+    <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
+  </Container>
+  <Tab skin="png.flat.tab_metro" x="186" y="12" layer="4" labelColors="0xffffff" labelFont="Microsoft YaHei" width="174" height="93" buttonMode="true" direction="horizontal"/>
+  <Tab skin="png.flat.tab_metro" x="360" y="12" layer="4" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," width="174" height="93" buttonMode="true"/>
+  <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
+  <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
+  <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
+  <List layers="1,1,0" layer="9" x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
+    <UIView source="list.xml" layer="1" name="render"/>
+  </List>
   <Button label="新建" skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
   <Button label="整理相片" skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
   <Button label="一键发送" skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
@@ -23,14 +34,6 @@
     <Button label="" skin="png.flat.btn_min" layer="1" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
     <Button skin="png.flat.btn_restore" x="38" layer="1" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
   </Container>
-  <Tab skin="png.flat.tab_metro" x="186" y="12" layer="4" labelColors="0xffffff" labelFont="Microsoft YaHei" width="174" height="93" buttonMode="true" direction="horizontal"/>
-  <Tab skin="png.flat.tab_metro" x="360" y="12" layer="4" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," width="174" height="93" buttonMode="true"/>
-  <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
-  <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
-  <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
-  <List layers="1,1,0" layer="9" x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
-    <UIView source="list.xml" layer="1" name="render"/>
-  </List>
   <Container layers="3,1,0,0,block;1,1,0,0,第 1 层" layer="11" x="674" y="43" var="drawer">
     <Image url="png.flat.information" layer="1"/>
     <Label text="新建" x="27" y="29" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
@@ -51,5 +54,8 @@
     <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="137" y="125" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
     <Label text=">>" x="9" y="350" layer="1" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
     <Image url="png.flat.blank" x="5" y="6" layer="3" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
+  </Container>
+  <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" x="1024" y="768" width="12" height="12" alpha="0">
+    <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
 </View>
