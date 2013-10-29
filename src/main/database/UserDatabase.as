@@ -28,7 +28,7 @@ package main.database
 		protected var resultSql:Responder;
 		protected var insertSql:SQLStatement = new SQLStatement();
 		protected var updateSql:SQLStatement = new SQLStatement();
-		protected var daleteSql:SQLStatement = new SQLStatement();
+		protected var deleteSql:SQLStatement = new SQLStatement();
 		protected var selectSql:SQLStatement = new SQLStatement();
 		protected var tableSql:SQLStatement = new SQLStatement();
 		protected var insertText:String = "INSERT INTO userinfo(" +
@@ -121,8 +121,8 @@ package main.database
 		}
 		
 		//创建连接与数据表时的错误处理
-		protected function onErrorHandler(event:SQLError):void {
-			if (event.target == conn) {
+		protected function onErrorHandler(event:SQLErrorEvent):void {
+			if (event.target== conn) {
 				conn.removeEventListener(SQLEvent.OPEN, onOpenedHandler);
 				conn.removeEventListener(SQLErrorEvent.ERROR, onErrorHandler);
 			}
@@ -135,6 +135,13 @@ package main.database
 			trace("Error details:", event.error.details);
 		}
 		
+		//对数据表操作时的错误处理
+		protected function onErrorResultHandler(error:SQLError):void
+		{
+			trace("Error message:", error.message);
+			trace("Error details:", error.details);
+		}
+		
 		//对数据表操作后返回结果处理
 		protected function onResultHandler(result:SQLResult):void {
 			var count:int = result.rowsAffected;
@@ -142,9 +149,9 @@ package main.database
 				select();
 				return;
 			}
-			var resultDate:Array = result.date;
+			var resultData:Array = result.data;
 			if (resultData) {
-				dispatchEvent(new DataActionEvent(DataActionEventKind.KIND_DATA_CHANGE, resultDate));
+				dispatchEvent(new DataActionEvent(DataActionEventKind.KIND_DATA_CHANGE, resultData));
 			}
 		}
 		
@@ -164,7 +171,6 @@ package main.database
 			insertSql.parameters[":userEmail"] = user.userEmail;
 			insertSql.parameters[":userPhotoId"] = user.userPhotoId;
 			insertSql.parameters[":userPrintPhotoId"] = user.userPrintPhotoId;
-			insertSql.parameters[":userInfo"] = user.userInfo;
 			insertSql.execute( -1, resultSql);
 		}
 		
@@ -180,7 +186,6 @@ package main.database
 			updateSql.parameters[":userEmail"] = user.userEmail;
 			updateSql.parameters[":userPhotoId"] = user.userPhotoId;
 			updateSql.parameters[":userPrintPhotoId"] = user.userPrintPhotoId;
-			updateSql.parameters[":userInfo"] = user.userInfo;
 			updateSql.execute( -1, resultSql);
 		}
 		

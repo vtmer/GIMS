@@ -42,13 +42,13 @@
     <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="92" y="199" layer="1" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12" var="input_phone" selectable="true" align="left"/>
     <TextInput skin="png.flat.textinput" x="167" y="159" layer="1" width="139" height="28" color="0xc9cdcc" margin="5,5,," font="Microsoft YaHei" size="12" var="input_dorNum" selectable="true" align="left" text="宿舍号"/>
     <TextInput text="请输入Email" skin="png.flat.textinput" x="69" y="239" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" var="input_email" selectable="true"/>
-    <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="69" y="159" layer="1" buttonMode="true" labelColors="0x333333"/>
+    <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="69" y="159" layer="1" buttonMode="true" labelColors="0x333333" var="input_dor"/>
     <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="89" y="356" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_printPhotoId" selectable="true"/>
     <TextInput text="电子版相片编码" skin="png.flat.textinput" x="89" y="309" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_photoId" selectable="true"/>
     <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_Enter"/>
     <Button skin="png.flat.btn_add" x="313" y="357" layer="1" buttonMode="true" var="btn_addPrintPhoto"/>
     <Button skin="png.flat.btn_add" x="313" y="310" layer="1" buttonMode="true" var="btn_addPhoto"/>
-    <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="137" y="125" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true"/>
+    <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="137" y="125" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
     <Label text=">>" x="9" y="350" layer="1" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
     <Image url="png.flat.blank" x="5" y="6" layer="3" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
   </Container>

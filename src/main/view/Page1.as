@@ -2,9 +2,12 @@ package main.view
 {
 	import flash.display.NativeWindowResize;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import main.database.UserDatabase;
 	import main.events.DataActionEvent;
 	import main.events.DataActionEventKind;
+	import main.model.UserInfo;
 	import main.ui.Page1UI;
 	import flash.events.FocusEvent;
 	
@@ -14,10 +17,15 @@ package main.view
 	 */
 	public class Page1 extends Page1UI
 	{
-		private var drawerIn:Boolean = false;
+		private var _isDrawerIn:Boolean = false;
+		private var editUser:UserInfo;
+		private var database:UserDatabase;
 		
 		public function Page1()
 		{
+			//初始化
+			database = new UserDatabase;
+			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
 			//窗口操作
 			windowsBtn();
 			//drawer动画
@@ -26,22 +34,23 @@ package main.view
 			//表单提示信息
 			inputFieldTips();
 			//表单确认
-			//inputEnter();
+			inputEnter();
 		}
 		
+		//drawer动画
 		private function IOAnimation(e:MouseEvent):void
 		{
-			if (drawerIn)
+			if (_isDrawerIn)
 			{
 				drawer.x = 674;
 				drawer.alpha = 1;
-				drawerIn = false;
+				_isDrawerIn = false;
 			}
 			else
 			{
 				drawer.x = 1010;
 				drawer.alpha = .1;
-				drawerIn = true;
+				_isDrawerIn = true;
 			}
 		}
 		
@@ -82,62 +91,71 @@ package main.view
 		}
 		
 		//表单确认
-		//private function inputEnter():void
-		//{
-			//btn_Enter.addEventListener(MouseEvent.MOUSE_DOWN, enterDown);
-		//}
-		//
-		//private function enterDown(e:MouseEvent):void
-		//{
-			//onActionHandler(DataActionEventKind.KIND_SAVE);
-		//}
-		//
-		//新建数据派发事件
-		//protected function onActionHandler(kind:String):void
-		//{
-			//var event:DataActionEvent;
-			//switch (kind)
-			//{
-				//case DataActionEventKind.KIND_SAVE: 
-					//var errors:Array = Validator.validateAll(validatorArray);
-					//if (errors.length)
-					//{
-						//return;
-					//}
-					//event = new DataActionEvent(kind, editUser);
-					//break;
-			//}
-			//if (event)
-			//{
-				//dispatchEvent(event);
-			//}
-			//resetForm();
-		//}
+		private function inputEnter():void
+		{
+			btn_Enter.addEventListener(MouseEvent.MOUSE_DOWN, enterDown);
+		}
 		
-		//protected function onActionHandler(kind:String):void
-		//{
-			//var event:DataActionEvent;
-			//switch (kind)
-			//{
-				//case DataActionEventKind.KIND_CANCEL: 
-					//event = new DataActionEvent(kind);
-					//break;
-				//
-				//case DataActionEventKind.KIND_SAVE: 
-					//var errors:Array = Validator.validateAll(validatorArray);
-					//if (errors.length)
-					//{
-						//return;
-					//}
-					//event = new DataActionEvent(kind, editUser);
-					//break;
-			//}
-			//if (event)
-			//{
-				//dispatchEvent(event);
-			//}
-			//resetForm();
-		//}
+		private function enterDown(e:MouseEvent):void
+		{
+			editUser.userName = input_name.text;
+			editUser.userIsTown = Number(input_isTown.selectedValue);
+			editUser.userDormitory = input_dor.selectedLabel;
+			editUser.userDorNumber = Number(input_dorNum.text);
+			editUser.userPhone = Number(input_phone.text);
+			editUser.userEmail = input_email.text;
+			editUser.userPhotoId = input_photoId.text;
+			editUser.userPrintPhotoId = input_printPhotoId.text;
+			
+			onActionHandler(DataActionEventKind.KIND_SAVE);
+		}
+		
+		//处理派发事件
+		private function onDataActionHandler(e:DataActionEvent):void
+		{
+			switch (e.kind)
+			{
+				case DataActionEventKind.KIND_SAVE: 
+					if (editUser.userId)
+					{
+						database.update(editUser);
+					}
+					else
+					{
+						database.insert(editUser);
+					}
+				break;
+			}
+		}
+		
+		//新建数据派发事件
+		protected function onActionHandler(kind:String):void
+		{
+			var event:DataActionEvent;
+			switch (kind)
+			{
+				case DataActionEventKind.KIND_SAVE: 
+					event = new DataActionEvent(kind, editUser);
+					break;
+			}
+			if (event)
+			{
+				dispatchEvent(event);
+			}
+			resetForm();
+		}
+		
+		protected function resetForm():void
+		{
+			input_name.text = "";
+			input_isTown.selectedIndex = 0;
+			input_dor.selectedIndex = 4;
+			input_dorNum.text = "";
+			input_phone.text = "";
+			input_email.text = "";
+			input_photoId.text = "";
+			input_printPhotoId.text = "";
+		}
 		
 		//窗口操作
 		private function windowsBtn():void

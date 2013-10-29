@@ -27,7 +27,7 @@ package main.events
 		
 		public override function toString():String 
 		{ 
-			return formatToString("DataActionEvent","kind" "type", "bubbles", "cancelable", "eventPhase"); 
+			return formatToString("DataActionEvent","kind","type", "bubbles", "cancelable", "eventPhase"); 
 		}
 		
 	}
