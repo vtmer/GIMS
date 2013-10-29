@@ -17,7 +17,7 @@ package main.view
 	 */
 	public class Page1 extends Page1UI
 	{
-		private var _isDrawerIn:Boolean = false;
+		private var _isDrawerIn:Boolean = true;
 		private var editUser:UserInfo;
 		private var database:UserDatabase;
 		
@@ -43,14 +43,14 @@ package main.view
 		{
 			if (_isDrawerIn)
 			{
-				drawer.x = 674;
-				drawer.alpha = 1;
+				//drawer.x = 674;
+				drawer.visible = true;
 				_isDrawerIn = false;
 			}
 			else
 			{
-				drawer.x = 1010;
-				drawer.alpha = .1;
+				//drawer.x = 1010;
+				drawer.visible = false;
 				_isDrawerIn = true;
 			}
 		}
@@ -112,7 +112,6 @@ package main.view
 			onActionHandler(DataActionEventKind.KIND_SAVE);
 		}
 		
-		
 		//根据操作处理数据
 		protected function onActionHandler(kind:String):void
 		{
@@ -126,8 +125,8 @@ package main.view
 			}
 			//if (event)
 			//{
-				//dispatchEvent(event);
-				//trace("派发事件");
+			//dispatchEvent(event);
+			//trace("派发事件");
 			//}
 			resetForm();
 			
@@ -174,6 +173,18 @@ package main.view
 		private function md_resize(e:MouseEvent):void
 		{
 			this.stage.nativeWindow.startResize(NativeWindowResize.BOTTOM_RIGHT);
+			stage.addEventListener(Event.ENTER_FRAME, ef);
+		}
+		
+		private function ef(e:Event):void
+		{
+			bg.width = stage.stageWidth;
+			bg.height = stage.stageHeight;
+			windows_btn.right = 20;
+			windows_btn.top = 12;
+			block_resize.right = 12;
+			block_resize.bottom = 12;
+		
 		}
 		
 		private function md_remove(e:MouseEvent):void

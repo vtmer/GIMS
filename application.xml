@@ -18,6 +18,7 @@
     <height>792</height>
     <maximizable>true</maximizable>
     <minimizable>true</minimizable>
+	<minSize>1048 792</minSize>
     <resizable>true</resizable>
   </initialWindow>
   <icon>

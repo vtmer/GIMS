@@ -3,11 +3,13 @@ package main.ui {
 	import morn.core.components.*;
 	import main.ui.listUI;
 	public class Page1UI extends View {
+		public var bg:Image;
 		public var block_remove:Container;
 		public var btn_new:Button;
 		public var btn_arrange:Button;
 		public var btn_send:Button;
 		public var btn_io:Button;
+		public var windows_btn:Container;
 		public var btn_close:Button;
 		public var btn_max:Button;
 		public var btn_min:Button;
@@ -27,10 +29,8 @@ package main.ui {
 		public var btn_block:Image;
 		public var block_resize:Container;
 		protected var uiXML:XML =
-			<View sceneAlpha="0" visible="true" left="0" top="0" bottom="0" right="0">
-			  <Container left="0" right="0" top="0" bottom="0">
-			    <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26"/>
-			  </Container>
+			<View sceneAlpha="0" visible="true">
+			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
 			  <Image url="png.flat.logo" x="33" y="36"/>
 			  <Image url="png.flat.icon1" x="86" y="136"/>
 			  <Image url="png.flat.icon2" x="84" y="240"/>
@@ -57,13 +57,13 @@ package main.ui {
 			  <Button label="导入/导出" skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
 			  <Button skin="png.flat.btn_contact" x="76" y="724" buttonMode="true"/>
 			  <Button skin="png.flat.btn_question" x="104" y="724" buttonMode="true"/>
-			  <Container right="20" top="12">
+			  <Container right="20" top="12" var="windows_btn">
 			    <Button skin="png.flat.btn_close" x="76" buttonMode="true" var="btn_close" toolTip="关闭"/>
 			    <Button skin="png.flat.btn_max" x="38" buttonMode="true" var="btn_max" toolTip="最大化"/>
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
 			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
 			  </Container>
-			  <Container x="674" y="43" var="drawer">
+			  <Container x="674" y="43" var="drawer" visible="false">
 			    <Image url="png.flat.information"/>
 			    <Label text="新建" x="27" y="29" size="24" font="Microsoft YaHei" color="0x333333"/>
 			    <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
@@ -84,7 +84,7 @@ package main.ui {
 			    <Label text=">>" x="9" y="350" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
 			    <Image url="png.flat.blank" x="5" y="6" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
 			  </Container>
-			  <Container var="block_resize" right="12" bottom="12" x="1024" y="768" width="12" height="12" alpha="0">
+			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
 			</View>;

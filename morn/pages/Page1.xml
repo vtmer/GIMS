@@ -1,7 +1,5 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="morn/views/page1.jpg" layers="12,1,7,1,control;11,1,7,1,drawer;1,1,7,1,button;9,1,7,1,list;6,1,7,1,search;5,0,7,1,label;4,1,7,1,navigation;13,1,7,0,remove;3,1,7,1,image;2,1,7,1,background" visible="true" left="0" top="0" bottom="0" right="0">
-  <Container layers="1,1,0" layer="2" left="0" right="0" top="0" bottom="0">
-    <Image url="png.flat.bg" x="0" y="0" layer="1" sizeGrid="186,104,26,26"/>
-  </Container>
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,0,0,control;11,0,0,1,drawer;1,1,0,1,button;9,1,0,0,list;6,1,0,1,search;5,0,0,1,label;4,1,0,1,navigation;13,1,0,0,remove;3,1,0,1,image;2,1,0,1,background" visible="true">
+  <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Image url="png.flat.logo" x="33" y="36" layer="3"/>
   <Image url="png.flat.icon1" x="86" y="136" layer="3"/>
   <Image url="png.flat.icon2" x="84" y="240" layer="3"/>
@@ -28,13 +26,13 @@
   <Button label="导入/导出" skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
   <Button skin="png.flat.btn_contact" x="76" y="724" layer="1" buttonMode="true"/>
   <Button skin="png.flat.btn_question" x="104" y="724" layer="1" buttonMode="true"/>
-  <Container layers="1,1,0" layer="1" right="20" top="12">
+  <Container layers="1,1,0" layer="1" right="20" top="12" var="windows_btn">
     <Button skin="png.flat.btn_close" x="76" layer="1" buttonMode="true" var="btn_close" toolTip="关闭"/>
     <Button skin="png.flat.btn_max" x="38" layer="1" buttonMode="true" var="btn_max" toolTip="最大化"/>
     <Button label="" skin="png.flat.btn_min" layer="1" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
     <Button skin="png.flat.btn_restore" x="38" layer="1" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
   </Container>
-  <Container layers="3,1,0,0,block;1,1,0,0,第 1 层" layer="11" x="674" y="43" var="drawer">
+  <Container layers="3,1,0,0,block;1,1,0,0,第 1 层" layer="11" x="674" y="43" var="drawer" visible="false">
     <Image url="png.flat.information" layer="1"/>
     <Label text="新建" x="27" y="29" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
     <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
@@ -55,7 +53,7 @@
     <Label text=">>" x="9" y="350" layer="1" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
     <Image url="png.flat.blank" x="5" y="6" layer="3" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
   </Container>
-  <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" x="1024" y="768" width="12" height="12" alpha="0">
+  <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
     <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
 </View>
