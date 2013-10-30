@@ -13,6 +13,7 @@ package main.view
 	import flash.events.FocusEvent;
 	import morn.core.components.Component;
 	import morn.core.components.Label;
+	import morn.core.components.TextInput;
 	import morn.core.handlers.Handler;
 	
 	/**
@@ -50,7 +51,7 @@ package main.view
 			//onActionHandler(DataActionEventKind.KIND_REFRESH);
 			//list.dataSource = editUser as Array;
 			list.renderHandler = new Handler(listRender); //自定义渲染方式
-		    
+		
 		/**自定义List项渲染*/
 		
 		}
@@ -58,7 +59,7 @@ package main.view
 		private function listRender(item:Component, index:int):void
 		{
 			
-			if (index<list.array.length)
+			if (index < list.array.length)
 			{
 				list.repeatX = 1;
 				list.repeatY = list.array.length;
@@ -72,7 +73,7 @@ package main.view
 				var userEmail:Label = item.getChildByName("userEmail") as Label;
 				userId.text = userData.userId.toString();
 				userName.text = userData.userName;
-				userDor.text = userData.userDormitory+userData.userDorNumber.toString();
+				userDor.text = userData.userDormitory + "-" + userData.userDorNumber.toString();
 				userPhone.text = userData.userPhone.toString();
 				userEmail.text = userData.userEmail;
 				
@@ -161,23 +162,23 @@ package main.view
 					list.array = event.data as Array;
 					trace("数据变更");
 					break;
-				
-				case DataActionEventKind.KIND_REFRESH: 
-					database.select();
-					break;
-
-				case DataActionEventKind.KIND_SAVE: 
-					if (editUser.userId)
-					{
-						trace("数据更新");
-						database.update(editUser);
-					}
-					else
-					{
-						trace("数据插入");
-						database.insert(editUser);
-					}
-					break;
+			
+				//case DataActionEventKind.KIND_REFRESH: 
+				//database.select();
+				//break;
+			
+				//case DataActionEventKind.KIND_SAVE: 
+				//if (editUser.userId)
+				//{
+				//trace("数据更新");
+				//database.update(editUser);
+				//}
+				//else
+				//{
+				//trace("数据插入");
+				//database.insert(editUser);
+				//}
+				//break;
 			}
 		
 		}
@@ -197,10 +198,28 @@ package main.view
 			if (event)
 			{
 				dispatchEvent(event);
-				trace("派发事件"+event.kind);
+				trace("派发事件" + event.kind);
 			}
 			resetForm();
-		
+			switch (event.kind)
+			{
+				case DataActionEventKind.KIND_REFRESH: 
+					database.select();
+					break;
+				
+				case DataActionEventKind.KIND_SAVE: 
+					if (editUser.userId)
+					{
+						trace("数据更新");
+						database.update(editUser);
+					}
+					else
+					{
+						trace("数据插入");
+						database.insert(editUser);
+					}
+					break;
+			}
 		}
 		
 		protected function resetForm():void
@@ -213,6 +232,19 @@ package main.view
 			input_email.text = "";
 			input_photoId.text = "";
 			input_printPhotoId.text = "";
+			
+			inputRefresh(input_name, "请输入姓名");
+			inputRefresh(input_dorNum, "宿舍号");
+			inputRefresh(input_phone, "请输入长号或者短号");
+			inputRefresh(input_email, "请输入Email");
+			inputRefresh(input_photoId, "电子版相片编码");
+			inputRefresh(input_printPhotoId, "冲洗版相片编码");
+		}
+		
+		private function inputRefresh(inputField:TextInput, tipsText:String):void
+		{
+			inputField.text = tipsText;
+			inputField.color = 0xc9cdcc;
 		}
 		
 		//窗口操作
