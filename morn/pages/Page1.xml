@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,0,0,control;11,0,0,1,drawer;1,1,0,1,button;9,1,0,0,list;6,1,0,1,search;5,0,0,1,label;4,1,0,1,navigation;13,1,0,0,remove;3,1,0,1,image;2,1,0,1,background" visible="true">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,2,1,control;11,0,2,0,drawer;14,1,2,0,list;1,1,2,1,button;6,1,2,1,search;5,0,2,1,label;4,1,2,1,navigation;13,1,2,0,remove;3,1,2,1,image;2,1,2,1,background" visible="true">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Image url="png.flat.logo" x="33" y="36" layer="3"/>
   <Image url="png.flat.icon1" x="86" y="136" layer="3"/>
@@ -17,9 +17,6 @@
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
   <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
-  <List layers="1,1,0" layer="9" x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
-    <UIView source="list.xml" layer="1" name="render"/>
-  </List>
   <Button label="新建" skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
   <Button label="整理相片" skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
   <Button label="一键发送" skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
@@ -32,8 +29,20 @@
     <Button label="" skin="png.flat.btn_min" layer="1" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
     <Button skin="png.flat.btn_restore" x="38" layer="1" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
   </Container>
+  <List layers="1,1,0" layer="14" x="223" y="225" var="list" repeatY="10" repeatX="1">
+    <Box layers="1,1,0" layer="1" name="render" var="render">
+      <Label text="陈丽婷" x="106" y="1" layer="1" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName"/>
+      <Label text="东区12-608" x="208" y="1" layer="1" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
+      <Label text="13560478360 " x="346" y="1" layer="1" width="107" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone"/>
+      <Label text="armchanel@msn.com" x="465" layer="1" width="228" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="2" name="userEmail"/>
+      <CheckBox skin="png.flat.checkbox" y="18" layer="1" buttonMode="true"/>
+      <Label text="01" x="68" layer="1" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId"/>
+      <Clip url="png.flat.clip_condition" x="39" y="20" layer="1" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
+    </Box>
+    <VScrollBar skin="png.flat.vscroll" x="697" y="0" layer="1" name="scrollBar" width="17" height="498"/>
+  </List>
   <Container layers="3,1,0,0,block;1,1,0,0,第 1 层" layer="11" x="674" y="43" var="drawer" visible="false">
-    <Image url="png.flat.information" layer="1"/>
+    <Image url="png.flat.information" layer="1" visible="true"/>
     <Label text="新建" x="27" y="29" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
     <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
     <Label text="........................................................................................................." x="25" y="279" layer="1" color="0xc9cdcc"/>

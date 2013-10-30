@@ -1,7 +1,6 @@
 /**Created by the Morn,do not modify.*/
 package main.ui {
 	import morn.core.components.*;
-	import main.ui.listUI;
 	public class Page1UI extends View {
 		public var bg:Image;
 		public var block_remove:Container;
@@ -14,6 +13,8 @@ package main.ui {
 		public var btn_max:Button;
 		public var btn_min:Button;
 		public var btn_restore:Button;
+		public var list:List;
+		public var render:Box;
 		public var drawer:Container;
 		public var input_name:TextInput;
 		public var input_phone:TextInput;
@@ -48,9 +49,6 @@ package main.ui {
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
 			  <Image url="png.flat.search_close" x="742" y="157"/>
-			  <List x="218" y="245" repeatX="1" repeatY="10" spaceX="0" spaceY="1">
-			    <list name="render" runtime="main.ui.listUI"/>
-			  </List>
 			  <Button label="新建" skin="png.flat.btn_metro" x="12" y="104" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
 			  <Button label="整理相片" skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
 			  <Button label="一键发送" skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
@@ -63,8 +61,20 @@ package main.ui {
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
 			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
 			  </Container>
+			  <List x="223" y="225" var="list" repeatY="10" repeatX="1">
+			    <Box name="render" var="render">
+			      <Label text="陈丽婷" x="106" y="1" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName"/>
+			      <Label text="东区12-608" x="208" y="1" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
+			      <Label text="13560478360 " x="346" y="1" width="107" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone"/>
+			      <Label text="armchanel@msn.com" x="465" width="228" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="2" name="userEmail"/>
+			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
+			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId"/>
+			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
+			    </Box>
+			    <VScrollBar skin="png.flat.vscroll" x="697" y="0" name="scrollBar" width="17" height="498"/>
+			  </List>
 			  <Container x="674" y="43" var="drawer" visible="false">
-			    <Image url="png.flat.information"/>
+			    <Image url="png.flat.information" visible="true"/>
 			    <Label text="新建" x="27" y="29" size="24" font="Microsoft YaHei" color="0x333333"/>
 			    <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
 			    <Label text="........................................................................................................." x="25" y="279" color="0xc9cdcc"/>
@@ -90,7 +100,6 @@ package main.ui {
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
-			viewClassMap["main.ui.listUI"] = listUI;
 			createView(uiXML);
 		}
 	}

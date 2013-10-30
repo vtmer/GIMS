@@ -17,7 +17,8 @@ package main.events
 		public function DataActionEvent(kind:String, data:Object=null) 
 		{ 
 			super(DATA_ACTION_EVENT,false,false);
-			
+			this.kind = kind;
+			this.data = data;
 		} 
 		
 		public override function clone():Event 

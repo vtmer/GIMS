@@ -1,5 +1,6 @@
 package main.view
 {
+	import flash.accessibility.Accessibility;
 	import flash.display.NativeWindowResize;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -10,6 +11,9 @@ package main.view
 	import main.model.UserInfo;
 	import main.ui.Page1UI;
 	import flash.events.FocusEvent;
+	import morn.core.components.Component;
+	import morn.core.components.Label;
+	import morn.core.handlers.Handler;
 	
 	/**
 	 * ...
@@ -25,7 +29,8 @@ package main.view
 		{
 			//初始化
 			editUser = new UserInfo();
-			database = new UserDatabase;
+			database = new UserDatabase();
+			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
 			//窗口操作
 			windowsBtn();
 			//drawer动画
@@ -35,7 +40,43 @@ package main.view
 			inputFieldTips();
 			//表单确认
 			inputEnter();
+			//list
+			initList();
+		}
 		
+		private function initList():void
+		{
+			//检索数据库
+			//onActionHandler(DataActionEventKind.KIND_REFRESH);
+			//list.dataSource = editUser as Array;
+			list.renderHandler = new Handler(listRender); //自定义渲染方式
+		    
+		/**自定义List项渲染*/
+		
+		}
+		
+		private function listRender(item:Component, index:int):void
+		{
+			
+			if (index<list.array.length)
+			{
+				list.repeatX = 1;
+				list.repeatY = list.array.length;
+				var userData:UserInfo = list.array[index];
+				//var userInfoLabel:Array = ["userId", "userName", "userDor", "userPhone", "userEmail"];
+				//for each(var lebal:* in userInfoLabel) {}
+				var userId:Label = item.getChildByName("userId") as Label;
+				var userName:Label = item.getChildByName("userName") as Label;
+				var userDor:Label = item.getChildByName("userDor") as Label;
+				var userPhone:Label = item.getChildByName("userPhone") as Label;
+				var userEmail:Label = item.getChildByName("userEmail") as Label;
+				userId.text = userData.userId.toString();
+				userName.text = userData.userName;
+				userDor.text = userData.userDormitory+userData.userDorNumber.toString();
+				userPhone.text = userData.userPhone.toString();
+				userEmail.text = userData.userEmail;
+				
+			}
 		}
 		
 		//drawer动画
@@ -108,30 +149,23 @@ package main.view
 			editUser.userPhotoId = input_photoId.text;
 			editUser.userPrintPhotoId = input_printPhotoId.text;
 			
-			trace(editUser.userName);
 			onActionHandler(DataActionEventKind.KIND_SAVE);
 		}
 		
-		//根据操作处理数据
-		protected function onActionHandler(kind:String):void
+		//处理派发的事件
+		protected function onDataActionHandler(event:DataActionEvent):void
 		{
-			var event:DataActionEvent;
-			switch (kind)
-			{
-				case DataActionEventKind.KIND_SAVE: 
-					event = new DataActionEvent(kind, editUser);
-					event.kind = kind;
-					break;
-			}
-			//if (event)
-			//{
-			//dispatchEvent(event);
-			//trace("派发事件");
-			//}
-			resetForm();
-			
 			switch (event.kind)
 			{
+				case DataActionEventKind.KIND_DATA_CHANGE: 
+					list.array = event.data as Array;
+					trace("数据变更");
+					break;
+				
+				case DataActionEventKind.KIND_REFRESH: 
+					database.select();
+					break;
+
 				case DataActionEventKind.KIND_SAVE: 
 					if (editUser.userId)
 					{
@@ -145,6 +179,28 @@ package main.view
 					}
 					break;
 			}
+		
+		}
+		
+		//根据操作处理数据
+		protected function onActionHandler(kind:String):void
+		{
+			var event:DataActionEvent;
+			switch (kind)
+			{
+				case DataActionEventKind.KIND_REFRESH: 
+				case DataActionEventKind.KIND_SAVE: 
+					event = new DataActionEvent(kind, editUser);
+					event.kind = kind;
+					break;
+			}
+			if (event)
+			{
+				dispatchEvent(event);
+				trace("派发事件"+event.kind);
+			}
+			resetForm();
+		
 		}
 		
 		protected function resetForm():void

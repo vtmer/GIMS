@@ -151,10 +151,10 @@ package main.database
 			}
 			var resultData:Array = result.data;
 			if (resultData) {
+				trace("有数据")
 				dispatchEvent(new DataActionEvent(DataActionEventKind.KIND_DATA_CHANGE, resultData));
 			}
 		}
-		
 		//查询检索数据
 		public function select():void {
 			selectSql.execute( -1, resultSql);
