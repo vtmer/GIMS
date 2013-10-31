@@ -62,17 +62,18 @@ package main.ui {
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
 			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
 			  </Container>
-			  <List x="231" y="248" var="list" repeatY="10" repeatX="1">
-			    <Box name="render" var="render" width="693" height="48" x="0" y="0">
-			      <Label text="陈丽婷" x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName"/>
-			      <Label text="东区12-608" x="206" y="0" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
-			      <Label text="13560478360 " x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone"/>
-			      <Label text="armchanel@msn.com" x="544" width="231" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
+			  <List x="218" y="248" var="list" repeatY="10" repeatX="1">
+			    <Box name="render" var="render" width="693" height="48" x="13">
+			      <Label text="陈丽婷" x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName" selectable="true"/>
+			      <Label text="东区12-608" x="206" y="0" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor" selectable="true"/>
+			      <Label text="13560478360 " x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone" selectable="true"/>
+			      <Label text="armchanel@msn.com" x="544" width="231" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail" selectable="true"/>
 			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
-			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId"/>
+			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId" selectable="true"/>
 			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
+			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="772" height="48" name="selectBox" clipX="1" clipY="2"/>
 			    </Box>
-			    <VScrollBar skin="png.flat.vscroll" x="759" name="scrollBar" width="17" height="479" y="2"/>
+			    <VScrollBar skin="png.flat.vscroll" x="772" name="scrollBar" width="17" height="480" y="1"/>
 			  </List>
 			  <Container x="674" y="43" var="drawer" visible="false">
 			    <Image url="png.flat.information" visible="true"/>
