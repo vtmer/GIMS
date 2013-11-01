@@ -1,27 +1,15 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,2,1,control;11,0,2,1,drawer;14,1,2,0,list;1,1,2,1,button;6,1,2,1,search;5,1,2,1,label;4,1,2,1,navigation;13,1,2,1,remove;3,1,2,0,image;2,1,2,1,background" visible="true">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,1,1,0,drawer;14,1,1,1,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
-  <Image url="png.flat.logo" x="33" y="36" layer="3"/>
-  <Image url="png.flat.icon1" x="86" y="136" layer="3"/>
-  <Image url="png.flat.icon2" x="84" y="240" layer="3"/>
-  <Image url="png.flat.icon3" x="85" y="352" layer="3"/>
-  <Image url="png.flat.icon4" x="84" y="460" layer="3"/>
-  <Image url="png.flat.icon5" x="214" y="48" layer="3"/>
-  <Image url="png.flat.text_home" x="248" y="42" layer="3"/>
-  <Image url="png.flat.text_other" x="406" y="42" layer="3"/>
-  <Image url="png.flat.icon6" x="367" y="48" layer="3"/>
-  <Image url="png.flat.table" x="217" y="209" layer="3"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
   </Container>
-  <Tab skin="png.flat.tab_metro" x="186" y="12" layer="4" labelColors="0xffffff" labelFont="Microsoft YaHei" width="174" height="93" buttonMode="true" direction="horizontal"/>
-  <Tab skin="png.flat.tab_metro" x="360" y="12" layer="4" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," width="174" height="93" buttonMode="true"/>
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
   <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
-  <Button label="新建" skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
-  <Button label="整理相片" skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
-  <Button label="一键发送" skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
-  <Button label="导入/导出" skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
   <Button skin="png.flat.btn_contact" x="76" y="724" layer="1" buttonMode="true"/>
   <Button skin="png.flat.btn_question" x="104" y="724" layer="1" buttonMode="true"/>
   <Container layers="1,1,0" layer="1" right="20" top="12" var="windows_btn">
@@ -30,41 +18,76 @@
     <Button label="" skin="png.flat.btn_min" layer="1" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
     <Button skin="png.flat.btn_restore" x="38" layer="1" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
   </Container>
-  <List layers="1,1,1,0,第 1 层" layer="14" x="218" y="248" var="list" repeatY="10" repeatX="1">
-    <Box layers="1,1,0" layer="1" name="render" var="render" width="693" height="48" x="13">
-      <Label text="陈丽婷" x="106" y="0" layer="1" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName" selectable="true"/>
-      <Label text="东区12-608" x="206" y="0" layer="1" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor" selectable="true"/>
-      <Label text="13560478360 " x="346" y="0" layer="1" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone" selectable="true"/>
-      <Label text="armchanel@msn.com" x="544" layer="1" width="231" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail" selectable="true"/>
+  <Image url="png.flat.logo" x="33" y="36" layer="3"/>
+  <Image url="png.flat.icon5" x="214" y="48" layer="3"/>
+  <Image url="png.flat.text_home" x="248" y="42" layer="3"/>
+  <Image url="png.flat.text_other" x="406" y="42" layer="3"/>
+  <Image url="png.flat.icon6" x="367" y="48" layer="3"/>
+  <Image url="png.flat.table" x="217" y="209" layer="3"/>
+  <List layers="1,1,1,0,第 1 层" layer="14" x="231" y="248" var="list" repeatY="10" repeatX="1">
+    <Box layers="1,1,1,1,第 1 层;2,1,1,1,第 2 层" layer="1" name="render" var="render" width="758" height="48" buttonMode="false" x="0" y="0">
+      <Label text="陈丽婷" x="106" y="0" layer="1" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName"/>
+      <Label text="东区12-608" x="206" y="0" layer="1" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
+      <Label text="13560478360 " x="346" y="0" layer="1" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone"/>
+      <Label text="armchanel@msn.com" x="544" layer="1" width="231" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
       <CheckBox skin="png.flat.checkbox" y="18" layer="1" buttonMode="true"/>
-      <Label text="01" x="68" layer="1" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId" selectable="true"/>
+      <Label text="01" x="68" layer="1" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId"/>
       <Clip url="png.flat.clip_condition" x="39" y="20" layer="1" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
-      <Clip url="png.flat.clip_selectBox" x="-13" y="0" layer="1" width="772" height="48" name="selectBox" clipX="1" clipY="2"/>
+      <Clip url="png.flat.clip_selectBox" x="-13" y="0" layer="2" width="772" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
     </Box>
-    <VScrollBar skin="png.flat.vscroll" x="772" layer="1" name="scrollBar" width="17" height="480" y="1"/>
+    <VScrollBar skin="png.flat.vscroll" x="759" layer="1" name="scrollBar" width="17" height="480" y="1"/>
   </List>
-  <Container layers="3,1,0,0,block;1,1,0,0,第 1 层" layer="11" x="674" y="43" var="drawer" visible="false">
-    <Image url="png.flat.information" layer="1" visible="true"/>
-    <Label text="新建" x="27" y="29" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
-    <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="27" y="83" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
-    <Label text="........................................................................................................." x="25" y="279" layer="1" color="0xc9cdcc"/>
-    <Label text="相片编码：" x="27" y="313" layer="1" color="0x333333" font="Microsoft YaHei" size="12"/>
-    <Label text="_________________________________________" x="24" y="54" layer="1" color="0xc9cdcc"/>
-    <TextInput skin="png.flat.textinput" x="69" y="79" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" text="请输入姓名" var="input_name"/>
-    <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="92" y="199" layer="1" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12" var="input_phone" selectable="true" align="left"/>
-    <TextInput skin="png.flat.textinput" x="167" y="159" layer="1" width="139" height="28" color="0xc9cdcc" margin="5,5,," font="Microsoft YaHei" size="12" var="input_dorNum" selectable="true" align="left" text="宿舍号"/>
-    <TextInput text="请输入Email" skin="png.flat.textinput" x="69" y="239" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" var="input_email" selectable="true"/>
-    <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="69" y="159" layer="1" buttonMode="true" labelColors="0x333333" var="input_dor"/>
-    <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="89" y="356" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_printPhotoId" selectable="true"/>
-    <TextInput text="电子版相片编码" skin="png.flat.textinput" x="89" y="309" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" var="input_photoId" selectable="true"/>
-    <Button label="确认" skin="png.flat.btn_enter" x="258" y="413" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_Enter"/>
-    <Button skin="png.flat.btn_add" x="313" y="357" layer="1" buttonMode="true" var="btn_addPrintPhoto"/>
-    <Button skin="png.flat.btn_add" x="313" y="310" layer="1" buttonMode="true" var="btn_addPhoto"/>
-    <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="137" y="125" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
-    <Label text=">>" x="9" y="350" layer="1" bold="true" color="0xc9cdcc" font="SimSun" size="12"/>
-    <Image url="png.flat.blank" x="5" y="6" layer="3" width="20" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
+  <Container layers="5,1,2,0,info;4,0,2,1,new;3,1,2,1,block;1,1,2,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
+    <Image url="png.flat.information" layer="1" visible="true" x="488"/>
+    <Label text="_____________________________________________" x="501" y="51" layer="1" color="0xc9cdcc"/>
+    <Label text=">>" x="497" y="350" layer="1" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
+    <Image url="png.flat.blank" x="493" y="6" layer="3" width="22" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
+    <Image url="png.flat.blank" y="63" layer="3" width="231" height="102" alpha="0" var="block_blank"/>
+    <Box layers="1,1,0" layer="4" x="513" y="29" var="box_new">
+      <Label text="新建" x="2" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
+      <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="2" y="54" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
+      <Label text="...................................................................................." y="250" layer="1" color="0xc9cdcc"/>
+      <Label text="相片编码：" x="2" y="284" layer="1" color="0x333333" font="Microsoft YaHei" size="12"/>
+      <TextInput skin="png.flat.textinput" x="44" y="50" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" text="请输入姓名" var="input_name"/>
+      <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="67" y="170" layer="1" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12" selectable="true" align="left" var="input_phone"/>
+      <TextInput skin="png.flat.textinput" x="142" y="130" layer="1" width="139" height="28" color="0xc9cdcc" margin="5,5,," font="Microsoft YaHei" size="12" selectable="true" align="left" text="宿舍号" var="input_dorNum"/>
+      <TextInput text="请输入Email" skin="png.flat.textinput" x="44" y="210" layer="1" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" var="input_email"/>
+      <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="44" y="130" layer="1" buttonMode="true" labelColors="0x333333" var="input_dor"/>
+      <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="64" y="327" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_printPhotoId"/>
+      <TextInput text="电子版相片编码" skin="png.flat.textinput" x="64" y="280" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_photoId"/>
+      <Button label="确认" skin="png.flat.btn_enter" x="233" y="384" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_enter"/>
+      <Button skin="png.flat.btn_add" x="288" y="328" layer="1" buttonMode="true"/>
+      <Button skin="png.flat.btn_add" x="288" y="281" layer="1" buttonMode="true"/>
+      <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="112" y="96" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
+    </Box>
+    <Box layers="1,1,0" layer="5" x="515" y="30" var="box_info" visible="false" disabled="false">
+      <Label text="详细信息" layer="1" font="Microsoft YaHei" size="24" color="0x333333" selectable="true"/>
+      <Label text="01" x="11" y="53" layer="1" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_id"/>
+      <Label text="陈丽婷" x="53" y="53" layer="1" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_name"/>
+      <Label text="宿舍：" x="11" y="91" layer="1" width="176" height="26" font="Microsoft YaHei" size="12" color="0x333333" selectable="true" var="label_dor"/>
+      <Label text="电话:" x="11" y="117" layer="1" font="Microsoft YaHei" size="12" height="26" width="225" color="0x333333" selectable="true" var="label_phone"/>
+      <Label text="邮箱：" x="11" y="143" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true" var="label_email"/>
+      <Label text="相片信息" x="11" y="169" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true"/>
+      <Label text="电子版：" x="11" y="195" layer="1" font="Microsoft YaHei" size="12" width="283" height="26" wordWrap="true" color="0x333333" selectable="true" var="label_photoId"/>
+      <Label text="冲洗版：" x="11" y="221" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" wordWrap="true" selectable="true" var="label_printPhotoId"/>
+      <Label text="备注：" x="11" y="262" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true" var="label_note"/>
+      <Label text="................................................................................................" x="14" y="314" layer="1" color="0xcccccc"/>
+      <Label text="电子版" x="102" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
+      <Label text="冲洗版" x="154" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
+      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1"/>
+    </Box>
   </Container>
   <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
     <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
+  <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
+    <Image url="png.flat.icon1" x="20" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon2" x="18" y="104" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon3" x="19" y="216" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon4" x="18" y="324" layer="1" mouseEnabled="false"/>
+    <Label text="新建" x="17" y="28" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="整理相片" x="3" y="136" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="一键发送" x="3" y="244" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="导入/导出" y="352" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+  </Box>
 </View>

@@ -25,6 +25,8 @@ package main.view
 		private var _isDrawerIn:Boolean = true;
 		private var editUser:UserInfo;
 		private var database:UserDatabase;
+		private var userData:UserInfo;
+		private var infoData:UserInfo;
 		
 		public function Page1()
 		{
@@ -37,12 +39,40 @@ package main.view
 			//drawer动画
 			btn_block.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			btn_new.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
+			//监听list
+			list.addEventListener(Event.ENTER_FRAME, listEF);
 			//表单提示信息
 			inputFieldTips();
 			//表单确认
 			inputEnter();
 			//list
 			initList();
+		}
+		
+		private function listEF(e:Event):void
+		{
+			if (_isDrawerIn)
+			{
+				if (list.selectedIndex != -1)
+				{
+					drawerInfo();
+					trace(list.selectedIndex);
+				}
+			}
+		}
+		
+		private function drawerInfo():void
+		{
+				drawer.visible = true;
+				_isDrawerIn = false;
+				box_new.visible = false;
+				box_info.visible = true;
+				
+				
+				//显示选择项信息
+				infoData = list.array[list.selectedIndex];
+				label_name.text = userData.userName;
+			    label_id.text=userData.userId.toString();
 		}
 		
 		private function initList():void
@@ -63,7 +93,7 @@ package main.view
 			{
 				list.repeatX = 1;
 				list.repeatY = list.array.length;
-				var userData:UserInfo = list.array[index];
+				userData = list.array[index];
 				//var userInfoLabel:Array = ["userId", "userName", "userDor", "userPhone", "userEmail"];
 				//for each(var lebal:* in userInfoLabel) {}
 				var userId:Label = item.getChildByName("userId") as Label;
@@ -88,12 +118,16 @@ package main.view
 				//drawer.x = 674;
 				drawer.visible = true;
 				_isDrawerIn = false;
+				box_new.visible = true;
+				box_info.visible = false;
 			}
 			else
 			{
 				//drawer.x = 1010;
 				drawer.visible = false;
 				_isDrawerIn = true;
+				list.selectedIndex = -1;
+				
 			}
 		}
 		
@@ -136,7 +170,7 @@ package main.view
 		//表单确认
 		private function inputEnter():void
 		{
-			btn_Enter.addEventListener(MouseEvent.MOUSE_DOWN, enterDown);
+			btn_enter.addEventListener(MouseEvent.MOUSE_DOWN, enterDown);
 		}
 		
 		private function enterDown(e:MouseEvent):void
