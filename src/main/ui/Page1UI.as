@@ -67,12 +67,12 @@ package main.ui {
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <List x="231" y="248" var="list" repeatY="10" repeatX="1">
 			    <Box name="render" var="render" width="758" height="48" buttonMode="false" x="0" y="0">
-			      <Label text="陈丽婷" x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="14" bold="false" isHtml="false" margin="13,14,," name="userName"/>
-			      <Label text="东区12-608" x="206" y="0" width="141" height="47" margin="13,14,," size="14" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
-			      <Label text="13560478360 " x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="14" name="userPhone"/>
-			      <Label text="armchanel@msn.com" x="544" width="231" height="48" size="14" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
+			      <Label text="陈丽婷" x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
+			      <Label text="东区12-608" x="206" y="0" width="141" height="47" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
+			      <Label text="13560478360 " x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
+			      <Label text="armchanel@msn.com" x="544" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
 			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
-			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="14" font="Microsoft YaHei" align="center" name="userId"/>
+			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
 			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
 			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="772" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
 			    </Box>

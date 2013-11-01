@@ -39,8 +39,8 @@ package main.view
 			//drawer动画
 			btn_block.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			btn_new.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
-			//监听list
-			list.addEventListener(Event.ENTER_FRAME, listEF);
+			block_blank.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
+			
 			//表单提示信息
 			inputFieldTips();
 			//表单确认
@@ -49,30 +49,53 @@ package main.view
 			initList();
 		}
 		
-		private function listEF(e:Event):void
+		//选择被改变时
+		private function listSelect(index:int):void
 		{
-			if (_isDrawerIn)
+			if (list.selectedIndex != -1)
 			{
-				if (list.selectedIndex != -1)
+				if (_isDrawerIn)
 				{
-					drawerInfo();
-					trace(list.selectedIndex);
+					drawerInfo(list.selectedIndex);
+					trace("显示" + index);
+				}
+				else
+				{
+					changeInfo(list.selectedIndex);
+					trace("变更" + index);
 				}
 			}
 		}
 		
-		private function drawerInfo():void
+		private function changeInfo(selectedIndex:int):void
 		{
-				drawer.visible = true;
-				_isDrawerIn = false;
-				box_new.visible = false;
-				box_info.visible = true;
-				
-				
-				//显示选择项信息
-				infoData = list.array[list.selectedIndex];
-				label_name.text = userData.userName;
-			    label_id.text=userData.userId.toString();
+			infoView(selectedIndex);
+		}
+		
+		private function drawerInfo(index:int):void
+		{
+			drawer.visible = true;
+			_isDrawerIn = false;
+			box_new.visible = false;
+			box_info.visible = true;
+			
+			//显示选择项信息
+			infoView(index);
+		}
+		
+		private function infoView(index:int):void
+		{
+			infoData = list.array[index];
+			trace("选中"+infoData.userName+"; id为"+infoData.userId);
+			
+			label_name.text = infoData.userName;
+			label_id.text = infoData.userId.toString();
+			label_dor.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString();
+			label_phone.text = "电话："+infoData.userPhone.toString();
+			label_email.text = "Email：" + infoData.userEmail;
+			label_photoId.text = "电子版：" + infoData.userPhotoId;
+			label_printPhotoId.text = "冲洗版：" + infoData.userPrintPhotoId
+			
 		}
 		
 		private function initList():void
@@ -81,6 +104,7 @@ package main.view
 			//onActionHandler(DataActionEventKind.KIND_REFRESH);
 			//list.dataSource = editUser as Array;
 			list.renderHandler = new Handler(listRender); //自定义渲染方式
+			list.selectHandler = new Handler(listSelect); //自定义选择变更处理
 		
 		/**自定义List项渲染*/
 		
@@ -127,6 +151,7 @@ package main.view
 				drawer.visible = false;
 				_isDrawerIn = true;
 				list.selectedIndex = -1;
+				trace("隐藏drawer");
 				
 			}
 		}
