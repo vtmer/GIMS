@@ -32,7 +32,8 @@ package main.view
 		public function Page1()
 		{
 			//初始化
-			editUser = new UserInfo();
+			
+			
 			database = new UserDatabase();
 			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
 			//窗口操作
@@ -58,6 +59,8 @@ package main.view
 			if (list.selectedIndex != -1)
 			{
 				listSelectIndex = list.selectedIndex;
+				editUser = list.array[listSelectIndex];
+				
 				if (_isDrawerIn)
 				{
 					drawerInfo(index);
@@ -111,7 +114,7 @@ package main.view
 			}
 			
 			label_info.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString() + "\n电话：" + infoData.userPhone.toString() + "\nEmail：" + infoData.userEmail + "\n相片信息\n电子版：" + infoData.userPhotoId + "\n冲洗版：" + infoData.userPrintPhotoId + "\n\n备注：";
-		
+			
 		}
 		
 		//编辑信息
@@ -122,22 +125,23 @@ package main.view
 			_isNewInfo = false;
 			editInfoChange(listSelectIndex);
 			label_title.text = "编辑信息";
-		
+			
+			
 		}
 		
 		private function editInfoChange(index:int):void
 		{
 			
-			infoData = list.array[index];
+			
 			trace("编辑" + index);
-			input_name.text = infoData.userName;
-			input_isTown.selectedIndex = infoData.userIsTown;
-			input_dor.selectedLabel = infoData.userDormitory;
-			input_dorNum.text = infoData.userDorNumber.toString();
-			input_phone.text = infoData.userPhone.toString();
-			input_email.text = infoData.userEmail;
-			input_photoId.text = infoData.userPhotoId;
-			input_printPhotoId.text = infoData.userPrintPhotoId;
+			input_name.text = editUser.userName;
+			input_isTown.selectedIndex = editUser.userIsTown;
+			input_dor.selectedLabel = editUser.userDormitory;
+			input_dorNum.text = editUser.userDorNumber.toString();
+			input_phone.text = editUser.userPhone.toString();
+			input_email.text = editUser.userEmail;
+			input_photoId.text = editUser.userPhotoId;
+			input_printPhotoId.text = editUser.userPrintPhotoId;
 			input_name.color = 0x666666;
 			input_dorNum.color = 0x666666;
 			input_phone.color = 0x666666;
@@ -152,7 +156,7 @@ package main.view
 			drawer.visible = false;
 			_isDrawerIn = true;
 			list.selectedIndex = -1;
-		
+			
 		}
 		
 		private function initList():void
@@ -161,9 +165,9 @@ package main.view
 			list.renderHandler = new Handler(listRender);
 			//自定义选择变更处理
 			list.selectHandler = new Handler(listSelect);
-		
-		/**自定义List项渲染*/
-		
+			
+			/**自定义List项渲染*/
+			
 		}
 		
 		private function listRender(item:Component, index:int):void
@@ -210,6 +214,7 @@ package main.view
 		{
 			_isNewInfo = true;
 			label_title.text = "新建";
+			
 			if (_isDrawerIn)
 			{
 				//drawer.x = 674;
@@ -217,6 +222,7 @@ package main.view
 				_isDrawerIn = false;
 				box_new.visible = true;
 				box_info.visible = false;
+				editUser=new UserInfo();
 			}
 			else
 			{
@@ -261,7 +267,7 @@ package main.view
 					inputField.color = 0xc9cdcc;
 				}
 			}
-		
+			
 		}
 		
 		//表单确认
@@ -272,27 +278,21 @@ package main.view
 		
 		private function enterDown(e:MouseEvent):void
 		{
+			editUser.userName = input_name.text;
+			editUser.userIsTown = Number(input_isTown.selectedValue);
+			editUser.userDormitory = input_dor.selectedLabel;
+			editUser.userDorNumber = Number(input_dorNum.text);
+			editUser.userPhone = Number(input_phone.text);
+			editUser.userEmail = input_email.text;
+			editUser.userPhotoId = input_photoId.text;
+			editUser.userPrintPhotoId = input_printPhotoId.text;
 			
-			if (_isNewInfo)
-			{
-				editUser.userName = input_name.text;
-				editUser.userIsTown = Number(input_isTown.selectedValue);
-				editUser.userDormitory = input_dor.selectedLabel;
-				editUser.userDorNumber = Number(input_dorNum.text);
-				editUser.userPhone = Number(input_phone.text);
-				editUser.userEmail = input_email.text;
-				editUser.userPhotoId = input_photoId.text;
-				editUser.userPrintPhotoId = input_printPhotoId.text;
-				
-				onActionHandler(DataActionEventKind.KIND_SAVE);
-			}
-			else
-			{
-				
-				trace("提交编辑信息" + list.selectedIndex)
-				
-				onActionHandler(DataActionEventKind.KIND_EDIT);
-			}
+			onActionHandler(DataActionEventKind.KIND_SAVE);
+			trace("提交编辑信息" + listSelectIndex);
+			
+			drawer.visible = false;
+			_isDrawerIn = true;
+			
 		}
 		
 		//处理派发的事件
@@ -304,11 +304,11 @@ package main.view
 					list.array = event.data as Array;
 					trace("数据变更");
 					break;
-			
+				
 				//case DataActionEventKind.KIND_REFRESH: 
 				//database.select();
 				//break;
-			
+				
 				//case DataActionEventKind.KIND_SAVE: 
 				//if (editUser.userId)
 				//{
@@ -322,7 +322,7 @@ package main.view
 				//}
 				//break;
 			}
-		
+			
 		}
 		
 		//根据操作处理数据
@@ -338,7 +338,7 @@ package main.view
 					break;
 				case DataActionEventKind.KIND_EDIT: 
 				case DataActionEventKind.KIND_DELETE: 
-					event = new DataActionEvent(kind, list.selectedItem);
+					event = new DataActionEvent(kind, editUser);
 					break;
 			}
 			if (event)
@@ -419,7 +419,7 @@ package main.view
 			windows_btn.top = 12;
 			block_resize.right = 12;
 			block_resize.bottom = 12;
-		
+			
 		}
 		
 		private function md_remove(e:MouseEvent):void
@@ -470,7 +470,7 @@ package main.view
 		{
 			this.stage.nativeWindow.close();
 		}
-	
+		
 	}
-
+	
 }

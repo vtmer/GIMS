@@ -43,7 +43,7 @@ package main.database
 										"user_dorNumber=:userDorNumber, " +
 										"user_phone=:userPhone, " + 
 										"user_email=:userEmail, " + 
-										"user_photoId=:userPhotoId " + 
+										"user_photoId=:userPhotoId, " + 
 										"user_printPhotoId=:userPrintPhotoId " + 
 										"WHERE user_id=:userId";
 		
@@ -177,7 +177,7 @@ package main.database
 		//更新数据
 		public function update(user:UserInfo):void {
 			updateSql.clearParameters();
-			updateSql.parameters["userId"] = user.userId;
+			updateSql.parameters[":userId"] = user.userId;
 			updateSql.parameters[":userName"] = user.userName;
 			updateSql.parameters[":userIsTown"] = user.userIsTown;
 			updateSql.parameters[":userDormitory"] = user.userDormitory;
