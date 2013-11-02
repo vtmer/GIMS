@@ -19,6 +19,7 @@ package main.ui {
 		public var btn_block:Image;
 		public var block_blank:Image;
 		public var box_new:Box;
+		public var label_title:Label;
 		public var input_name:TextInput;
 		public var input_phone:TextInput;
 		public var input_dorNum:TextInput;
@@ -29,14 +30,11 @@ package main.ui {
 		public var btn_enter:Button;
 		public var input_isTown:RadioGroup;
 		public var box_info:Box;
-		public var label_id:Label;
 		public var label_name:Label;
-		public var label_dor:Label;
-		public var label_phone:Label;
-		public var label_email:Label;
-		public var label_photoId:Label;
-		public var label_printPhotoId:Label;
-		public var label_note:Label;
+		public var label_info:Label;
+		public var btn_infoEdit:Button;
+		public var btn_infoSend:Button;
+		public var btn_infoDelete:Button;
 		public var block_resize:Container;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
@@ -85,7 +83,7 @@ package main.ui {
 			    <Image url="png.flat.blank" x="493" y="6" width="22" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
 			    <Image url="png.flat.blank" y="63" width="231" height="102" alpha="0" var="block_blank"/>
 			    <Box x="513" y="29" var="box_new">
-			      <Label text="新建" x="2" size="24" font="Microsoft YaHei" color="0x333333"/>
+			      <Label text="新建" x="2" size="24" font="Microsoft YaHei" color="0x333333" var="label_title"/>
 			      <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="2" y="54" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
 			      <Label text="...................................................................................." y="250" color="0xc9cdcc"/>
 			      <Label text="相片编码：" x="2" y="284" color="0x333333" font="Microsoft YaHei" size="12"/>
@@ -103,19 +101,15 @@ package main.ui {
 			    </Box>
 			    <Box x="515" y="30" var="box_info" visible="false" disabled="false">
 			      <Label text="详细信息" font="Microsoft YaHei" size="24" color="0x333333" selectable="true"/>
-			      <Label text="01" x="11" y="53" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_id"/>
-			      <Label text="陈丽婷" x="53" y="53" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_name"/>
-			      <Label text="宿舍：" x="11" y="91" width="176" height="26" font="Microsoft YaHei" size="12" color="0x333333" selectable="true" var="label_dor"/>
-			      <Label text="电话:" x="11" y="117" font="Microsoft YaHei" size="12" height="26" width="225" color="0x333333" selectable="true" var="label_phone"/>
-			      <Label text="邮箱：" x="11" y="143" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true" var="label_email"/>
-			      <Label text="相片信息" x="11" y="169" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true"/>
-			      <Label text="电子版：" x="11" y="195" font="Microsoft YaHei" size="12" width="283" height="26" wordWrap="true" color="0x333333" selectable="true" var="label_photoId"/>
-			      <Label text="冲洗版：" x="11" y="221" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" wordWrap="true" selectable="true" var="label_printPhotoId"/>
-			      <Label text="备注：" x="11" y="262" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true" var="label_note"/>
+			      <Label text="01" x="11" y="53" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_name" width="154" height="24"/>
+			      <Label x="11" y="91" width="282" height="230" font="Microsoft YaHei" size="12" color="0x333333" selectable="true" var="label_info" wordWrap="true" multiline="true" leading="8"/>
 			      <Label text="................................................................................................" x="14" y="314" color="0xcccccc"/>
 			      <Label text="电子版" x="102" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
 			      <Label text="冲洗版" x="154" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
 			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355"/>
+			      <Button skin="png.flat.btn_edit" x="268" y="83" var="btn_infoEdit" buttonMode="true"/>
+			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true"/>
+			      <Button skin="png.flat.btn_delete" x="268" y="151" var="btn_infoDelete" buttonMode="true"/>
 			    </Box>
 			  </Container>
 			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">

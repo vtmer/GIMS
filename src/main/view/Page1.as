@@ -1,8 +1,7 @@
 package main.view
 {
-	import flash.accessibility.Accessibility;
 	import flash.display.NativeWindowResize;
-	import flash.display.Sprite;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import main.database.UserDatabase;
@@ -23,7 +22,9 @@ package main.view
 	public class Page1 extends Page1UI
 	{
 		private var _isDrawerIn:Boolean = true;
+		private var _isNewInfo:Boolean = true;
 		private var editUser:UserInfo;
+		private var listSelectIndex:int;
 		private var database:UserDatabase;
 		private var userData:UserInfo;
 		private var infoData:UserInfo;
@@ -40,7 +41,9 @@ package main.view
 			btn_block.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			btn_new.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			block_blank.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
-			
+			//drawer按钮
+			btn_infoEdit.addEventListener(MouseEvent.MOUSE_DOWN, infoEdit);
+			btn_infoDelete.addEventListener(MouseEvent.MOUSE_DOWN, infoDelete);
 			//表单提示信息
 			inputFieldTips();
 			//表单确认
@@ -54,15 +57,25 @@ package main.view
 		{
 			if (list.selectedIndex != -1)
 			{
+				listSelectIndex = list.selectedIndex;
 				if (_isDrawerIn)
 				{
-					drawerInfo(list.selectedIndex);
+					drawerInfo(index);
 					trace("显示" + index);
 				}
 				else
 				{
-					changeInfo(list.selectedIndex);
-					trace("变更" + index);
+					trace(listSelectIndex);
+					trace(_isNewInfo);
+					if (_isNewInfo)
+					{
+						changeInfo(index);
+						trace("变更" + index);
+					}
+					else
+					{
+						editInfoChange(index);
+					}
 				}
 			}
 		}
@@ -72,6 +85,7 @@ package main.view
 			infoView(selectedIndex);
 		}
 		
+		//信息详情
 		private function drawerInfo(index:int):void
 		{
 			drawer.visible = true;
@@ -86,25 +100,67 @@ package main.view
 		private function infoView(index:int):void
 		{
 			infoData = list.array[index];
-			trace("选中"+infoData.userName+"; id为"+infoData.userId);
+			//01-10
+			if (infoData.userId < 10)
+			{
+				label_name.text = "0" + infoData.userId.toString() + "   " + infoData.userName;
+			}
+			else
+			{
+				label_name.text = infoData.userId.toString() + "   " + infoData.userName;
+			}
 			
-			label_name.text = infoData.userName;
-			label_id.text = infoData.userId.toString();
-			label_dor.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString();
-			label_phone.text = "电话："+infoData.userPhone.toString();
-			label_email.text = "Email：" + infoData.userEmail;
-			label_photoId.text = "电子版：" + infoData.userPhotoId;
-			label_printPhotoId.text = "冲洗版：" + infoData.userPrintPhotoId
+			label_info.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString() + "\n电话：" + infoData.userPhone.toString() + "\nEmail：" + infoData.userEmail + "\n相片信息\n电子版：" + infoData.userPhotoId + "\n冲洗版：" + infoData.userPrintPhotoId + "\n\n备注：";
+		
+		}
+		
+		//编辑信息
+		private function infoEdit(e:MouseEvent):void
+		{
+			box_new.visible = true;
+			box_info.visible = false;
+			_isNewInfo = false;
+			editInfoChange(listSelectIndex);
+			label_title.text = "编辑信息";
+		
+		}
+		
+		private function editInfoChange(index:int):void
+		{
 			
+			infoData = list.array[index];
+			trace("编辑" + index);
+			input_name.text = infoData.userName;
+			input_isTown.selectedIndex = infoData.userIsTown;
+			input_dor.selectedLabel = infoData.userDormitory;
+			input_dorNum.text = infoData.userDorNumber.toString();
+			input_phone.text = infoData.userPhone.toString();
+			input_email.text = infoData.userEmail;
+			input_photoId.text = infoData.userPhotoId;
+			input_printPhotoId.text = infoData.userPrintPhotoId;
+			input_name.color = 0x666666;
+			input_dorNum.color = 0x666666;
+			input_phone.color = 0x666666;
+			input_email.color = 0x666666;
+			input_photoId.color = 0x666666;
+			input_printPhotoId.color = 0x666666;
+		}
+		
+		//删除项
+		private function infoDelete(e:MouseEvent):void
+		{
+			drawer.visible = false;
+			_isDrawerIn = true;
+			list.selectedIndex = -1;
+		
 		}
 		
 		private function initList():void
 		{
-			//检索数据库
-			//onActionHandler(DataActionEventKind.KIND_REFRESH);
-			//list.dataSource = editUser as Array;
-			list.renderHandler = new Handler(listRender); //自定义渲染方式
-			list.selectHandler = new Handler(listSelect); //自定义选择变更处理
+			//自定义渲染方式
+			list.renderHandler = new Handler(listRender);
+			//自定义选择变更处理
+			list.selectHandler = new Handler(listSelect);
 		
 		/**自定义List项渲染*/
 		
@@ -118,25 +174,42 @@ package main.view
 				list.repeatX = 1;
 				list.repeatY = list.array.length;
 				userData = list.array[index];
-				//var userInfoLabel:Array = ["userId", "userName", "userDor", "userPhone", "userEmail"];
-				//for each(var lebal:* in userInfoLabel) {}
 				var userId:Label = item.getChildByName("userId") as Label;
 				var userName:Label = item.getChildByName("userName") as Label;
 				var userDor:Label = item.getChildByName("userDor") as Label;
 				var userPhone:Label = item.getChildByName("userPhone") as Label;
 				var userEmail:Label = item.getChildByName("userEmail") as Label;
-				userId.text = userData.userId.toString();
+				
+				if (userData.userId < 10)
+				{
+					userId.text = "0" + userData.userId.toString();
+				}
+				else
+				{
+					userId.text = userData.userId.toString();
+				}
+				
+				if (userData.userDormitory == null)
+				{
+					userDor.text = "无";
+				}
+				else
+				{
+					userDor.text = userData.userDormitory + "-" + userData.userDorNumber.toString();
+				}
+				
 				userName.text = userData.userName;
-				userDor.text = userData.userDormitory + "-" + userData.userDorNumber.toString();
 				userPhone.text = userData.userPhone.toString();
 				userEmail.text = userData.userEmail;
 				
 			}
 		}
 		
-		//drawer动画
+		//新建drawer动画
 		private function IOAnimation(e:MouseEvent):void
 		{
+			_isNewInfo = true;
+			label_title.text = "新建";
 			if (_isDrawerIn)
 			{
 				//drawer.x = 674;
@@ -151,7 +224,6 @@ package main.view
 				drawer.visible = false;
 				_isDrawerIn = true;
 				list.selectedIndex = -1;
-				trace("隐藏drawer");
 				
 			}
 		}
@@ -200,16 +272,27 @@ package main.view
 		
 		private function enterDown(e:MouseEvent):void
 		{
-			editUser.userName = input_name.text;
-			editUser.userIsTown = Number(input_isTown.selectedValue);
-			editUser.userDormitory = input_dor.selectedLabel;
-			editUser.userDorNumber = Number(input_dorNum.text);
-			editUser.userPhone = Number(input_phone.text);
-			editUser.userEmail = input_email.text;
-			editUser.userPhotoId = input_photoId.text;
-			editUser.userPrintPhotoId = input_printPhotoId.text;
 			
-			onActionHandler(DataActionEventKind.KIND_SAVE);
+			if (_isNewInfo)
+			{
+				editUser.userName = input_name.text;
+				editUser.userIsTown = Number(input_isTown.selectedValue);
+				editUser.userDormitory = input_dor.selectedLabel;
+				editUser.userDorNumber = Number(input_dorNum.text);
+				editUser.userPhone = Number(input_phone.text);
+				editUser.userEmail = input_email.text;
+				editUser.userPhotoId = input_photoId.text;
+				editUser.userPrintPhotoId = input_printPhotoId.text;
+				
+				onActionHandler(DataActionEventKind.KIND_SAVE);
+			}
+			else
+			{
+				
+				trace("提交编辑信息" + list.selectedIndex)
+				
+				onActionHandler(DataActionEventKind.KIND_EDIT);
+			}
 		}
 		
 		//处理派发的事件
@@ -253,6 +336,10 @@ package main.view
 					event = new DataActionEvent(kind, editUser);
 					event.kind = kind;
 					break;
+				case DataActionEventKind.KIND_EDIT: 
+				case DataActionEventKind.KIND_DELETE: 
+					event = new DataActionEvent(kind, list.selectedItem);
+					break;
 			}
 			if (event)
 			{
@@ -260,6 +347,7 @@ package main.view
 				trace("派发事件" + event.kind);
 			}
 			resetForm();
+			
 			switch (event.kind)
 			{
 				case DataActionEventKind.KIND_REFRESH: 

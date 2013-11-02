@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,0,1,1,drawer;14,1,1,0,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,1,1,0,drawer;14,1,1,0,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
@@ -37,14 +37,14 @@
     </Box>
     <VScrollBar skin="png.flat.vscroll" x="759" layer="1" name="scrollBar" width="17" height="480" y="1"/>
   </List>
-  <Container layers="5,1,2,0,info;4,0,2,1,new;3,1,2,1,block;1,1,2,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
+  <Container layers="5,0,1,1,info;4,1,1,0,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
     <Image url="png.flat.information" layer="1" visible="true" x="488"/>
     <Label text="_____________________________________________" x="501" y="51" layer="1" color="0xc9cdcc"/>
     <Label text=">>" x="497" y="350" layer="1" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
     <Image url="png.flat.blank" x="493" y="6" layer="3" width="22" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
     <Image url="png.flat.blank" y="63" layer="3" width="231" height="102" alpha="0" var="block_blank"/>
     <Box layers="1,1,0" layer="4" x="513" y="29" var="box_new">
-      <Label text="新建" x="2" layer="1" size="24" font="Microsoft YaHei" color="0x333333"/>
+      <Label text="新建" x="2" layer="1" size="24" font="Microsoft YaHei" color="0x333333" var="label_title"/>
       <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="2" y="54" layer="1" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
       <Label text="...................................................................................." y="250" layer="1" color="0xc9cdcc"/>
       <Label text="相片编码：" x="2" y="284" layer="1" color="0x333333" font="Microsoft YaHei" size="12"/>
@@ -60,21 +60,17 @@
       <Button skin="png.flat.btn_add" x="288" y="281" layer="1" buttonMode="true"/>
       <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="112" y="96" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
     </Box>
-    <Box layers="1,1,0" layer="5" x="515" y="30" var="box_info" visible="false" disabled="false">
+    <Box layers="2,1,0,0,button;1,1,0,1,第 1 层" layer="5" x="515" y="30" var="box_info" visible="false" disabled="false">
       <Label text="详细信息" layer="1" font="Microsoft YaHei" size="24" color="0x333333" selectable="true"/>
-      <Label text="01" x="11" y="53" layer="1" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_id"/>
-      <Label text="陈丽婷" x="53" y="53" layer="1" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_name"/>
-      <Label text="宿舍：" x="11" y="91" layer="1" width="176" height="26" font="Microsoft YaHei" size="12" color="0x333333" selectable="true" var="label_dor"/>
-      <Label text="电话:" x="11" y="117" layer="1" font="Microsoft YaHei" size="12" height="26" width="225" color="0x333333" selectable="true" var="label_phone"/>
-      <Label text="邮箱：" x="11" y="143" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true" var="label_email"/>
-      <Label text="相片信息" x="11" y="169" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true"/>
-      <Label text="电子版：" x="11" y="195" layer="1" font="Microsoft YaHei" size="12" width="283" height="26" wordWrap="true" color="0x333333" selectable="true" var="label_photoId"/>
-      <Label text="冲洗版：" x="11" y="221" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" wordWrap="true" selectable="true" var="label_printPhotoId"/>
-      <Label text="备注：" x="11" y="262" layer="1" font="Microsoft YaHei" size="12" width="245" height="26" color="0x333333" selectable="true" var="label_note"/>
+      <Label text="01" x="11" y="53" layer="1" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_name" width="154" height="24"/>
+      <Label x="11" y="91" layer="1" width="282" height="230" font="Microsoft YaHei" size="12" color="0x333333" selectable="true" var="label_info" wordWrap="true" multiline="true" leading="8"/>
       <Label text="................................................................................................" x="14" y="314" layer="1" color="0xcccccc"/>
       <Label text="电子版" x="102" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
       <Label text="冲洗版" x="154" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
       <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1"/>
+      <Button skin="png.flat.btn_edit" x="268" y="83" layer="2" var="btn_infoEdit" buttonMode="true"/>
+      <Button skin="png.flat.btn_send" x="268" y="117" layer="2" var="btn_infoSend" buttonMode="true"/>
+      <Button skin="png.flat.btn_delete" x="268" y="151" layer="2" var="btn_infoDelete" buttonMode="true"/>
     </Box>
   </Container>
   <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
