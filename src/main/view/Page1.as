@@ -37,6 +37,7 @@ package main.view
 		private var printPhotoFile:File;
 		private var photoFileName:String;
 		private var printPhotoFileName:String;
+		private var photoIdArray:Array;
 		
 		public function Page1()
 		{
@@ -83,27 +84,36 @@ package main.view
 				
 				for (var j:int = 0; j < list.array.length; j++)
 				{
-					photoFileName = list.array[j].userPhotoId + ".JPG";
-					printPhotoFileName = list.array[j].userPrintPhotoId + ".JPG";
-					if (contents[i].name == photoFileName)
+					//分割匹配
+					photoIdArray = list.array[j].userPhotoId.split(",");
+					
+					for (var k:int = 0; k < photoIdArray.length; k++)
 					{
-						
-						trace("匹配" + list.array[j].userName + "的相片" + photoFileName);
-						outputFile = photoFile.resolvePath("电子版/" + list.array[j].userId + "/" + photoFileName);
-						printPhotoFile = photoFile.resolvePath("冲洗版/" + list.array[j].userId + "/" + photoFileName);
-						
-						if (contents[i].exists)
+						photoFileName = photoIdArray[k] + ".JPG";
+						trace(photoFileName);
+						if (contents[i].name == photoFileName)
 						{
 							
-							contents[i].moveTo(outputFile, true);
+							trace("匹配" + list.array[j].userName + "的相片" + photoFileName);
+							outputFile = photoFile.resolvePath("电子版/" + list.array[j].userId + "/" + photoFileName);
+							printPhotoFile = photoFile.resolvePath("冲洗版/" + list.array[j].userId + "/" + photoFileName);
 							
-							sameFile = outputFile.resolvePath("");
-						}
-						else
-						{
-							sameFile.copyTo(outputFile, true);
+							if (contents[i].exists)
+							{
+								
+								contents[i].moveTo(outputFile, true);
+								
+								sameFile = outputFile.resolvePath("");
+							}
+							else
+							{
+								sameFile.copyTo(outputFile, true);
+							}
 						}
 					}
+					
+					printPhotoFileName = list.array[j].userPrintPhotoId + ".JPG";
+					
 					if (contents[i].name == printPhotoFileName)
 					{
 						sameFile.copyTo(printPhotoFile, true);
@@ -241,7 +251,7 @@ package main.view
 		private function onRollWheelHander(e:MouseEvent):void
 		{
 			scrollBarView.alpha = 1;
-
+			
 			var myTimer:Timer = new Timer(400, 2);
 			myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
 			myTimer.reset();
@@ -249,14 +259,17 @@ package main.view
 			myTimer.delay = 1000;
 			
 			//list遮蔽底部
-			if (scrollBarView.value + 13 > list.array.length) {
-			    block_mask.visible = false;	
-			}else {
+			if (scrollBarView.value + 13 > list.array.length)
+			{
+				block_mask.visible = false;
+			}
+			else
+			{
 				block_mask.visible = true;
 			}
 		}
 		
-		private function timerHandler(e:Event):void 
+		private function timerHandler(e:Event):void
 		{
 			scrollBarView.alpha -= 0.2;
 		}
