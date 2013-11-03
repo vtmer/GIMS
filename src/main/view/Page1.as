@@ -241,14 +241,19 @@ package main.view
 		private function onRollWheelHander(e:MouseEvent):void
 		{
 			scrollBarView.alpha = 1;
-			trace(scrollBarView.value);
+
 			var myTimer:Timer = new Timer(400, 2);
 			myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
 			myTimer.reset();
 			myTimer.start();
 			myTimer.delay = 1000;
 			
-			
+			//list遮蔽底部
+			if (scrollBarView.value + 13 > list.array.length) {
+			    block_mask.visible = false;	
+			}else {
+				block_mask.visible = true;
+			}
 		}
 		
 		private function timerHandler(e:Event):void 
