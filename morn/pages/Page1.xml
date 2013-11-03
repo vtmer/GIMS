@@ -1,16 +1,18 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,5,1,control;11,0,5,1,drawer;14,1,5,1,list;3,1,5,1,image;1,1,5,1,button;6,1,5,0,search;5,1,5,1,label;4,1,5,1,navigation;13,1,5,1,remove;2,1,5,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,1,1,1,drawer;14,1,1,1,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,0,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
   </Container>
+  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4"/>
+  <Label text="个人信息" x="214" y="150" layer="5" font="Microsoft YaHei" size="18" color="0x333333"/>
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
   <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
   <TextInput x="446" y="149" layer="6" width="282" height="22" align="left" font="Microsoft YaHei" size="12"/>
   <Button skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
   <Button skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
-  <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
-  <Button skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
   <Button skin="png.flat.btn_contact" x="76" y="724" layer="1" buttonMode="true"/>
   <Button skin="png.flat.btn_question" x="104" y="724" layer="1" buttonMode="true"/>
   <Container layers="1,1,0" layer="1" right="20" top="12" var="windows_btn">

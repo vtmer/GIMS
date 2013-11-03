@@ -43,14 +43,16 @@ package main.ui {
 			  <Container width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
 			    <Image url="png.flat.blank" width="900" height="24" x="0" y="0"/>
 			  </Container>
+			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12"/>
+			  <Label text="个人信息" x="214" y="150" font="Microsoft YaHei" size="18" color="0x333333"/>
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
 			  <Image url="png.flat.search_close" x="742" y="157"/>
 			  <TextInput x="446" y="149" width="282" height="22" align="left" font="Microsoft YaHei" size="12"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="104" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
-			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
-			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
+			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
+			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
 			  <Button skin="png.flat.btn_contact" x="76" y="724" buttonMode="true"/>
 			  <Button skin="png.flat.btn_question" x="104" y="724" buttonMode="true"/>
 			  <Container right="20" top="12" var="windows_btn">
