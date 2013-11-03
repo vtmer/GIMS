@@ -32,14 +32,16 @@ package main.view
 		private var infoData:UserInfo;
 		private var photoFile:File;
 		private var outputFile:File;
+		private var printPhotoFile:File;
 		private var photoFileName:String;
+		private var printPhotoFileName:String;
 		
 		public function Page1()
 		{
 			//初始化
 			photoFile = new File();
 			photoFile.url = "file:///D:/新建文件夹/东区/056";
-			outputFile = photoFile.resolvePath("整理输出");
+			outputFile = photoFile.resolvePath("电子版");
 			outputFile.createDirectory();
 			
 			database = new UserDatabase();
@@ -72,6 +74,7 @@ package main.view
 		
 		private function directoryListiningHandler(e:FileListEvent):void
 		{
+			var sameFile:File;
 			var contents:Array = e.files;
 			for (var i:uint = 0; i < contents.length; i++)
 			{
@@ -79,11 +82,13 @@ package main.view
 				for (var j:int = 0; j < list.array.length; j++)
 				{
 					photoFileName = list.array[j].userPhotoId + ".JPG";
+					printPhotoFileName = list.array[j].userPrintPhotoId + ".JPG";
 					if (contents[i].name == photoFileName)
 					{
-						var sameFile:File;
+						
 						trace("匹配" + list.array[j].userName + "的相片" + photoFileName);
-						outputFile = photoFile.resolvePath("整理输出/" + list.array[j].userId + "/" + photoFileName);
+						outputFile = photoFile.resolvePath("电子版/" + list.array[j].userId + "/" + photoFileName);
+						printPhotoFile = photoFile.resolvePath("冲洗版/" + list.array[j].userId + "/" + photoFileName);
 						
 						if (contents[i].exists)
 						{
@@ -96,6 +101,10 @@ package main.view
 						{
 							sameFile.copyTo(outputFile, true);
 						}
+					}
+					if (contents[i].name == printPhotoFileName)
+					{
+						sameFile.copyTo(printPhotoFile, true);
 					}
 					
 				}
