@@ -37,6 +37,7 @@ package main.ui {
 		public var btn_infoSend:Button;
 		public var btn_infoDelete:Button;
 		public var block_resize:Container;
+		public var block_mask:Image;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
@@ -77,8 +78,8 @@ package main.ui {
 			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			  </Box>
-			  <List x="231" y="247" var="list" repeatY="10" repeatX="1">
-			    <Box name="render" var="render" width="777" height="48" buttonMode="false" y="1">
+			  <List x="231" y="248" var="list" repeatY="10" repeatX="1">
+			    <Box name="render" var="render" width="777" height="48" buttonMode="false">
 			      <Label text="陈丽婷" x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
 			      <Label text="东区12-608" x="206" y="0" width="141" height="47" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
 			      <Label text="13560478360 " x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
@@ -88,7 +89,7 @@ package main.ui {
 			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
 			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
 			    </Box>
-			    <VScrollBar skin="png.flat.vscroll" x="772" width="6" height="483" name="scrollBar" var="scrollBarView"/>
+			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
 			  </List>
 			  <Container x="186" y="43" var="drawer" visible="false" disabled="false">
 			    <Image url="png.flat.information" visible="true" x="488"/>
@@ -129,6 +130,7 @@ package main.ui {
 			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
+			  <Image url="png.flat.mask" x="216" y="705" width="793" height="24" var="block_mask"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {

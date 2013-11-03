@@ -2,7 +2,9 @@ package main.view
 {
 	import flash.display.NativeWindowResize;
 	import flash.events.FileListEvent;
+	import flash.events.TimerEvent;
 	import flash.filesystem.File;
+	import flash.utils.Timer;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -228,9 +230,30 @@ package main.view
 			list.renderHandler = new Handler(listRender);
 			//自定义选择变更处理
 			list.selectHandler = new Handler(listSelect);
+			//滚轮时
+			list.addEventListener(MouseEvent.MOUSE_WHEEL, onRollWheelHander);
 		
 		/**自定义List项渲染*/
 		
+		}
+		
+		//滚动条
+		private function onRollWheelHander(e:MouseEvent):void
+		{
+			scrollBarView.alpha = 1;
+			trace(scrollBarView.value);
+			var myTimer:Timer = new Timer(400, 2);
+			myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
+			myTimer.reset();
+			myTimer.start();
+			myTimer.delay = 1000;
+			
+			
+		}
+		
+		private function timerHandler(e:Event):void 
+		{
+			scrollBarView.alpha -= 0.2;
 		}
 		
 		private function listRender(item:Component, index:int):void
