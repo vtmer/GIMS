@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,1,1,0,drawer;14,1,1,0,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,5,1,control;11,0,5,1,drawer;14,1,5,1,list;3,1,5,1,image;1,1,5,1,button;6,1,5,0,search;5,1,5,1,label;4,1,5,1,navigation;13,1,5,1,remove;2,1,5,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
@@ -6,6 +6,7 @@
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
   <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
+  <TextInput x="446" y="149" layer="6" width="282" height="22" align="left" font="Microsoft YaHei" size="12"/>
   <Button skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
   <Button skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
   <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
@@ -24,8 +25,18 @@
   <Image url="png.flat.text_other" x="406" y="42" layer="3"/>
   <Image url="png.flat.icon6" x="367" y="48" layer="3"/>
   <Image url="png.flat.table" x="217" y="209" layer="3"/>
-  <List layers="1,1,1,0,第 1 层" layer="14" x="231" y="248" var="list" repeatY="10" repeatX="1">
-    <Box layers="1,1,1,1,第 1 层;2,1,1,1,第 2 层" layer="1" name="render" var="render" width="758" height="48" buttonMode="false" x="0" y="0">
+  <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
+    <Image url="png.flat.icon1" x="20" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon2" x="18" y="104" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon3" x="19" y="216" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon4" x="18" y="324" layer="1" mouseEnabled="false"/>
+    <Label text="新建" x="17" y="28" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="整理相片" x="3" y="136" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="一键发送" x="3" y="244" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="导入/导出" y="352" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+  </Box>
+  <List layers="1,1,1,0,第 1 层" layer="14" x="231" y="247" var="list" repeatY="10" repeatX="1">
+    <Box layers="1,1,1,1,第 1 层;2,1,1,0,第 2 层" layer="1" name="render" var="render" width="777" height="48" buttonMode="false" y="1">
       <Label text="陈丽婷" x="106" y="0" layer="1" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
       <Label text="东区12-608" x="206" y="0" layer="1" width="141" height="47" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
       <Label text="13560478360 " x="346" y="0" layer="1" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
@@ -33,9 +44,9 @@
       <CheckBox skin="png.flat.checkbox" y="18" layer="1" buttonMode="true"/>
       <Label text="01" x="68" layer="1" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
       <Clip url="png.flat.clip_condition" x="39" y="20" layer="1" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
-      <Clip url="png.flat.clip_selectBox" x="-13" y="0" layer="2" width="772" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
+      <Clip url="png.flat.clip_selectBox" x="-13" y="0" layer="2" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
     </Box>
-    <VScrollBar skin="png.flat.vscroll" x="759" layer="1" name="scrollBar" width="17" height="480" y="1"/>
+    <VScrollBar skin="png.flat.vscroll" x="772" layer="1" width="6" height="483" name="scrollBar" var="scrollBarView"/>
   </List>
   <Container layers="5,0,1,1,info;4,1,1,0,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
     <Image url="png.flat.information" layer="1" visible="true" x="488"/>
@@ -76,14 +87,4 @@
   <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
     <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
-  <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
-    <Image url="png.flat.icon1" x="20" layer="1" mouseEnabled="false"/>
-    <Image url="png.flat.icon2" x="18" y="104" layer="1" mouseEnabled="false"/>
-    <Image url="png.flat.icon3" x="19" y="216" layer="1" mouseEnabled="false"/>
-    <Image url="png.flat.icon4" x="18" y="324" layer="1" mouseEnabled="false"/>
-    <Label text="新建" x="17" y="28" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
-    <Label text="整理相片" x="3" y="136" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
-    <Label text="一键发送" x="3" y="244" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
-    <Label text="导入/导出" y="352" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
-  </Box>
 </View>

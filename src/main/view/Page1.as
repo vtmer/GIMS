@@ -1,6 +1,8 @@
 package main.view
 {
 	import flash.display.NativeWindowResize;
+	import flash.events.FileListEvent;
+	import flash.filesystem.File;
 	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -28,11 +30,17 @@ package main.view
 		private var database:UserDatabase;
 		private var userData:UserInfo;
 		private var infoData:UserInfo;
+		private var photoFile:File;
+		private var outputFile:File;
+		private var photoFileName:String;
 		
 		public function Page1()
 		{
 			//初始化
-			
+			photoFile = new File();
+			photoFile.url = "file:///D:/新建文件夹/东区/056";
+			outputFile = photoFile.resolvePath("整理输出");
+			outputFile.createDirectory();
 			
 			database = new UserDatabase();
 			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
@@ -45,12 +53,60 @@ package main.view
 			//drawer按钮
 			btn_infoEdit.addEventListener(MouseEvent.MOUSE_DOWN, infoEdit);
 			btn_infoDelete.addEventListener(MouseEvent.MOUSE_DOWN, infoDelete);
+			//匹配整理
+			btn_arrange.addEventListener(MouseEvent.MOUSE_DOWN, arrange);
 			//表单提示信息
 			inputFieldTips();
 			//表单确认
 			inputEnter();
 			//list
 			initList();
+		}
+		
+		//整理相片
+		private function arrange(e:MouseEvent):void
+		{
+			photoFile.getDirectoryListingAsync();
+			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
+		}
+		
+		private function directoryListiningHandler(e:FileListEvent):void
+		{
+			var contents:Array = e.files;
+			for (var i:uint = 0; i < contents.length; i++)
+			{
+				
+				for (var j:int = 0; j < list.array.length; j++)
+				{
+					photoFileName = list.array[j].userPhotoId + ".JPG";
+					if (contents[i].name == photoFileName)
+					{
+						var sameFile:File;
+						trace("匹配" + list.array[j].userName + "的相片" + photoFileName);
+						outputFile = photoFile.resolvePath("整理输出/" + list.array[j].userId + "/" + photoFileName);
+						
+						if (contents[i].exists)
+						{
+							
+							contents[i].moveTo(outputFile, true);
+							
+							sameFile = outputFile.resolvePath("");
+						}
+						else
+						{
+							sameFile.copyTo(outputFile, true);
+						}
+					}
+					
+				}
+			}
+			
+			adaptation();
+		}
+		
+		private function adaptation():void
+		{
+		
 		}
 		
 		//选择被改变时
@@ -114,7 +170,7 @@ package main.view
 			}
 			
 			label_info.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString() + "\n电话：" + infoData.userPhone.toString() + "\nEmail：" + infoData.userEmail + "\n相片信息\n电子版：" + infoData.userPhotoId + "\n冲洗版：" + infoData.userPrintPhotoId + "\n\n备注：";
-			
+		
 		}
 		
 		//编辑信息
@@ -125,13 +181,11 @@ package main.view
 			_isNewInfo = false;
 			editInfoChange(listSelectIndex);
 			label_title.text = "编辑信息";
-			
-			
+		
 		}
 		
 		private function editInfoChange(index:int):void
 		{
-			
 			
 			trace("编辑" + index);
 			input_name.text = editUser.userName;
@@ -156,7 +210,7 @@ package main.view
 			drawer.visible = false;
 			_isDrawerIn = true;
 			list.selectedIndex = -1;
-			
+		
 		}
 		
 		private function initList():void
@@ -165,9 +219,9 @@ package main.view
 			list.renderHandler = new Handler(listRender);
 			//自定义选择变更处理
 			list.selectHandler = new Handler(listSelect);
-			
-			/**自定义List项渲染*/
-			
+		
+		/**自定义List项渲染*/
+		
 		}
 		
 		private function listRender(item:Component, index:int):void
@@ -222,7 +276,7 @@ package main.view
 				_isDrawerIn = false;
 				box_new.visible = true;
 				box_info.visible = false;
-				editUser=new UserInfo();
+				editUser = new UserInfo();
 			}
 			else
 			{
@@ -267,7 +321,7 @@ package main.view
 					inputField.color = 0xc9cdcc;
 				}
 			}
-			
+		
 		}
 		
 		//表单确认
@@ -292,7 +346,7 @@ package main.view
 			
 			drawer.visible = false;
 			_isDrawerIn = true;
-			
+		
 		}
 		
 		//处理派发的事件
@@ -304,11 +358,11 @@ package main.view
 					list.array = event.data as Array;
 					trace("数据变更");
 					break;
-				
+			
 				//case DataActionEventKind.KIND_REFRESH: 
 				//database.select();
 				//break;
-				
+			
 				//case DataActionEventKind.KIND_SAVE: 
 				//if (editUser.userId)
 				//{
@@ -322,7 +376,7 @@ package main.view
 				//}
 				//break;
 			}
-			
+		
 		}
 		
 		//根据操作处理数据
@@ -419,7 +473,7 @@ package main.view
 			windows_btn.top = 12;
 			block_resize.right = 12;
 			block_resize.bottom = 12;
-			
+		
 		}
 		
 		private function md_remove(e:MouseEvent):void
@@ -470,7 +524,7 @@ package main.view
 		{
 			this.stage.nativeWindow.close();
 		}
-		
-	}
 	
+	}
+
 }

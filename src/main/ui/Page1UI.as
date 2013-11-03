@@ -15,6 +15,7 @@ package main.ui {
 		public var btn_restore:Button;
 		public var list:List;
 		public var render:Box;
+		public var scrollBarView:VScrollBar;
 		public var drawer:Container;
 		public var btn_block:Image;
 		public var block_blank:Image;
@@ -45,6 +46,7 @@ package main.ui {
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
 			  <Image url="png.flat.search_close" x="742" y="157"/>
+			  <TextInput x="446" y="149" width="282" height="22" align="left" font="Microsoft YaHei" size="12"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="104" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true"/>
@@ -63,8 +65,18 @@ package main.ui {
 			  <Image url="png.flat.text_other" x="406" y="42"/>
 			  <Image url="png.flat.icon6" x="367" y="48"/>
 			  <Image url="png.flat.table" x="217" y="209"/>
-			  <List x="231" y="248" var="list" repeatY="10" repeatX="1">
-			    <Box name="render" var="render" width="758" height="48" buttonMode="false" x="0" y="0">
+			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
+			    <Image url="png.flat.icon1" x="20" mouseEnabled="false"/>
+			    <Image url="png.flat.icon2" x="18" y="104" mouseEnabled="false"/>
+			    <Image url="png.flat.icon3" x="19" y="216" mouseEnabled="false"/>
+			    <Image url="png.flat.icon4" x="18" y="324" mouseEnabled="false"/>
+			    <Label text="新建" x="17" y="28" font="Microsoft YaHei" color="0xffffff" size="14"/>
+			    <Label text="整理相片" x="3" y="136" font="Microsoft YaHei" color="0xffffff" size="14"/>
+			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
+			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
+			  </Box>
+			  <List x="231" y="247" var="list" repeatY="10" repeatX="1">
+			    <Box name="render" var="render" width="777" height="48" buttonMode="false" y="1">
 			      <Label text="陈丽婷" x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
 			      <Label text="东区12-608" x="206" y="0" width="141" height="47" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
 			      <Label text="13560478360 " x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
@@ -72,9 +84,9 @@ package main.ui {
 			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
 			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
 			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
-			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="772" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
+			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
 			    </Box>
-			    <VScrollBar skin="png.flat.vscroll" x="759" name="scrollBar" width="17" height="480" y="1"/>
+			    <VScrollBar skin="png.flat.vscroll" x="772" width="6" height="483" name="scrollBar" var="scrollBarView"/>
 			  </List>
 			  <Container x="186" y="43" var="drawer" visible="false" disabled="false">
 			    <Image url="png.flat.information" visible="true" x="488"/>
@@ -115,16 +127,6 @@ package main.ui {
 			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
-			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
-			    <Image url="png.flat.icon1" x="20" mouseEnabled="false"/>
-			    <Image url="png.flat.icon2" x="18" y="104" mouseEnabled="false"/>
-			    <Image url="png.flat.icon3" x="19" y="216" mouseEnabled="false"/>
-			    <Image url="png.flat.icon4" x="18" y="324" mouseEnabled="false"/>
-			    <Label text="新建" x="17" y="28" font="Microsoft YaHei" color="0xffffff" size="14"/>
-			    <Label text="整理相片" x="3" y="136" font="Microsoft YaHei" color="0xffffff" size="14"/>
-			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
-			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
-			  </Box>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
