@@ -16,6 +16,7 @@ package main.ui {
 		public var list:List;
 		public var render:Box;
 		public var scrollBarView:VScrollBar;
+		public var block_mask:Image;
 		public var drawer:Container;
 		public var btn_block:Image;
 		public var block_blank:Image;
@@ -33,18 +34,20 @@ package main.ui {
 		public var box_info:Box;
 		public var label_name:Label;
 		public var label_info:Label;
+		public var tab_photoType:Tab;
 		public var btn_infoEdit:Button;
 		public var btn_infoSend:Button;
 		public var btn_infoDelete:Button;
+		public var photoView:Image;
+		public var tab_circle:Tab;
 		public var block_resize:Container;
-		public var block_mask:Image;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
 			  <Container width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
 			    <Image url="png.flat.blank" width="900" height="24" x="0" y="0"/>
 			  </Container>
-			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12"/>
+			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" buttonMode="true"/>
 			  <Label text="个人信息" x="214" y="150" font="Microsoft YaHei" size="18" color="0x333333"/>
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
@@ -63,10 +66,10 @@ package main.ui {
 			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
 			  </Container>
 			  <Image url="png.flat.logo" x="33" y="36"/>
-			  <Image url="png.flat.icon5" x="214" y="48"/>
-			  <Image url="png.flat.text_home" x="248" y="42"/>
-			  <Image url="png.flat.text_other" x="406" y="42"/>
-			  <Image url="png.flat.icon6" x="367" y="48"/>
+			  <Image url="png.flat.icon5" x="214" y="48" mouseEnabled="false"/>
+			  <Image url="png.flat.text_home" x="248" y="42" mouseEnabled="false"/>
+			  <Image url="png.flat.text_other" x="406" y="42" mouseEnabled="false"/>
+			  <Image url="png.flat.icon6" x="367" y="48" mouseEnabled="false"/>
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
 			    <Image url="png.flat.icon1" x="20" mouseEnabled="false"/>
@@ -91,6 +94,7 @@ package main.ui {
 			    </Box>
 			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
 			  </List>
+			  <Image url="png.flat.mask" x="216" y="705" width="793" height="24" var="block_mask"/>
 			  <Container x="186" y="43" var="drawer" visible="false" disabled="false">
 			    <Image url="png.flat.information" visible="true" x="488"/>
 			    <Label text="_____________________________________________" x="501" y="51" color="0xc9cdcc"/>
@@ -121,16 +125,21 @@ package main.ui {
 			      <Label text="................................................................................................" x="14" y="314" color="0xcccccc"/>
 			      <Label text="电子版" x="102" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
 			      <Label text="冲洗版" x="154" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
-			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355"/>
+			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" var="tab_photoType"/>
 			      <Button skin="png.flat.btn_edit" x="268" y="83" var="btn_infoEdit" buttonMode="true"/>
 			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true"/>
 			      <Button skin="png.flat.btn_delete" x="268" y="151" var="btn_infoDelete" buttonMode="true"/>
+			      <Image x="34" y="405" width="246.6" height="185" var="photoView"/>
+			      <Container x="11" y="614" width="289" height="14" centerX="0">
+			        <Container centerX="0">
+			          <Tab labels=",," skin="png.flat.tab_circle" direction="horizontal" buttonMode="true" labelBold="false" selectedIndex="0" var="tab_circle" y="0"/>
+			        </Container>
+			      </Container>
 			    </Box>
 			  </Container>
 			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
-			  <Image url="png.flat.mask" x="216" y="705" width="793" height="24" var="block_mask"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {

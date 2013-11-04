@@ -1,9 +1,9 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="15,1,3,1,mask;12,1,3,1,control;11,0,3,1,drawer;14,1,3,0,list;3,1,3,1,image;1,1,3,1,button;6,1,3,1,search;5,1,3,1,label;4,1,3,1,navigation;13,1,3,1,remove;2,1,3,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,1,1,0,drawer;15,1,1,1,mask;14,1,1,1,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,0,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
   </Container>
-  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4"/>
+  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4" buttonMode="true"/>
   <Label text="个人信息" x="214" y="150" layer="5" font="Microsoft YaHei" size="18" color="0x333333"/>
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
@@ -22,10 +22,10 @@
     <Button skin="png.flat.btn_restore" x="38" layer="1" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
   </Container>
   <Image url="png.flat.logo" x="33" y="36" layer="3"/>
-  <Image url="png.flat.icon5" x="214" y="48" layer="3"/>
-  <Image url="png.flat.text_home" x="248" y="42" layer="3"/>
-  <Image url="png.flat.text_other" x="406" y="42" layer="3"/>
-  <Image url="png.flat.icon6" x="367" y="48" layer="3"/>
+  <Image url="png.flat.icon5" x="214" y="48" layer="3" mouseEnabled="false"/>
+  <Image url="png.flat.text_home" x="248" y="42" layer="3" mouseEnabled="false"/>
+  <Image url="png.flat.text_other" x="406" y="42" layer="3" mouseEnabled="false"/>
+  <Image url="png.flat.icon6" x="367" y="48" layer="3" mouseEnabled="false"/>
   <Image url="png.flat.table" x="217" y="209" layer="3"/>
   <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
     <Image url="png.flat.icon1" x="20" layer="1" mouseEnabled="false"/>
@@ -50,7 +50,8 @@
     </Box>
     <VScrollBar skin="png.flat.vscroll" x="771" layer="1" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
   </List>
-  <Container layers="5,0,1,1,info;4,1,1,0,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
+  <Image url="png.flat.mask" x="216" y="705" layer="15" width="793" height="24" var="block_mask"/>
+  <Container layers="5,1,1,0,info;4,0,1,1,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
     <Image url="png.flat.information" layer="1" visible="true" x="488"/>
     <Label text="_____________________________________________" x="501" y="51" layer="1" color="0xc9cdcc"/>
     <Label text=">>" x="497" y="350" layer="1" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
@@ -73,21 +74,26 @@
       <Button skin="png.flat.btn_add" x="288" y="281" layer="1" buttonMode="true"/>
       <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="112" y="96" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
     </Box>
-    <Box layers="2,1,0,0,button;1,1,0,1,第 1 层" layer="5" x="515" y="30" var="box_info" visible="false" disabled="false">
+    <Box layers="3,1,0,1,Photo;2,1,0,0,button;1,1,0,0,第 1 层" layer="5" x="515" y="30" var="box_info" visible="false" disabled="false">
       <Label text="详细信息" layer="1" font="Microsoft YaHei" size="24" color="0x333333" selectable="true"/>
       <Label text="01" x="11" y="53" layer="1" size="16" font="Microsoft YaHei" color="0x333333" selectable="true" var="label_name" width="154" height="24"/>
       <Label x="11" y="91" layer="1" width="282" height="230" font="Microsoft YaHei" size="12" color="0x333333" selectable="true" var="label_info" wordWrap="true" multiline="true" leading="8"/>
       <Label text="................................................................................................" x="14" y="314" layer="1" color="0xcccccc"/>
       <Label text="电子版" x="102" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
       <Label text="冲洗版" x="154" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
-      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1"/>
+      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1" var="tab_photoType"/>
       <Button skin="png.flat.btn_edit" x="268" y="83" layer="2" var="btn_infoEdit" buttonMode="true"/>
       <Button skin="png.flat.btn_send" x="268" y="117" layer="2" var="btn_infoSend" buttonMode="true"/>
       <Button skin="png.flat.btn_delete" x="268" y="151" layer="2" var="btn_infoDelete" buttonMode="true"/>
+      <Image x="34" y="405" layer="3" width="246.6" height="185" var="photoView"/>
+      <Container layers="1,1,0" layer="2" x="11" y="614" width="289" height="14" centerX="0">
+        <Container layers="1,1,0" layer="1" centerX="0">
+          <Tab labels=",," skin="png.flat.tab_circle" layer="1" direction="horizontal" buttonMode="true" layers="1,1,0,0,第 1 层" labelBold="false" selectedIndex="0" var="tab_circle" y="0"/>
+        </Container>
+      </Container>
     </Box>
   </Container>
   <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
     <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
-  <Image url="png.flat.mask" x="216" y="705" layer="15" width="793" height="24" var="block_mask"/>
 </View>
