@@ -15,6 +15,7 @@ package main.ui {
 		public var btn_restore:Button;
 		public var list:List;
 		public var render:Box;
+		public var userIsFinish:Clip;
 		public var scrollBarView:VScrollBar;
 		public var block_mask:Image;
 		public var drawer:Container;
@@ -89,7 +90,7 @@ package main.ui {
 			      <Label text="armchanel@msn.com" x="544" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
 			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
 			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
-			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" name="userIsTown"/>
+			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" var="userIsFinish"/>
 			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
 			    </Box>
 			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>

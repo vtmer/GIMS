@@ -16,6 +16,7 @@ package main.view
 	import flash.events.FocusEvent;
 	import morn.core.components.Component;
 	import morn.core.components.Label;
+	import morn.core.components.Clip;
 	import morn.core.components.TextInput;
 	import morn.core.handlers.Handler;
 	
@@ -130,7 +131,7 @@ package main.view
 		
 		}
 		
-		//选择被改变时
+		//list选择被改变时
 		private function listSelect(index:int):void
 		{
 			if (list.selectedIndex != -1)
@@ -191,7 +192,77 @@ package main.view
 			}
 			
 			label_info.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString() + "\n电话：" + infoData.userPhone.toString() + "\nEmail：" + infoData.userEmail + "\n相片信息\n电子版：" + infoData.userPhotoId + "\n冲洗版：" + infoData.userPrintPhotoId + "\n\n备注：";
+			
+			tab_photoType.selectedIndex = 0;
+			getPhoto(infoData.userPhotoId, "电子版");
+			
+			tab_photoType.selectHandler = new Handler(photoTypeChange);
+			tab_circle.selectHandler=new Handler(circleChange);
 		
+		}
+		
+		//改变相片类型时
+		private function photoTypeChange(index:int):void
+		{
+			
+			switch (index)
+			{
+				//电子版
+				case 0:
+					
+					getPhoto(infoData.userPhotoId, "电子版");
+					break;
+				//冲洗版
+				case 1:
+					
+					getPhoto(infoData.userPrintPhotoId, "冲洗版");
+					break;
+			}
+		}
+		
+		//获取相片
+		private function getPhoto(photoId:String, photoType:String):void
+		{
+			
+			photoIdArray = photoId.split(",");
+			photoFileName = photoIdArray[0] + ".jpg";
+			
+			//获取相片数作指示器
+			var photoNum:Array = [];
+			for (var i:int = 0; i < photoIdArray.length; i++)
+			{
+				photoNum.push("");
+			}
+			tab_circle.labels = photoNum.toString();
+			
+			outputFile = photoFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			photoView.url = outputFile.url;
+		}
+		
+	    //改变相片编号指示器
+		private function circleChange(index:int):void
+		{
+			switch (tab_photoType.selectedIndex)
+			{
+				//电子版
+				case 0:
+					changePhoto("电子版",index);
+					break;
+				//冲洗版
+				case 1:
+					
+					changePhoto("冲洗版",index);
+					break;
+			}
+			
+		}
+		
+		private function changePhoto(photoType:String,index:int):void
+		{
+			trace(photoIdArray);
+			photoFileName = photoIdArray[index] + ".jpg";
+			outputFile = photoFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			photoView.url = outputFile.url;
 		}
 		
 		//编辑信息
@@ -243,8 +314,6 @@ package main.view
 			//滚轮时
 			list.addEventListener(MouseEvent.MOUSE_WHEEL, onRollWheelHander);
 		
-		/**自定义List项渲染*/
-		
 		}
 		
 		//滚动条
@@ -274,6 +343,7 @@ package main.view
 			scrollBarView.alpha -= 0.2;
 		}
 		
+		/**自定义List项渲染*/
 		private function listRender(item:Component, index:int):void
 		{
 			
