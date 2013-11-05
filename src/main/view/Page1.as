@@ -464,8 +464,16 @@ package main.view
 			onActionHandler(DataActionEventKind.KIND_SAVE);
 			trace("提交编辑信息" + listSelectIndex);
 			
-			drawer.visible = false;
-			_isDrawerIn = true;
+			
+			//是否为新建信息做出响应
+			if (label_title.text=="新建") {
+				drawer.visible = false;
+				_isDrawerIn = true;
+			}else {
+				drawerInfo(listSelectIndex);
+			}
+			
+			
 		
 		}
 		
