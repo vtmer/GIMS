@@ -49,7 +49,7 @@ package main.ui {
 			    <Image url="png.flat.blank" width="900" height="24" x="0" y="0"/>
 			  </Container>
 			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" buttonMode="true"/>
-			  <Label text="个人信息" x="214" y="150" font="Microsoft YaHei" size="18" color="0x333333"/>
+			  <Label text="个人信息" x="214" y="146" font="Microsoft YaHei" size="18" color="0x333333"/>
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
 			  <Image url="png.flat.search_close" x="742" y="157"/>
@@ -69,8 +69,8 @@ package main.ui {
 			  <Image url="png.flat.logo" x="33" y="36"/>
 			  <Image url="png.flat.icon5" x="214" y="48" mouseEnabled="false"/>
 			  <Image url="png.flat.text_home" x="248" y="42" mouseEnabled="false"/>
-			  <Image url="png.flat.text_other" x="406" y="42" mouseEnabled="false"/>
-			  <Image url="png.flat.icon6" x="367" y="48" mouseEnabled="false"/>
+			  <Image url="png.flat.text_other" x="418" y="42" mouseEnabled="false"/>
+			  <Image url="png.flat.icon6" x="379" y="48" mouseEnabled="false"/>
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
 			    <Image url="png.flat.icon1" x="20" mouseEnabled="false"/>
@@ -114,9 +114,7 @@ package main.ui {
 			      <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="44" y="130" buttonMode="true" labelColors="0x333333" var="input_dor"/>
 			      <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="64" y="327" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_printPhotoId"/>
 			      <TextInput text="电子版相片编码" skin="png.flat.textinput" x="64" y="280" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_photoId"/>
-			      <Button label="确认" skin="png.flat.btn_enter" x="233" y="384" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_enter"/>
-			      <Button skin="png.flat.btn_add" x="288" y="328" buttonMode="true"/>
-			      <Button skin="png.flat.btn_add" x="288" y="281" buttonMode="true"/>
+			      <Button label="确认" skin="png.flat.btn_enter" x="200" y="384" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_enter"/>
 			      <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="112" y="96" labelColors="0x333333" labelSize="12" labelMargin="5,,10," buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
 			    </Box>
 			    <Box x="515" y="30" var="box_info" visible="false" disabled="false">

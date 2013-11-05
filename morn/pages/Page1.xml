@@ -1,10 +1,10 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,0,1,1,drawer;15,1,1,1,mask;14,1,1,0,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,0,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,1,1,control;11,1,1,0,drawer;15,1,1,1,mask;14,1,1,1,list;3,1,1,1,image;1,1,1,1,button;6,1,1,1,search;5,1,1,1,label;4,1,1,1,navigation;13,1,1,1,remove;2,1,1,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
   </Container>
   <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4" buttonMode="true"/>
-  <Label text="个人信息" x="214" y="150" layer="5" font="Microsoft YaHei" size="18" color="0x333333"/>
+  <Label text="个人信息" x="214" y="146" layer="5" font="Microsoft YaHei" size="18" color="0x333333"/>
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
   <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
@@ -24,8 +24,8 @@
   <Image url="png.flat.logo" x="33" y="36" layer="3"/>
   <Image url="png.flat.icon5" x="214" y="48" layer="3" mouseEnabled="false"/>
   <Image url="png.flat.text_home" x="248" y="42" layer="3" mouseEnabled="false"/>
-  <Image url="png.flat.text_other" x="406" y="42" layer="3" mouseEnabled="false"/>
-  <Image url="png.flat.icon6" x="367" y="48" layer="3" mouseEnabled="false"/>
+  <Image url="png.flat.text_other" x="418" y="42" layer="3" mouseEnabled="false"/>
+  <Image url="png.flat.icon6" x="379" y="48" layer="3" mouseEnabled="false"/>
   <Image url="png.flat.table" x="217" y="209" layer="3"/>
   <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
     <Image url="png.flat.icon1" x="20" layer="1" mouseEnabled="false"/>
@@ -51,7 +51,7 @@
     <VScrollBar skin="png.flat.vscroll" x="771" layer="1" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
   </List>
   <Image url="png.flat.mask" x="216" y="705" layer="15" width="793" height="24" var="block_mask"/>
-  <Container layers="5,1,1,0,info;4,0,1,1,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
+  <Container layers="5,0,1,1,info;4,1,1,0,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
     <Image url="png.flat.information" layer="1" visible="true" x="488"/>
     <Label text="_____________________________________________" x="501" y="51" layer="1" color="0xc9cdcc"/>
     <Label text=">>" x="497" y="350" layer="1" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
@@ -69,9 +69,7 @@
       <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="44" y="130" layer="1" buttonMode="true" labelColors="0x333333" var="input_dor"/>
       <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="64" y="327" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_printPhotoId"/>
       <TextInput text="电子版相片编码" skin="png.flat.textinput" x="64" y="280" layer="1" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_photoId"/>
-      <Button label="确认" skin="png.flat.btn_enter" x="233" y="384" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_enter"/>
-      <Button skin="png.flat.btn_add" x="288" y="328" layer="1" buttonMode="true"/>
-      <Button skin="png.flat.btn_add" x="288" y="281" layer="1" buttonMode="true"/>
+      <Button label="确认" skin="png.flat.btn_enter" x="200" y="384" layer="1" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_enter"/>
       <RadioGroup labels="是 ,否" skin="png.flat.radiogroup" x="112" y="96" layer="1" labelColors="0x333333" labelSize="12" labelMargin="5,,10," layers="1,1,0,0,第 1 层" buttonMode="true" selectedValue="0,1" selectedIndex="0" var="input_isTown"/>
     </Box>
     <Box layers="3,1,0,1,Photo;2,1,0,0,button;1,1,0,0,第 1 层" layer="5" x="515" y="30" var="box_info" visible="false" disabled="false">
