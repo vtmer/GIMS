@@ -51,7 +51,7 @@
     <VScrollBar skin="png.flat.vscroll" x="771" layer="1" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
   </List>
   <Image url="png.flat.mask" x="216" y="705" layer="15" width="793" height="24" var="block_mask"/>
-  <Container layers="5,0,1,1,info;4,1,1,0,new;3,1,1,1,block;1,1,1,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
+  <Container layers="5,1,0,0,info;4,0,0,1,new;3,1,0,1,block;1,1,0,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false">
     <Image url="png.flat.information" layer="1" visible="true" x="488"/>
     <Label text="_____________________________________________" x="501" y="51" layer="1" color="0xc9cdcc"/>
     <Label text=">>" x="497" y="350" layer="1" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
@@ -79,7 +79,7 @@
       <Label text="................................................................................................" x="14" y="314" layer="1" color="0xcccccc"/>
       <Label text="电子版" x="102" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
       <Label text="冲洗版" x="154" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
-      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1" var="tab_photoType"/>
+      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1" var="tab_photoType" buttonMode="true"/>
       <Button skin="png.flat.btn_edit" x="268" y="83" layer="2" var="btn_infoEdit" buttonMode="true"/>
       <Button skin="png.flat.btn_send" x="268" y="117" layer="2" var="btn_infoSend" buttonMode="true"/>
       <Button skin="png.flat.btn_delete" x="268" y="151" layer="2" var="btn_infoDelete" buttonMode="true"/>

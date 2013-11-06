@@ -124,7 +124,7 @@ package main.ui {
 			      <Label text="................................................................................................" x="14" y="314" color="0xcccccc"/>
 			      <Label text="电子版" x="102" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
 			      <Label text="冲洗版" x="154" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
-			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" var="tab_photoType"/>
+			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" var="tab_photoType" buttonMode="true"/>
 			      <Button skin="png.flat.btn_edit" x="268" y="83" var="btn_infoEdit" buttonMode="true"/>
 			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true"/>
 			      <Button skin="png.flat.btn_delete" x="268" y="151" var="btn_infoDelete" buttonMode="true"/>

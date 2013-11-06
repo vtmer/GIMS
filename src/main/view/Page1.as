@@ -39,6 +39,8 @@ package main.view
 		private var photoFileName:String;
 		private var printPhotoFileName:String;
 		private var photoIdArray:Array;
+		private var contents:Array;
+		private var sameFile:File;
 		
 		public function Page1()
 		{
@@ -78,56 +80,49 @@ package main.view
 		
 		private function directoryListiningHandler(e:FileListEvent):void
 		{
-			var sameFile:File;
-			var contents:Array = e.files;
+			contents= e.files;
 			for (var i:uint = 0; i < contents.length; i++)
 			{
 				
 				for (var j:int = 0; j < list.array.length; j++)
 				{
-					//分割匹配
-					photoIdArray = list.array[j].userPhotoId.split(",");
 					
-					for (var k:int = 0; k < photoIdArray.length; k++)
-					{
-						photoFileName = photoIdArray[k] + ".JPG";
-						trace(photoFileName);
-						if (contents[i].name == photoFileName)
-						{
-							
-							trace("匹配" + list.array[j].userName + "的相片" + photoFileName);
-							outputFile = photoFile.resolvePath("电子版/" + list.array[j].userId + "/" + photoFileName);
-							printPhotoFile = photoFile.resolvePath("冲洗版/" + list.array[j].userId + "/" + photoFileName);
-							
-							if (contents[i].exists)
-							{
-								
-								contents[i].moveTo(outputFile, true);
-								
-								sameFile = outputFile.resolvePath("");
-							}
-							else
-							{
-								sameFile.copyTo(outputFile, true);
-							}
-						}
-					}
-					
-					printPhotoFileName = list.array[j].userPrintPhotoId + ".JPG";
-					
-					if (contents[i].name == printPhotoFileName)
-					{
-						sameFile.copyTo(printPhotoFile, true);
-					}
+					adaptation(list.array[j].userPhotoId, "电子版",i,list.array[j].userId);
+					adaptation(list.array[j].userPrintPhotoId, "冲洗版",i,list.array[j].userId);
 					
 				}
 			}
-			
-			adaptation();
+		
 		}
 		
-		private function adaptation():void
+		//分割匹配
+		private function adaptation(photoId:String, photoType:String,index:int,userId:String):void
 		{
+			
+			photoIdArray = photoId.split(",");
+			
+			for (var k:int = 0; k < photoIdArray.length; k++)
+			{
+				photoFileName = photoIdArray[k] + ".JPG";
+				trace(photoFileName);
+				if (contents[index].name == photoFileName)
+				{
+					
+					outputFile = photoFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
+					
+					if (contents[index].exists)
+					{
+						
+						contents[index].moveTo(outputFile, true);
+						
+						sameFile = outputFile.resolvePath("");
+					}
+					else
+					{
+						sameFile.copyTo(outputFile, true);
+					}
+				}
+			}
 		
 		}
 		
@@ -197,7 +192,7 @@ package main.view
 			getPhoto(infoData.userPhotoId, "电子版");
 			
 			tab_photoType.selectHandler = new Handler(photoTypeChange);
-			tab_circle.selectHandler=new Handler(circleChange);
+			tab_circle.selectHandler = new Handler(circleChange);
 		
 		}
 		
@@ -223,7 +218,6 @@ package main.view
 		//获取相片
 		private function getPhoto(photoId:String, photoType:String):void
 		{
-			
 			photoIdArray = photoId.split(",");
 			photoFileName = photoIdArray[0] + ".jpg";
 			
@@ -239,25 +233,24 @@ package main.view
 			photoView.url = outputFile.url;
 		}
 		
-	    //改变相片编号指示器
+		//改变相片编号指示器
 		private function circleChange(index:int):void
 		{
 			switch (tab_photoType.selectedIndex)
 			{
 				//电子版
-				case 0:
-					changePhoto("电子版",index);
+				case 0: 
+					changePhoto("电子版", index);
 					break;
 				//冲洗版
-				case 1:
-					
-					changePhoto("冲洗版",index);
+				case 1: 
+					changePhoto("冲洗版", index);
 					break;
 			}
-			
+		
 		}
 		
-		private function changePhoto(photoType:String,index:int):void
+		private function changePhoto(photoType:String, index:int):void
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
@@ -464,16 +457,16 @@ package main.view
 			onActionHandler(DataActionEventKind.KIND_SAVE);
 			trace("提交编辑信息" + listSelectIndex);
 			
-			
 			//是否为新建信息做出响应
-			if (label_title.text=="新建") {
+			if (label_title.text == "新建")
+			{
 				drawer.visible = false;
 				_isDrawerIn = true;
-			}else {
+			}
+			else
+			{
 				drawerInfo(listSelectIndex);
 			}
-			
-			
 		
 		}
 		
