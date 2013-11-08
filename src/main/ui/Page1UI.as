@@ -4,6 +4,7 @@ package main.ui {
 	public class Page1UI extends View {
 		public var bg:Image;
 		public var block_remove:Container;
+		public var input_search:TextInput;
 		public var btn_new:Button;
 		public var btn_arrange:Button;
 		public var btn_send:Button;
@@ -53,7 +54,7 @@ package main.ui {
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
 			  <Image url="png.flat.search_close" x="742" y="157"/>
-			  <TextInput x="446" y="149" width="282" height="22" align="left" font="Microsoft YaHei" size="12"/>
+			  <TextInput x="446" y="149" width="282" height="22" align="left" font="Microsoft YaHei" size="12" var="input_search"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="104" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>

@@ -2,6 +2,7 @@ package main.view
 {
 	import flash.display.NativeWindowResize;
 	import flash.events.FileListEvent;
+	import flash.events.KeyboardEvent;
 	import flash.events.TimerEvent;
 	import flash.filesystem.File;
 	import flash.utils.Timer;
@@ -22,6 +23,7 @@ package main.view
 	
 	/**
 	 * ...
+	 *
 	 * @author shengbanx
 	 */
 	public class Page1 extends Page1UI
@@ -63,12 +65,38 @@ package main.view
 			btn_infoDelete.addEventListener(MouseEvent.MOUSE_DOWN, infoDelete);
 			//匹配整理
 			btn_arrange.addEventListener(MouseEvent.MOUSE_DOWN, arrange);
+			//搜索
+			input_search.addEventListener(FocusEvent.FOCUS_IN, inputSearch);
 			//表单提示信息
 			inputFieldTips();
 			//表单确认
 			inputEnter();
 			//list
 			initList();
+		}
+		
+		//搜索
+		private function inputSearch(e:FocusEvent):void
+		{
+			this.addEventListener(KeyboardEvent.KEY_DOWN, onEnter);
+		}
+		
+		private function onEnter(e:KeyboardEvent):void
+		{
+			if (e.keyCode == 13)
+			{
+				var searchText:String = input_search.text;
+				trace(searchText);
+			}
+			for (var i:int = 0; i < list.array.length; i++)
+			{
+				if (list.array[i].userName == searchText)
+				{
+					scrollBarView.value = i;
+					list.selectedIndex = i;
+				}
+				
+			}
 		}
 		
 		//整理相片
@@ -80,15 +108,15 @@ package main.view
 		
 		private function directoryListiningHandler(e:FileListEvent):void
 		{
-			contents= e.files;
+			contents = e.files;
 			for (var i:uint = 0; i < contents.length; i++)
 			{
 				
 				for (var j:int = 0; j < list.array.length; j++)
 				{
 					
-					adaptation(list.array[j].userPhotoId, "电子版",i,list.array[j].userId);
-					adaptation(list.array[j].userPrintPhotoId, "冲洗版",i,list.array[j].userId);
+					adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
+					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
 					
 				}
 			}
@@ -96,7 +124,7 @@ package main.view
 		}
 		
 		//分割匹配
-		private function adaptation(photoId:String, photoType:String,index:int,userId:String):void
+		private function adaptation(photoId:String, photoType:String, index:int, userId:String):void
 		{
 			
 			photoIdArray = photoId.split(",");
