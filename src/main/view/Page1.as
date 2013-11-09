@@ -43,7 +43,8 @@ package main.view
 		private var photoIdArray:Array;
 		private var contents:Array;
 		private var sameFile:File;
-		
+		private var progressRateNum:int;
+		private var progressBarMaxWidth:int = 573;
 		public function Page1()
 		{
 			//初始化
@@ -86,7 +87,6 @@ package main.view
 			if (e.keyCode == 13)
 			{
 				var searchText:String = input_search.text;
-				trace(searchText);
 			}
 			for (var i:int = 0; i < list.array.length; i++)
 			{
@@ -104,6 +104,34 @@ package main.view
 		{
 			photoFile.getDirectoryListingAsync();
 			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
+			progress();
+		}
+		
+		private function progress():void
+		{
+			dialog_progress.visible = true;
+			dialog_progress.btn_ProgressClose.addEventListener(MouseEvent.MOUSE_DOWN, cancelProgress);
+			dialog_progress.btn_ProgressCancel.addEventListener(MouseEvent.MOUSE_DOWN, cancelProgress);
+			dialog_progress.addEventListener(Event.ENTER_FRAME, progressEF);
+			
+			progressRateNum = 0;
+		}
+		
+		private function progressEF(e:Event):void
+		{
+			
+			dialog_progress.progressBar.width = progressRateNum/100*progressBarMaxWidth;
+			dialog_progress.CurrentRate.text = progressRateNum.toString() + "%";
+            
+			if (progressRateNum == 100) {
+			dialog_progress.visible = false;
+			dialog_progress.removeEventListener(Event.ENTER_FRAME, progressEF);
+			}
+		}
+		
+		private function cancelProgress(e:MouseEvent):void
+		{
+		    dialog_progress.visible = false;
 		}
 		
 		private function directoryListiningHandler(e:FileListEvent):void
@@ -111,7 +139,8 @@ package main.view
 			contents = e.files;
 			for (var i:uint = 0; i < contents.length; i++)
 			{
-				
+				progressRateNum = Math.floor((i + 1) / contents.length*100);
+				trace(progressRateNum);
 				for (var j:int = 0; j < list.array.length; j++)
 				{
 					
@@ -132,7 +161,6 @@ package main.view
 			for (var k:int = 0; k < photoIdArray.length; k++)
 			{
 				photoFileName = photoIdArray[k] + ".JPG";
-				trace(photoFileName);
 				if (contents[index].name == photoFileName)
 				{
 					

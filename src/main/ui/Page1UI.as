@@ -1,6 +1,7 @@
 /**Created by the Morn,do not modify.*/
 package main.ui {
 	import morn.core.components.*;
+	import main.ui.ProgressUI;
 	public class Page1UI extends View {
 		public var bg:Image;
 		public var block_remove:Container;
@@ -43,6 +44,7 @@ package main.ui {
 		public var photoView:Image;
 		public var tab_circle:Tab;
 		public var block_resize:Container;
+		public var dialog_progress:ProgressUI;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
@@ -140,9 +142,11 @@ package main.ui {
 			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
+			  <Progress x="295" y="305" var="dialog_progress" visible="false" runtime="main.ui.ProgressUI"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
+			viewClassMap["main.ui.ProgressUI"] = ProgressUI;
 			createView(uiXML);
 		}
 	}

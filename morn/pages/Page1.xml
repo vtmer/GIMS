@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="12,1,6,1,control;11,0,6,1,drawer;15,1,6,1,mask;14,1,6,1,list;3,1,6,1,image;1,1,6,1,button;6,1,6,0,search;5,1,6,1,label;4,1,6,1,navigation;13,1,6,1,remove;2,1,6,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="16,1,0,0,progress;12,1,0,1,control;11,0,0,1,drawer;15,1,0,1,mask;14,1,0,1,list;3,1,0,1,image;1,1,0,1,button;6,1,0,1,search;5,1,0,1,label;4,1,0,1,navigation;13,1,0,1,remove;2,1,0,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
@@ -94,4 +94,5 @@
   <Container layers="1,1,0" layer="12" var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
     <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
+  <UIView source="Progress.xml" x="295" y="305" layer="16" var="dialog_progress" visible="false"/>
 </View>
