@@ -370,11 +370,10 @@ package main.view
 		{
 			scrollBarView.alpha = 1;
 			
-			var myTimer:Timer = new Timer(400, 2);
+			var myTimer:Timer = new Timer(1000, 1);
 			myTimer.addEventListener(TimerEvent.TIMER, timerHandler);
 			myTimer.reset();
 			myTimer.start();
-			myTimer.delay = 1000;
 			
 			//list遮蔽底部
 			if (scrollBarView.value + 13 > list.array.length)
@@ -389,7 +388,7 @@ package main.view
 		
 		private function timerHandler(e:Event):void
 		{
-			scrollBarView.alpha -= 0.2;
+			scrollBarView.alpha = 0;
 		}
 		
 		/**自定义List项渲染*/
@@ -406,6 +405,7 @@ package main.view
 				var userDor:Label = item.getChildByName("userDor") as Label;
 				var userPhone:Label = item.getChildByName("userPhone") as Label;
 				var userEmail:Label = item.getChildByName("userEmail") as Label;
+				var userIsFinish:Clip = item.getChildByName("userIsFinish") as Clip;
 				
 				if (userData.userId < 10)
 				{
@@ -428,6 +428,17 @@ package main.view
 				userName.text = userData.userName;
 				userPhone.text = userData.userPhone.toString();
 				userEmail.text = userData.userEmail;
+				
+				
+				var testFile:File = photoFile.resolvePath( "电子版/" + Number(index + 1 ));
+				var testFile2:File = photoFile.resolvePath( "冲洗版/" + Number(index + 1));
+				
+				if (testFile.exists && testFile2.exists) {
+				    userIsFinish.frame = 0;	
+					trace(index + "存在");
+				}else {
+				    userIsFinish.frame = 1;	
+				}
 				
 			}
 		}
@@ -535,23 +546,6 @@ package main.view
 					list.array = event.data as Array;
 					trace("数据变更");
 					break;
-			
-				//case DataActionEventKind.KIND_REFRESH: 
-				//database.select();
-				//break;
-			
-				//case DataActionEventKind.KIND_SAVE: 
-				//if (editUser.userId)
-				//{
-				//trace("数据更新");
-				//database.update(editUser);
-				//}
-				//else
-				//{
-				//trace("数据插入");
-				//database.insert(editUser);
-				//}
-				//break;
 			}
 		
 		}

@@ -17,7 +17,6 @@ package main.ui {
 		public var btn_restore:Button;
 		public var list:List;
 		public var render:Box;
-		public var userIsFinish:Clip;
 		public var scrollBarView:VScrollBar;
 		public var block_mask:Image;
 		public var drawer:Container;
@@ -45,6 +44,9 @@ package main.ui {
 		public var tab_circle:Tab;
 		public var block_resize:Container;
 		public var dialog_progress:ProgressUI;
+		public var btn_allSelect:CheckBox;
+		public var sort_down:Image;
+		public var sort_up:Image;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
@@ -93,7 +95,7 @@ package main.ui {
 			      <Label text="armchanel@msn.com" x="544" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
 			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
 			      <Label text="01" x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
-			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="0" clipWidth="14" clipX="2" var="userIsFinish"/>
+			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="1" clipWidth="14" clipX="2" name="userIsFinish"/>
 			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
 			    </Box>
 			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
@@ -143,6 +145,10 @@ package main.ui {
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
 			  <Progress x="295" y="305" var="dialog_progress" visible="false" runtime="main.ui.ProgressUI"/>
+			  <Button skin="png.flat.btn_sort" x="433" y="210" buttonMode="true"/>
+			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect"/>
+			  <Image url="png.flat.sort_down" x="558" y="233" var="sort_down" visible="false"/>
+			  <Image url="png.flat.sort_up" x="558" y="226" width="8" height="4" var="sort_up" visible="false"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
