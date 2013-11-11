@@ -80,22 +80,23 @@ package main.view
 		}
 		
 		//筛选非本校区
-		private function isTown():void 
+		private function isTown():void
 		{
 			tab_isTown.selectHandler = new Handler(isTownHandler);
 		}
 		
-		private function isTownHandler(index:int):void 
+		private function isTownHandler(index:int):void
 		{
-			switch (index) {
-			case 0:
-				trace("大学城校区");
-				
-				break;
-			case 1:
-				
-			    trace("非大学城校区");	
-				break;
+			switch (index)
+			{
+				case 0: 
+					trace("大学城校区");
+					
+					break;
+				case 1:
+					
+					trace("非大学城校区");
+					break;
 			}
 		}
 		
@@ -143,18 +144,19 @@ package main.view
 		private function progressEF(e:Event):void
 		{
 			
-			dialog_progress.progressBar.width = progressRateNum/100*progressBarMaxWidth;
+			dialog_progress.progressBar.width = progressRateNum / 100 * progressBarMaxWidth;
 			dialog_progress.CurrentRate.text = progressRateNum.toString() + "%";
-            
-			if (progressRateNum == 100) {
-			dialog_progress.visible = false;
-			dialog_progress.removeEventListener(Event.ENTER_FRAME, progressEF);
+			
+			if (progressRateNum == 100)
+			{
+				dialog_progress.visible = false;
+				dialog_progress.removeEventListener(Event.ENTER_FRAME, progressEF);
 			}
 		}
 		
 		private function cancelProgress(e:MouseEvent):void
 		{
-		    dialog_progress.visible = false;
+			dialog_progress.visible = false;
 		}
 		
 		private function directoryListiningHandler(e:FileListEvent):void
@@ -162,7 +164,7 @@ package main.view
 			contents = e.files;
 			for (var i:uint = 0; i < contents.length; i++)
 			{
-				progressRateNum = Math.floor((i + 1) / contents.length*100);
+				progressRateNum = Math.floor((i + 1) / contents.length * 100);
 				trace(progressRateNum);
 				for (var j:int = 0; j < list.array.length; j++)
 				{
@@ -374,6 +376,8 @@ package main.view
 			drawer.visible = false;
 			_isDrawerIn = true;
 			list.selectedIndex = -1;
+			
+			onActionHandler(DataActionEventKind.KIND_DELETE);
 		
 		}
 		
@@ -453,14 +457,17 @@ package main.view
 				userEmail.text = userData.userEmail;
 				
 				//判断是否匹配
-				var testFile:File = photoFile.resolvePath( "电子版/" + Number(index + 1 ));
-				var testFile2:File = photoFile.resolvePath( "冲洗版/" + Number(index + 1));
+				var testFile:File = photoFile.resolvePath("电子版/" + Number(index + 1));
+				var testFile2:File = photoFile.resolvePath("冲洗版/" + Number(index + 1));
 				
-				if (testFile.exists && testFile2.exists) {
-				    userIsFinish.frame = 0;	
+				if (testFile.exists && testFile2.exists)
+				{
+					userIsFinish.frame = 0;
 					trace(index + "存在");
-				}else {
-				    userIsFinish.frame = 1;	
+				}
+				else
+				{
+					userIsFinish.frame = 1;
 				}
 				
 			}
@@ -601,7 +608,9 @@ package main.view
 				case DataActionEventKind.KIND_REFRESH: 
 					database.select();
 					break;
-				
+				case DataActionEventKind.KIND_DELETE: 
+					database.remove(editUser);
+					break;
 				case DataActionEventKind.KIND_SAVE: 
 					if (editUser.userId)
 					{
