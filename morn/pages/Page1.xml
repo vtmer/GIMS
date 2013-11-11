@@ -1,9 +1,9 @@
-<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="18,1,6,1,image2;17,1,6,1,button2;16,0,6,1,progress;12,1,6,1,control;11,0,6,1,drawer;15,1,6,1,mask;14,1,6,0,list;3,1,6,1,image;1,1,6,1,button;6,1,6,1,search;5,1,6,1,label;4,1,6,1,navigation;13,1,6,1,remove;2,1,6,1,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="792" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="18,1,7,1,image2;17,1,7,1,button2;16,0,7,1,progress;12,1,7,1,control;11,0,7,1,drawer;15,1,7,1,mask;14,1,7,1,list;3,0,7,1,image;1,1,7,1,button;6,1,7,1,search;5,1,7,1,label;4,1,7,0,navigation;13,1,7,1,remove;2,1,7,1,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg"/>
   <Container layers="1,1,0" layer="13" width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
     <Image url="png.flat.blank" layer="1" width="900" height="24" x="0" y="0"/>
   </Container>
-  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4" buttonMode="true"/>
+  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4" buttonMode="true" var="tab_isTown"/>
   <Label text="个人信息" x="214" y="146" layer="5" font="Microsoft YaHei" size="18" color="0x333333"/>
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>

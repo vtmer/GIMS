@@ -45,6 +45,7 @@ package main.view
 		private var sameFile:File;
 		private var progressRateNum:int;
 		private var progressBarMaxWidth:int = 573;
+		
 		public function Page1()
 		{
 			//初始化
@@ -74,6 +75,28 @@ package main.view
 			inputEnter();
 			//list
 			initList();
+			//筛选非本校区
+			isTown();
+		}
+		
+		//筛选非本校区
+		private function isTown():void 
+		{
+			tab_isTown.selectHandler = new Handler(isTownHandler);
+		}
+		
+		private function isTownHandler(index:int):void 
+		{
+			switch (index) {
+			case 0:
+				trace("大学城校区");
+				
+				break;
+			case 1:
+				
+			    trace("非大学城校区");	
+				break;
+			}
 		}
 		
 		//搜索
@@ -429,7 +452,7 @@ package main.view
 				userPhone.text = userData.userPhone.toString();
 				userEmail.text = userData.userEmail;
 				
-				
+				//判断是否匹配
 				var testFile:File = photoFile.resolvePath( "电子版/" + Number(index + 1 ));
 				var testFile2:File = photoFile.resolvePath( "冲洗版/" + Number(index + 1));
 				

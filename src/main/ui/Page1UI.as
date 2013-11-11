@@ -5,6 +5,7 @@ package main.ui {
 	public class Page1UI extends View {
 		public var bg:Image;
 		public var block_remove:Container;
+		public var tab_isTown:Tab;
 		public var input_search:TextInput;
 		public var btn_new:Button;
 		public var btn_arrange:Button;
@@ -53,7 +54,7 @@ package main.ui {
 			  <Container width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
 			    <Image url="png.flat.blank" width="900" height="24" x="0" y="0"/>
 			  </Container>
-			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" buttonMode="true"/>
+			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" buttonMode="true" var="tab_isTown"/>
 			  <Label text="个人信息" x="214" y="146" font="Microsoft YaHei" size="18" color="0x333333"/>
 			  <Image url="png.flat.search_bar" x="415" y="146"/>
 			  <Image url="png.flat.search" x="418.3" y="150"/>
