@@ -5,6 +5,7 @@ package main.view
 	import flash.events.Event;
 	import flash.events.FileListEvent;
 	import flash.events.FocusEvent;
+	import flash.events.IOErrorEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
@@ -47,6 +48,9 @@ package main.view
 		private var sameFile:File;
 		private var progressRateNum:int;
 		private var progressBarMaxWidth:int = 573;
+		private var fileInt:int;
+		private var listInt:int;
+		private var idInt:int;
 		
 		public function Page1()
 		{
@@ -121,7 +125,10 @@ package main.view
 		{
 			photoFile.getDirectoryListingAsync();
 			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
-			//progress();
+			progress();
+			listInt = 0;
+			fileInt = 0;
+			idInt = 0;
 		}
 		
 		private function progress():void
@@ -155,18 +162,22 @@ package main.view
 		private function directoryListiningHandler(e:FileListEvent):void
 		{
 			contents = e.files;
-//			for (var i:uint = 0; i < contents.length; i++)
-//			{
-//				progressRateNum = Math.floor((i + 1) / contents.length * 100);
-//				
-//				for (var j:int = 0; j < list.array.length; j++)
-//				{
-//					
-//					adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
-//					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
-//					
-//				}
-//			}
+			arrangeFiles();
+		
+		}
+		
+		private function arrangeFiles():void
+		{
+			if (fileInt < contents.length)
+			{
+				progressRateNum = Math.floor((fileInt + 1) / contents.length * 100);
+				trace(progressRateNum);
+				if (listInt < list.array.length)
+				{
+					adaptation(list.array[listInt].userPhotoId, "电子版", fileInt, list.array[listInt].userId);
+					adaptation(list.array[listInt].userPrintPhotoId, "冲洗版", fileInt, list.array[listInt].userId);
+				}
+			}
 		
 		}
 		
@@ -176,28 +187,57 @@ package main.view
 			
 			photoIdArray = photoId.split(",");
 			
-			for (var k:int = 0; k < photoIdArray.length; k++)
+			if (idInt < photoIdArray.length)
 			{
-				photoFileName = photoIdArray[k] + ".JPG";
+				photoFileName = photoIdArray[idInt] + ".JPG";
 				if (contents[index].name == photoFileName)
 				{
 					
 					outputFile = photoFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
 					
-					if (contents[index].exists)
-					{
-						
-						contents[index].moveTo(outputFile, true);
-						
-						sameFile = outputFile.resolvePath("");
-					}
-					else
-					{
-						sameFile.copyTo(outputFile, true);
-					}
+					//if (contents[index].exists)
+					//{
+					//
+					contents[index].copyToAsync(outputFile, true);
+					
+					contents[index].addEventListener(Event.COMPLETE, fileCopiedHandler);
+					contents[index].addEventListener(IOErrorEvent.IO_ERROR, fileCopyIOErrorEventHandler);
+						//
+						//sameFile = outputFile.resolvePath("");
+						//}
+						//else
+						//{
+						//sameFile.copyTo(outputFile, true);
+						//}
 				}
 			}
 		
+		}
+		
+		private function fileCopyIOErrorEventHandler(e:IOErrorEvent):void
+		{
+			
+			trace("I/O Error.");
+		
+		}
+		
+		private function fileCopiedHandler(e:Event):void
+		{
+			if (idInt = photoIdArray.length)
+			{
+				idInt = 0;
+				listInt++;
+			}
+			if (listInt = list.array.length)
+			{
+				idInt = 0;
+				listInt = 0;
+				fileInt++;
+			}
+			
+			idInt++;
+			arrangeFiles();
+			trace("成功复制一个");
 		}
 		
 		//list选择被改变时
@@ -540,7 +580,7 @@ package main.view
 		private function enterDown(e:MouseEvent):void
 		{
 			//代码录入测试数据（数字为添加数量）:按整理后新建并点击确认
-			InputText();
+			//InputText();
 			
 			editUser.userName = input_name.text;
 			editUser.userIsTown = Number(input_isTown.selectedIndex);
@@ -582,7 +622,7 @@ package main.view
 			lastNameIndex = Math.floor(Math.random() * lastName.length);
 			firstNameIndex = Math.floor(Math.random() * firstName.length);
 			firstNameIndex2 = Math.floor(Math.random() * firstName.length);
-			if (Math.random()*1.4 > 1)
+			if (Math.random() * 1.4 > 1)
 				input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex];
 			else
 				input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex] + firstName[firstNameIndex2];
@@ -596,9 +636,8 @@ package main.view
 			photoFileIndex = Math.floor(Math.random() * contents.length);
 			photoFlieNameText = contents[photoFileIndex].name;
 			input_photoId.text = photoFlieNameText.substr(0, 8);
-			input_printPhotoId.text = photoFlieNameText.substr(0,8);
+			input_printPhotoId.text = photoFlieNameText.substr(0, 8);
 			trace(photoFlieNameText.substr(0, 8));
-			
 		
 		}
 		
