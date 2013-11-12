@@ -386,7 +386,10 @@ package main.view
 		//滚动条
 		private function onRollWheelHander(e:MouseEvent):void
 		{
-
+            //初始化判断
+			if(list.array.length<11)
+				scrollBarView.value=0;
+			
 			scrollBarView.alpha = 1;
 			
 			var myTimer:Timer = new Timer(1000, 1);
@@ -395,7 +398,7 @@ package main.view
 			myTimer.start();
 			
 			//list遮蔽底部
-			if (scrollBarView.value + 13 > list.array.length)
+			if (scrollBarView.value + 13 > list.array.length || list.array.length<10)
 			{
 				block_mask.visible = false;
 			}
