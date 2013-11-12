@@ -91,7 +91,7 @@ package main.ui {
 			  <List x="231" y="248" var="list" repeatY="10" repeatX="1">
 			    <Box name="render" var="render" width="777" height="48" buttonMode="false">
 			      <Label x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
-			      <Label text="东区12-608" x="206" y="0" width="141" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor"/>
+			      <Label x="206" y="0" width="141" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor" height="49"/>
 			      <Label x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
 			      <Label x="544" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
 			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
