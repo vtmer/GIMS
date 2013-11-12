@@ -1,5 +1,6 @@
 package main.view
 {
+	import air.update.logging.Level;
 	import flash.display.NativeWindowResize;
 	import flash.events.Event;
 	import flash.events.FileListEvent;
@@ -51,7 +52,7 @@ package main.view
 		{
 			//初始化
 			photoFile = new File();
-			photoFile.url = "file:///D:/新建文件夹/东区/056";
+			photoFile.url = "file:///D:/新建文件夹/东区";
 			outputFile = photoFile.resolvePath("电子版");
 			outputFile.createDirectory();
 			
@@ -386,9 +387,9 @@ package main.view
 		//滚动条
 		private function onRollWheelHander(e:MouseEvent):void
 		{
-            //初始化判断
-			if(list.array.length<11)
-				scrollBarView.value=0;
+			//初始化判断
+			if (list.array.length < 11)
+				scrollBarView.value = 0;
 			
 			scrollBarView.alpha = 1;
 			
@@ -398,7 +399,7 @@ package main.view
 			myTimer.start();
 			
 			//list遮蔽底部
-			if (scrollBarView.value + 13 > list.array.length || list.array.length<10)
+			if (scrollBarView.value + 13 > list.array.length || list.array.length < 10)
 			{
 				block_mask.visible = false;
 			}
@@ -537,6 +538,9 @@ package main.view
 		
 		private function enterDown(e:MouseEvent):void
 		{
+			//代码录入测试数据
+			InputText(1);
+			
 			editUser.userName = input_name.text;
 			editUser.userIsTown = Number(input_isTown.selectedIndex);
 			editUser.userDormitory = input_dor.selectedLabel;
@@ -562,12 +566,54 @@ package main.view
 			
 		}
 		
+		private function InputText(num:int):void
+		{
+			//相片编号
+			photoFile.getDirectoryListingAsync();
+			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandlerTest);
+			
+			//名字
+			var lastName:Array = ["黄", "夏", "陈", "萧", "凌", "林", "刘", "邹", "白", "王", "李", "张", "杨", "吴", "赵", "周", "徐", "孙", "马", "朱", "胡", "郭", "何", "高", "罗", "叶", "蒋", "杜", "苏", "魏", "程", "吕", "丁", "沈", "任", "曾"];
+			var firstName:Array = ["苏", "暖", "夏", "安", "柔", "默", "朵", "沐", "芷", "若", "沫", "岚", "颜", "然", "念", "瑟", "素", "静", "温", "绿", "懒", "糖", "秋", "北", "西", "南", "白", "果", "柒", "染", "莫", "落", "寞", "墨", "左", "初", "陌", "离", "纪", "清", "薇", "浅", "月", "瑾", "断", "以", "顾", "羽", "七", "莲", "见", "萧", "东", "梦", "青", "韵"];
+			var lastNameIndex:int;
+			var firstNameIndex:int;
+			var firstNameIndex2:int;
+			var photoFileIndex:int;
+			var photoFlieNameText:String;
+			
+			for (var i:int = 0; i < num; i++)
+			{
+				lastNameIndex = Math.floor(Math.random() * lastName.length);
+				firstNameIndex = Math.floor(Math.random() * firstName.length);
+				firstNameIndex2 = Math.floor(Math.random() * firstName.length);
+				if (Math.random() < 0.5)
+					input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex];
+				else
+					input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex] + firstName[firstNameIndex2];
+				
+				input_dor.selectedIndex = Math.floor(Math.random() * 4);
+				input_dorNum.text = String(Number(Math.floor(Math.random() * 750)));
+				input_isTown.selectedIndex = Math.floor(Math.random() * 1.1);
+				input_phone.text = String(Number(13511111111 + Math.floor(Math.random() * 88888888)));
+				input_email.text = String(Number(Math.random() * 999999999)) + "@qq.com";
+				
+				photoFileIndex = Math.floor(Math.random() * contains.length);
+				photoFlieNameText = contents[photoFileIndex].name;
+				input_photoId.text = photoFlieNameText.substring(0, 4);
+			}
+		}
+		
+		private function directoryListiningHandlerTest(e:FileListEvent):void
+		{
+			contents = e.files;
+		}
+		
 		//处理派发的事件
 		protected function onDataActionHandler(event:DataActionEvent):void
 		{
 			switch (event.kind)
 			{
-				case DataActionEventKind.KIND_DATA_CHANGE: 
+				case DataActionEventKind.KIND_DATA_CHANGE:
 					
 					list.array = event.data as Array;
 					trace("数据变更");
@@ -624,7 +670,7 @@ package main.view
 					break;
 				case DataActionEventKind.KIND_FILTER: 
 					database.setIsTownIndex(tab_isTown.selectedIndex);
-					editUser=list.array[0];
+					editUser = list.array[0];
 					database.update(editUser);
 					break;
 			}
