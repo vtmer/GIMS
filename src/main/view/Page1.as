@@ -1,23 +1,24 @@
 package main.view
 {
 	import flash.display.NativeWindowResize;
+	import flash.events.Event;
 	import flash.events.FileListEvent;
+	import flash.events.FocusEvent;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.filesystem.File;
 	import flash.utils.Timer;
 	
-	import flash.events.Event;
-	import flash.events.MouseEvent;
 	import main.database.UserDatabase;
 	import main.events.DataActionEvent;
 	import main.events.DataActionEventKind;
 	import main.model.UserInfo;
 	import main.ui.Page1UI;
-	import flash.events.FocusEvent;
+	
+	import morn.core.components.Clip;
 	import morn.core.components.Component;
 	import morn.core.components.Label;
-	import morn.core.components.Clip;
 	import morn.core.components.TextInput;
 	import morn.core.handlers.Handler;
 	
@@ -87,17 +88,7 @@ package main.view
 		
 		private function isTownHandler(index:int):void
 		{
-			switch (index)
-			{
-				case 0: 
-					trace("大学城校区");
-					
-					break;
-				case 1:
-					
-					trace("非大学城校区");
-					break;
-			}
+			onActionHandler(DataActionEventKind.KIND_FILTER);
 		}
 		
 		//搜索
@@ -174,7 +165,7 @@ package main.view
 					
 				}
 			}
-		
+			
 		}
 		
 		//分割匹配
@@ -204,7 +195,7 @@ package main.view
 					}
 				}
 			}
-		
+			
 		}
 		
 		//list选择被改变时
@@ -274,7 +265,7 @@ package main.view
 			
 			tab_photoType.selectHandler = new Handler(photoTypeChange);
 			tab_circle.selectHandler = new Handler(circleChange);
-		
+			
 		}
 		
 		//改变相片类型时
@@ -328,7 +319,7 @@ package main.view
 					changePhoto("冲洗版", index);
 					break;
 			}
-		
+			
 		}
 		
 		private function changePhoto(photoType:String, index:int):void
@@ -347,13 +338,13 @@ package main.view
 			_isNewInfo = false;
 			editInfoChange(listSelectIndex);
 			label_title.text = "编辑信息";
-		
+			
 		}
 		
 		private function editInfoChange(index:int):void
 		{
 			
-			trace("编辑" + index);
+			trace("是否大学城" + editUser.userIsTown);
 			input_name.text = editUser.userName;
 			input_isTown.selectedIndex = editUser.userIsTown;
 			input_dor.selectedLabel = editUser.userDormitory;
@@ -378,7 +369,7 @@ package main.view
 			list.selectedIndex = -1;
 			
 			onActionHandler(DataActionEventKind.KIND_DELETE);
-		
+			
 		}
 		
 		private function initList():void
@@ -389,12 +380,13 @@ package main.view
 			list.selectHandler = new Handler(listSelect);
 			//滚轮时
 			list.addEventListener(MouseEvent.MOUSE_WHEEL, onRollWheelHander);
-		
+			
 		}
 		
 		//滚动条
 		private function onRollWheelHander(e:MouseEvent):void
 		{
+
 			scrollBarView.alpha = 1;
 			
 			var myTimer:Timer = new Timer(1000, 1);
@@ -426,7 +418,7 @@ package main.view
 			{
 				list.repeatX = 1;
 				list.repeatY = list.array.length;
-				userData = list.array[index];
+				userData = list.array[index] as UserInfo;
 				var userId:Label = item.getChildByName("userId") as Label;
 				var userName:Label = item.getChildByName("userName") as Label;
 				var userDor:Label = item.getChildByName("userDor") as Label;
@@ -531,7 +523,7 @@ package main.view
 					inputField.color = 0xc9cdcc;
 				}
 			}
-		
+			
 		}
 		
 		//表单确认
@@ -543,7 +535,7 @@ package main.view
 		private function enterDown(e:MouseEvent):void
 		{
 			editUser.userName = input_name.text;
-			editUser.userIsTown = Number(input_isTown.selectedValue);
+			editUser.userIsTown = Number(input_isTown.selectedIndex);
 			editUser.userDormitory = input_dor.selectedLabel;
 			editUser.userDorNumber = Number(input_dorNum.text);
 			editUser.userPhone = Number(input_phone.text);
@@ -564,7 +556,7 @@ package main.view
 			{
 				drawerInfo(listSelectIndex);
 			}
-		
+			
 		}
 		
 		//处理派发的事件
@@ -573,11 +565,12 @@ package main.view
 			switch (event.kind)
 			{
 				case DataActionEventKind.KIND_DATA_CHANGE: 
+					
 					list.array = event.data as Array;
 					trace("数据变更");
 					break;
 			}
-		
+			
 		}
 		
 		//根据操作处理数据
@@ -593,6 +586,9 @@ package main.view
 					break;
 				case DataActionEventKind.KIND_EDIT: 
 				case DataActionEventKind.KIND_DELETE: 
+					event = new DataActionEvent(kind, editUser);
+					break;
+				case DataActionEventKind.KIND_FILTER: 
 					event = new DataActionEvent(kind, editUser);
 					break;
 			}
@@ -622,6 +618,11 @@ package main.view
 						trace("数据插入");
 						database.insert(editUser);
 					}
+					break;
+				case DataActionEventKind.KIND_FILTER: 
+					database.setIsTownIndex(tab_isTown.selectedIndex);
+					editUser=list.array[0];
+					database.update(editUser);
 					break;
 			}
 		}
@@ -676,7 +677,7 @@ package main.view
 			windows_btn.top = 12;
 			block_resize.right = 12;
 			block_resize.bottom = 12;
-		
+			
 		}
 		
 		private function md_remove(e:MouseEvent):void
@@ -727,7 +728,7 @@ package main.view
 		{
 			this.stage.nativeWindow.close();
 		}
-	
+		
 	}
-
+	
 }

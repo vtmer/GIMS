@@ -1,5 +1,6 @@
 package main.database 
 {
+	import flash.data.SQLCollationType;
 	import flash.data.SQLConnection;
 	import flash.data.SQLMode;
 	import flash.data.SQLResult;
@@ -32,6 +33,29 @@ package main.database
 		protected var deleteSql:SQLStatement = new SQLStatement();
 		protected var selectSql:SQLStatement = new SQLStatement();
 		protected var tableSql:SQLStatement = new SQLStatement();
+		
+		private var isTownIndex:int=0;
+
+		public function setIsTownIndex(index:int):void
+		{
+              isTownIndex=index;
+			  selectText = "SELECT " + 
+				  "user_id as userId, " + 
+				  "user_name as userName, " + 
+				  "user_isTown as userIsTown, " + 
+				  "user_dormitory as userDormitory, " + 
+				  "user_dorNumber as userDorNumber, " +
+				  "user_phone as userPhone, " + 
+				  "user_email as userEmail, " + 
+				  "user_photoId as userPhotoId, " + 
+				  "user_printPhotoId as userPrintPhotoId " + 
+				  "FROM userinfo "+
+				  "WHERE user_isTown="+
+				  isTownIndex.toString();
+			  selectSql.text = selectText;
+		}
+
+		
 		protected var insertText:String = "INSERT INTO userinfo(" +
 		"'user_name', 'user_isTown', 'user_dormitory', 'user_dorNumber', 'user_phone','user_email','user_photoId','user_printPhotoId') VALUES(" +
 		":userName, :userIsTown, :userDormitory, :userDorNumber, :userPhone, :userEmail, :userPhotoId, :userPrintPhotoId)";
@@ -59,7 +83,9 @@ package main.database
 										"user_email as userEmail, " + 
 										"user_photoId as userPhotoId, " + 
 										"user_printPhotoId as userPrintPhotoId " + 
-										"FROM userinfo";
+										"FROM userinfo "+
+										"WHERE user_isTown="+
+										isTownIndex.toString();
 										
 		protected var tableText:String = "CREATE TABLE IF NOT EXISTS userinfo(" + 
 										"user_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
@@ -147,6 +173,7 @@ package main.database
 			var count:int = result.rowsAffected;
 			if (count) {
 				select();
+				trace(selectText);
 				return;
 			}
 			var resultData:Array = result.data;
@@ -158,6 +185,7 @@ package main.database
 		//查询检索数据
 		public function select():void {
 			selectSql.execute( -1, resultSql);
+			
 		}
 		
 		//插入数据
@@ -195,6 +223,7 @@ package main.database
 			deleteSql.parameters[":userId"] = user.userId;
 			deleteSql.execute( -1, resultSql);
 		}
+		
 	}
 
 }

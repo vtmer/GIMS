@@ -14,6 +14,7 @@ package main.events
 		static public const KIND_DELETE:String = "remove";
 		static public const KIND_SAVE:String = "save";
 		static public const KIND_CANCEL:String = "cancel";
+		static public const KIND_FILTER:String = "filter";
 		
 		public function DataActionEventKind()
 		{
