@@ -89,6 +89,7 @@ package main.view
 		
 		private function isTownHandler(index:int):void
 		{
+			scrollBarView.value = 0;
 			onActionHandler(DataActionEventKind.KIND_FILTER);
 		}
 		
@@ -120,7 +121,7 @@ package main.view
 		{
 			photoFile.getDirectoryListingAsync();
 			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
-			progress();
+			//progress();
 		}
 		
 		private function progress():void
@@ -154,19 +155,19 @@ package main.view
 		private function directoryListiningHandler(e:FileListEvent):void
 		{
 			contents = e.files;
-			for (var i:uint = 0; i < contents.length; i++)
-			{
-				progressRateNum = Math.floor((i + 1) / contents.length * 100);
-				trace(progressRateNum);
-				for (var j:int = 0; j < list.array.length; j++)
-				{
-					
-					adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
-					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
-					
-				}
-			}
-			
+//			for (var i:uint = 0; i < contents.length; i++)
+//			{
+//				progressRateNum = Math.floor((i + 1) / contents.length * 100);
+//				
+//				for (var j:int = 0; j < list.array.length; j++)
+//				{
+//					
+//					adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
+//					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
+//					
+//				}
+//			}
+		
 		}
 		
 		//分割匹配
@@ -196,7 +197,7 @@ package main.view
 					}
 				}
 			}
-			
+		
 		}
 		
 		//list选择被改变时
@@ -266,7 +267,7 @@ package main.view
 			
 			tab_photoType.selectHandler = new Handler(photoTypeChange);
 			tab_circle.selectHandler = new Handler(circleChange);
-			
+		
 		}
 		
 		//改变相片类型时
@@ -320,7 +321,7 @@ package main.view
 					changePhoto("冲洗版", index);
 					break;
 			}
-			
+		
 		}
 		
 		private function changePhoto(photoType:String, index:int):void
@@ -339,7 +340,7 @@ package main.view
 			_isNewInfo = false;
 			editInfoChange(listSelectIndex);
 			label_title.text = "编辑信息";
-			
+		
 		}
 		
 		private function editInfoChange(index:int):void
@@ -370,7 +371,7 @@ package main.view
 			list.selectedIndex = -1;
 			
 			onActionHandler(DataActionEventKind.KIND_DELETE);
-			
+		
 		}
 		
 		private function initList():void
@@ -381,7 +382,7 @@ package main.view
 			list.selectHandler = new Handler(listSelect);
 			//滚轮时
 			list.addEventListener(MouseEvent.MOUSE_WHEEL, onRollWheelHander);
-			
+		
 		}
 		
 		//滚动条
@@ -527,7 +528,7 @@ package main.view
 					inputField.color = 0xc9cdcc;
 				}
 			}
-			
+		
 		}
 		
 		//表单确认
@@ -538,8 +539,8 @@ package main.view
 		
 		private function enterDown(e:MouseEvent):void
 		{
-			//代码录入测试数据
-			InputText(1);
+			//代码录入测试数据（数字为添加数量）:按整理后新建并点击确认
+			InputText();
 			
 			editUser.userName = input_name.text;
 			editUser.userIsTown = Number(input_isTown.selectedIndex);
@@ -556,56 +557,49 @@ package main.view
 			//是否为新建信息做出响应
 			if (label_title.text == "新建")
 			{
-				drawer.visible = false;
-				_isDrawerIn = true;
+				//drawer.visible = false;
+				//_isDrawerIn = true;
 			}
 			else
 			{
 				drawerInfo(listSelectIndex);
 			}
-			
+		
 		}
 		
-		private function InputText(num:int):void
+		private function InputText():void
 		{
-			//相片编号
-			photoFile.getDirectoryListingAsync();
-			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandlerTest);
 			
 			//名字
 			var lastName:Array = ["黄", "夏", "陈", "萧", "凌", "林", "刘", "邹", "白", "王", "李", "张", "杨", "吴", "赵", "周", "徐", "孙", "马", "朱", "胡", "郭", "何", "高", "罗", "叶", "蒋", "杜", "苏", "魏", "程", "吕", "丁", "沈", "任", "曾"];
-			var firstName:Array = ["苏", "暖", "夏", "安", "柔", "默", "朵", "沐", "芷", "若", "沫", "岚", "颜", "然", "念", "瑟", "素", "静", "温", "绿", "懒", "糖", "秋", "北", "西", "南", "白", "果", "柒", "染", "莫", "落", "寞", "墨", "左", "初", "陌", "离", "纪", "清", "薇", "浅", "月", "瑾", "断", "以", "顾", "羽", "七", "莲", "见", "萧", "东", "梦", "青", "韵"];
+			var firstName:Array = ["苏", "燕", "暖", "夏", "安", "柔", "默", "朵", "沐", "芷", "若", "沫", "岚", "颜", "然", "念", "瑟", "素", "静", "温", "绿", "懒", "糖", "秋", "北", "西", "南", "白", "果", "柒", "染", "莫", "落", "寞", "墨", "左", "初", "陌", "离", "纪", "清", "薇", "浅", "月", "瑾", "断", "以", "顾", "羽", "七", "莲", "见", "萧", "东", "梦", "青", "韵"];
 			var lastNameIndex:int;
 			var firstNameIndex:int;
 			var firstNameIndex2:int;
 			var photoFileIndex:int;
 			var photoFlieNameText:String;
 			
-			for (var i:int = 0; i < num; i++)
-			{
-				lastNameIndex = Math.floor(Math.random() * lastName.length);
-				firstNameIndex = Math.floor(Math.random() * firstName.length);
-				firstNameIndex2 = Math.floor(Math.random() * firstName.length);
-				if (Math.random() < 0.5)
-					input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex];
-				else
-					input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex] + firstName[firstNameIndex2];
-				
-				input_dor.selectedIndex = Math.floor(Math.random() * 4);
-				input_dorNum.text = String(Number(Math.floor(Math.random() * 750)));
-				input_isTown.selectedIndex = Math.floor(Math.random() * 1.1);
-				input_phone.text = String(Number(13511111111 + Math.floor(Math.random() * 88888888)));
-				input_email.text = String(Number(Math.random() * 999999999)) + "@qq.com";
-				
-				photoFileIndex = Math.floor(Math.random() * contains.length);
-				photoFlieNameText = contents[photoFileIndex].name;
-				input_photoId.text = photoFlieNameText.substring(0, 4);
-			}
-		}
+			lastNameIndex = Math.floor(Math.random() * lastName.length);
+			firstNameIndex = Math.floor(Math.random() * firstName.length);
+			firstNameIndex2 = Math.floor(Math.random() * firstName.length);
+			if (Math.random()*1.4 > 1)
+				input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex];
+			else
+				input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex] + firstName[firstNameIndex2];
+			
+			input_dor.selectedIndex = Math.floor(Math.random() * 4);
+			input_dorNum.text = String(Number(200 + Math.floor(Math.random() * 550)));
+			input_isTown.selectedIndex = Math.floor(Math.random() * 1.1);
+			input_phone.text = String(Number(13511111111 + Math.floor(Math.random() * 88888888)));
+			input_email.text = String(Number(Math.floor(Math.random() * 999999999))) + "@qq.com";
+			
+			photoFileIndex = Math.floor(Math.random() * contents.length);
+			photoFlieNameText = contents[photoFileIndex].name;
+			input_photoId.text = photoFlieNameText.substr(0, 8);
+			input_printPhotoId.text = photoFlieNameText.substr(0,8);
+			trace(photoFlieNameText.substr(0, 8));
+			
 		
-		private function directoryListiningHandlerTest(e:FileListEvent):void
-		{
-			contents = e.files;
 		}
 		
 		//处理派发的事件
@@ -619,7 +613,7 @@ package main.view
 					trace("数据变更");
 					break;
 			}
-			
+		
 		}
 		
 		//根据操作处理数据
@@ -726,7 +720,7 @@ package main.view
 			windows_btn.top = 12;
 			block_resize.right = 12;
 			block_resize.bottom = 12;
-			
+		
 		}
 		
 		private function md_remove(e:MouseEvent):void
@@ -777,7 +771,7 @@ package main.view
 		{
 			this.stage.nativeWindow.close();
 		}
-		
-	}
 	
+	}
+
 }
