@@ -18,6 +18,7 @@ package main.ui {
 		public var btn_restore:Button;
 		public var list:List;
 		public var render:Box;
+		public var selectedCheckBox:CheckBox;
 		public var scrollBarView:VScrollBar;
 		public var block_mask:Image;
 		public var drawer:Container;
@@ -88,21 +89,21 @@ package main.ui {
 			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			  </Box>
-			  <List x="231" y="248" var="list" repeatY="10" repeatX="1">
-			    <Box name="render" var="render" width="777" height="48" buttonMode="false">
+			  <List x="231" y="248" var="list" repeatY="10" repeatX="1" mouseChildren="true" mouseEnabled="true">
+			    <Box name="render" var="render" width="777" height="48" buttonMode="true" mouseChildren="true" mouseEnabled="false">
 			      <Label x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
 			      <Label x="206" y="0" width="141" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor" height="49"/>
 			      <Label x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
 			      <Label x="544" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
-			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true"/>
+			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true" name="selectedCheck" var="selectedCheckBox" mouseEnabled="true"/>
 			      <Label x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
 			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="1" clipWidth="14" clipX="2" name="userIsFinish"/>
-			      <Clip url="png.flat.clip_selectBox" x="25" y="0" width="751" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="true" mouseEnabled="true" buttonMode="true"/>
+			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="false" mouseEnabled="false" buttonMode="true"/>
 			    </Box>
 			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
 			  </List>
 			  <Image url="png.flat.mask" x="216" y="705" width="793" height="24" var="block_mask" visible="false"/>
-			  <Container x="186" y="43" var="drawer" visible="false" disabled="false">
+			  <Container x="186" y="43" var="drawer" visible="false" disabled="false" mouseEnabled="false">
 			    <Image url="png.flat.information" visible="true" x="488"/>
 			    <Label text="_____________________________________________" x="501" y="51" color="0xc9cdcc"/>
 			    <Label text=">>" x="497" y="350" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>

@@ -1,16 +1,18 @@
 package main.view
 {
-	import air.update.logging.Level;
 	import flash.display.NativeWindowResize;
 	import flash.events.Event;
 	import flash.events.FileListEvent;
 	import flash.events.FocusEvent;
-	import flash.events.IOErrorEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.filesystem.File;
+	import flash.text.ime.CompositionAttributeRange;
 	import flash.utils.Timer;
+	import morn.core.components.Box;
+	
+	import air.update.logging.Level;
 	
 	import main.database.UserDatabase;
 	import main.events.DataActionEvent;
@@ -18,6 +20,7 @@ package main.view
 	import main.model.UserInfo;
 	import main.ui.Page1UI;
 	
+	import morn.core.components.CheckBox;
 	import morn.core.components.Clip;
 	import morn.core.components.Component;
 	import morn.core.components.Label;
@@ -48,17 +51,13 @@ package main.view
 		private var sameFile:File;
 		private var progressRateNum:int;
 		private var progressBarMaxWidth:int = 573;
-		private var fileInt:int;
-		private var listInt:int;
-		private var idInt:int;
+		private var selectedListItemArray:Array;
 		
 		public function Page1()
 		{
 			//初始化
 			photoFile = new File();
 			photoFile.url = "file:///D:/新建文件夹/东区";
-			outputFile = photoFile.resolvePath("电子版");
-			outputFile.createDirectory();
 			
 			database = new UserDatabase();
 			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
@@ -83,6 +82,21 @@ package main.view
 			initList();
 			//筛选非本校区
 			isTown();
+			//选择项组
+			selectedListItem();
+		}
+		
+		private function selectedListItem():void
+		{
+			selectedCheckBox.addEventListener(MouseEvent.CLICK, onCheckBoxClick);
+		}
+		
+		private function onCheckBoxClick():void
+		{
+			var cell:Component = list.selection;
+			var checkBox:CheckBox = cell.getChildByName("selectedCheck") as CheckBox;
+			list.array[listSelectIndex].dataSource["selectedCheck"] = checkBox.selected;
+			trace("勾选" + listSelectIndex);
 		}
 		
 		//筛选非本校区
@@ -126,9 +140,6 @@ package main.view
 			photoFile.getDirectoryListingAsync();
 			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
 			progress();
-			listInt = 0;
-			fileInt = 0;
-			idInt = 0;
 		}
 		
 		private function progress():void
@@ -162,20 +173,16 @@ package main.view
 		private function directoryListiningHandler(e:FileListEvent):void
 		{
 			contents = e.files;
-			arrangeFiles();
-		
-		}
-		
-		private function arrangeFiles():void
-		{
-			if (fileInt < contents.length)
+			for (var i:uint = 0; i < contents.length; i++)
 			{
-				progressRateNum = Math.floor((fileInt + 1) / contents.length * 100);
+				progressRateNum = Math.floor((i + 1) / contents.length * 100);
 				trace(progressRateNum);
-				if (listInt < list.array.length)
+				for (var j:int = 0; j < list.array.length; j++)
 				{
-					adaptation(list.array[listInt].userPhotoId, "电子版", fileInt, list.array[listInt].userId);
-					adaptation(list.array[listInt].userPrintPhotoId, "冲洗版", fileInt, list.array[listInt].userId);
+					
+					adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
+					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
+					
 				}
 			}
 		
@@ -187,57 +194,28 @@ package main.view
 			
 			photoIdArray = photoId.split(",");
 			
-			if (idInt < photoIdArray.length)
+			for (var k:int = 0; k < photoIdArray.length; k++)
 			{
-				photoFileName = photoIdArray[idInt] + ".JPG";
+				photoFileName = photoIdArray[k] + ".JPG";
 				if (contents[index].name == photoFileName)
 				{
 					
 					outputFile = photoFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
 					
-					//if (contents[index].exists)
-					//{
-					//
-					contents[index].copyToAsync(outputFile, true);
-					
-					contents[index].addEventListener(Event.COMPLETE, fileCopiedHandler);
-					contents[index].addEventListener(IOErrorEvent.IO_ERROR, fileCopyIOErrorEventHandler);
-						//
-						//sameFile = outputFile.resolvePath("");
-						//}
-						//else
-						//{
-						//sameFile.copyTo(outputFile, true);
-						//}
+					if (contents[index].exists)
+					{
+						
+						contents[index].copyTo(outputFile, true);
+						
+						sameFile = outputFile.resolvePath("");
+					}
+					else
+					{
+						sameFile.copyTo(outputFile, true);
+					}
 				}
 			}
 		
-		}
-		
-		private function fileCopyIOErrorEventHandler(e:IOErrorEvent):void
-		{
-			
-			trace("I/O Error.");
-		
-		}
-		
-		private function fileCopiedHandler(e:Event):void
-		{
-			if (idInt = photoIdArray.length)
-			{
-				idInt = 0;
-				listInt++;
-			}
-			if (listInt = list.array.length)
-			{
-				idInt = 0;
-				listInt = 0;
-				fileInt++;
-			}
-			
-			idInt++;
-			arrangeFiles();
-			trace("成功复制一个");
 		}
 		
 		//list选择被改变时
@@ -422,7 +400,15 @@ package main.view
 			list.selectHandler = new Handler(listSelect);
 			//滚轮时
 			list.addEventListener(MouseEvent.MOUSE_WHEEL, onRollWheelHander);
+			//双击编辑
+			list.addEventListener(MouseEvent.DOUBLE_CLICK, onListDoubleClick);
 		
+		}
+		
+		private function onListDoubleClick(e:MouseEvent):void
+		{
+			trace("双击");
+				editInfoChange(listSelectIndex);
 		}
 		
 		//滚动条
@@ -470,6 +456,7 @@ package main.view
 				var userPhone:Label = item.getChildByName("userPhone") as Label;
 				var userEmail:Label = item.getChildByName("userEmail") as Label;
 				var userIsFinish:Clip = item.getChildByName("userIsFinish") as Clip;
+				var selectedCheck:CheckBox = item.getChildByName("selectedCheck") as CheckBox;
 				
 				if (userData.userId < 10)
 				{
@@ -506,6 +493,8 @@ package main.view
 				{
 					userIsFinish.frame = 1;
 				}
+				
+					//判断是否选择
 				
 			}
 		}
@@ -580,7 +569,7 @@ package main.view
 		private function enterDown(e:MouseEvent):void
 		{
 			//代码录入测试数据（数字为添加数量）:按整理后新建并点击确认
-			//InputText();
+			InputText();
 			
 			editUser.userName = input_name.text;
 			editUser.userIsTown = Number(input_isTown.selectedIndex);
@@ -622,7 +611,7 @@ package main.view
 			lastNameIndex = Math.floor(Math.random() * lastName.length);
 			firstNameIndex = Math.floor(Math.random() * firstName.length);
 			firstNameIndex2 = Math.floor(Math.random() * firstName.length);
-			if (Math.random() * 1.4 > 1)
+			if (Math.random() < 0.5)
 				input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex];
 			else
 				input_name.text = lastName[lastNameIndex] + firstName[firstNameIndex] + firstName[firstNameIndex2];
@@ -633,11 +622,10 @@ package main.view
 			input_phone.text = String(Number(13511111111 + Math.floor(Math.random() * 88888888)));
 			input_email.text = String(Number(Math.floor(Math.random() * 999999999))) + "@qq.com";
 			
-			photoFileIndex = Math.floor(Math.random() * contents.length);
+			photoFileIndex = Math.floor(Math.random() * contains.length);
 			photoFlieNameText = contents[photoFileIndex].name;
-			input_photoId.text = photoFlieNameText.substr(0, 8);
-			input_printPhotoId.text = photoFlieNameText.substr(0, 8);
-			trace(photoFlieNameText.substr(0, 8));
+			input_photoId.text = photoFlieNameText.substring(0, 4);
+			input_printPhotoId.text = photoFlieNameText.substring(0, 4);
 		
 		}
 		
