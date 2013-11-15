@@ -24,8 +24,8 @@ package main.database
 	 */
 	public class UserDatabase extends EventDispatcher
 	{
-		//protected var dbFile:File=File.applicationStorageDirectory.resolvePath("userInfo.db"); 
-		protected var dbFile:File=File.desktopDirectory.resolvePath("userInfo.db"); 
+		protected var dbFile:File=File.applicationStorageDirectory.resolvePath("userInfo.db"); 
+		//protected var dbFile:File=File.desktopDirectory.resolvePath("userInfo.db"); 
 		protected var conn:SQLConnection;
 		protected var resultSql:Responder;
 		protected var insertSql:SQLStatement = new SQLStatement();

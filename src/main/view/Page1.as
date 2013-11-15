@@ -417,21 +417,21 @@ package main.view
 		
 		private function infoView(index:int):void
 		{
-			infoData = list.array[index];
+			
 			//01-10
-			if (infoData.userId < 10)
+			if (editUser.userId < 10)
 			{
-				label_name.text = "0" + infoData.userId.toString() + "   " + infoData.userName;
+				label_name.text = "0" + editUser.userId.toString() + "   " + editUser.userName;
 			}
 			else
 			{
-				label_name.text = infoData.userId.toString() + "   " + infoData.userName;
+				label_name.text = editUser.userId.toString() + "   " + editUser.userName;
 			}
 			
-			label_info.text = "宿舍：" + infoData.userDormitory + "-" + infoData.userDorNumber.toString() + "\n电话：" + infoData.userPhone.toString() + "\nEmail：" + infoData.userEmail + "\n相片信息\n电子版：" + infoData.userPhotoId + "\n冲洗版：" + infoData.userPrintPhotoId + "\n\n备注：";
+			label_info.text = "宿舍：" + editUser.userDormitory + "-" + editUser.userDorNumber.toString() + "\n电话：" + editUser.userPhone.toString() + "\nEmail：" + editUser.userEmail + "\n相片信息\n电子版：" + editUser.userPhotoId + "\n冲洗版：" + editUser.userPrintPhotoId + "\n\n备注：";
 			
 			tab_photoType.selectedIndex = 0;
-			getPhoto(infoData.userPhotoId, "电子版");
+			getPhoto(editUser.userPhotoId, "电子版");
 			
 			tab_photoType.selectHandler = new Handler(photoTypeChange);
 			tab_circle.selectHandler = new Handler(circleChange);
@@ -446,11 +446,11 @@ package main.view
 			{
 				//电子版
 				case 0: 
-					getPhoto(infoData.userPhotoId, "电子版");
+					getPhoto(editUser.userPhotoId, "电子版");
 					break;
 				//冲洗版
 				case 1: 
-					getPhoto(infoData.userPrintPhotoId, "冲洗版");
+					getPhoto(editUser.userPrintPhotoId, "冲洗版");
 					break;
 			}
 		}
@@ -469,7 +469,7 @@ package main.view
 			}
 			tab_circle.labels = photoNum.toString();
 			
-			photoViewFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		
@@ -494,7 +494,7 @@ package main.view
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
-			photoViewFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		
