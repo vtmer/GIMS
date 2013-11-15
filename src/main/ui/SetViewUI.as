@@ -20,6 +20,7 @@ package main.ui {
 			    <Label x="15" y="61" wordWrap="true" width="399" height="71" font="Microsoft YaHei" size="14" text="       GIMS是针对校团委数字中心——美丽瞬间活动而开发的信息管理系统。GIMS不仅可以自动录入女生信息而且可以智能整理相片，大大解放劳动力，提高生产力，造福后代子孙！" color="0x222222" selectable="true"/>
 			    <Label text="——维生数工作室" x="15" y="143" font="Microsoft YaHei" size="14" color="0x222222" width="401" height="27" align="right" selectable="true"/>
 			    <Label text="_____________________________________________________________" y="176" font="Arial" color="0xcccccc"/>
+			    <Label text="（首次运行请设置好相片整理输出目录~）" x="44" y="124" width="246" height="22" font="Microsoft YaHei" size="13" color="0x333333" bold="true"/>
 			  </Box>
 			  <Box x="36" y="9" var="setInfo" visible="false">
 			    <Label text="_____________________________________________________________" y="218" font="Arial" color="0xcccccc"/>

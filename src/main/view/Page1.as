@@ -92,6 +92,21 @@ package main.view
 			selectedListItem();
 			//第一次运行
 			firstRun();
+			//关于
+            btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
+		}
+		
+		private function onAboutBtn(e:MouseEvent):void 
+		{
+			AboutVIew.visible = true;
+			whiteMask.visible = true;
+			AboutVIew.btn_closeAboutView.addEventListener(MouseEvent.MOUSE_DOWN, onCloseAboutViewBtn);
+		}
+		
+		private function onCloseAboutViewBtn(e:MouseEvent):void 
+		{
+			AboutVIew.visible = false;
+			whiteMask.visible = false;
 		}
 		
 		//第一次运行&设置
@@ -107,13 +122,17 @@ package main.view
 				whiteMask.visible = true;
 				setView.visible = true;
 				setView.btn_next.addEventListener(MouseEvent.MOUSE_DOWN, onNextBtn);
-				
+				setView.btn_saveSet.disabled = true;
+				setView.btn_closeSetView.disabled = true;
+			}else {
+			    setView.btn_saveSet.disabled = false;
+				setView.btn_closeSetView.disabled = false;	
 			}
 		}
 		
 		private function onNextBtn(e:MouseEvent):void
 		{
-			isFirstRun = false;
+			
 			setView.firstRunInfo.visible = false;
 			setView.setInfo.visible = true;
 			setViewInfo();
@@ -178,6 +197,9 @@ package main.view
 		
 		private function directorySelected(e:Event):void
 		{
+			isFirstRun = false;
+			firstRun();
+			
 			outputFile = e.target as File;
 			setView.btn_browse.visible = false;
 			setView.input_filesPath.visible = true;
@@ -266,6 +288,7 @@ package main.view
 		private function progress():void
 		{
 			dialog_progress.visible = true;
+			whiteMask.visible = true;
 			dialog_progress.btn_ProgressClose.addEventListener(MouseEvent.MOUSE_DOWN, cancelProgress);
 			dialog_progress.btn_ProgressCancel.addEventListener(MouseEvent.MOUSE_DOWN, cancelProgress);
 			dialog_progress.addEventListener(Event.ENTER_FRAME, progressEF);
@@ -289,6 +312,7 @@ package main.view
 		private function cancelProgress(e:MouseEvent):void
 		{
 			dialog_progress.visible = false;
+			whiteMask.visible = false;
 		}
 		
 		private function directoryListiningHandler(e:FileListEvent):void
