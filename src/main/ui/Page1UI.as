@@ -1,6 +1,7 @@
 /**Created by the Morn,do not modify.*/
 package main.ui {
 	import morn.core.components.*;
+	import main.ui.AboutUI;
 	import main.ui.ProgressUI;
 	import main.ui.SetViewUI;
 	public class Page1UI extends View {
@@ -12,12 +13,14 @@ package main.ui {
 		public var btn_arrange:Button;
 		public var btn_send:Button;
 		public var btn_io:Button;
+		public var btn_quesent:Button;
 		public var windows_btn:Container;
 		public var btn_close:Button;
 		public var btn_max:Button;
 		public var btn_min:Button;
 		public var btn_restore:Button;
 		public var btn_set:Button;
+		public var image_isTown:Box;
 		public var list:List;
 		public var render:Box;
 		public var selectedCheckBox:CheckBox;
@@ -48,13 +51,13 @@ package main.ui {
 		public var photoView:Image;
 		public var tab_circle:Tab;
 		public var block_resize:Container;
-		public var dialog_progress:ProgressUI;
 		public var btn_allSelect:CheckBox;
 		public var sort_down:Image;
 		public var sort_up:Image;
 		public var whiteMask:Image;
+		public var dialog_progress:ProgressUI;
 		public var setView:SetViewUI;
-		public var image_isTown:Box;
+		public var AboutVIew:AboutUI;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
@@ -72,12 +75,12 @@ package main.ui {
 			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
 			  <Button skin="png.flat.btn_contact" x="65" y="724" buttonMode="true"/>
-			  <Button skin="png.flat.btn_question" x="93" y="724" buttonMode="true"/>
+			  <Button skin="png.flat.btn_question" x="93" y="724" buttonMode="true" var="btn_quesent"/>
 			  <Container right="20" top="12" var="windows_btn">
 			    <Button skin="png.flat.btn_close" x="76" buttonMode="true" var="btn_close" toolTip="关闭"/>
-			    <Button skin="png.flat.btn_max" x="38" buttonMode="true" var="btn_max" toolTip="最大化"/>
+			    <Button skin="png.flat.btn_max" x="38" buttonMode="true" var="btn_max" toolTip="最大化" disabled="true"/>
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
-			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
+			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原" disabled="true"/>
 			  </Container>
 			  <Button skin="png.flat.btn_set" x="120" y="724" var="btn_set"/>
 			  <Image url="png.flat.logo" x="33" y="36"/>
@@ -92,16 +95,22 @@ package main.ui {
 			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			  </Box>
+			  <Box x="214" y="42" var="image_isTown" mouseEnabled="false">
+			    <Image url="png.flat.icon5" y="6" mouseEnabled="false"/>
+			    <Image url="png.flat.text_home" x="34" mouseEnabled="false"/>
+			    <Image url="png.flat.text_other" x="204" mouseEnabled="false"/>
+			    <Image url="png.flat.icon6" x="165" y="6" mouseEnabled="false"/>
+			  </Box>
 			  <List x="231" y="248" var="list" repeatY="10" repeatX="1" mouseChildren="true">
 			    <Box name="render" var="render" width="777" height="48" buttonMode="true" mouseEnabled="true" mouseChildren="false">
 			      <Label x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
 			      <Label x="206" y="0" width="141" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor" height="49"/>
 			      <Label x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
 			      <Label x="543" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
-			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true" name="selectedCheck" mouseEnabled="true" var="selectedCheckBox"/>
+			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true" name="selectedCheck" mouseEnabled="true" var="selectedCheckBox" disabled="true"/>
 			      <Label x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
 			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="1" clipWidth="14" clipX="2" name="userIsFinish" buttonMode="false"/>
-			      <Clip url="png.flat.clip_selectBox" x="26" y="0" width="750" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="false" mouseEnabled="false" buttonMode="true"/>
+			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="false" mouseEnabled="false" buttonMode="true"/>
 			    </Box>
 			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
 			  </List>
@@ -149,22 +158,18 @@ package main.ui {
 			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
-			  <Progress x="295" y="305" var="dialog_progress" visible="false" runtime="main.ui.ProgressUI"/>
-			  <Button skin="png.flat.btn_sort" x="433" y="210" buttonMode="true"/>
-			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect"/>
+			  <Button skin="png.flat.btn_sort" x="433" y="210" buttonMode="true" disabled="true"/>
+			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect" disabled="true"/>
 			  <Image url="png.flat.sort_down" x="558" y="233" var="sort_down" visible="false"/>
 			  <Image url="png.flat.sort_up" x="558" y="226" width="8" height="4" var="sort_up" visible="false"/>
 			  <Image url="png.flat.whiteMask" x="12" y="12" width="1024" height="769" mouseEnabled="true" var="whiteMask" visible="false"/>
+			  <Progress x="295" y="305" var="dialog_progress" visible="false" runtime="main.ui.ProgressUI"/>
 			  <SetView x="321" y="256" var="setView" visible="false" runtime="main.ui.SetViewUI"/>
-			  <Box x="214" y="42" var="image_isTown">
-			    <Image url="png.flat.icon5" y="6" mouseEnabled="false"/>
-			    <Image url="png.flat.text_home" x="34" mouseEnabled="false"/>
-			    <Image url="png.flat.text_other" x="204" mouseEnabled="false"/>
-			    <Image url="png.flat.icon6" x="165" y="6" mouseEnabled="false"/>
-			  </Box>
+			  <About x="287" y="244" var="AboutVIew" visible="false" runtime="main.ui.AboutUI"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
+			viewClassMap["main.ui.AboutUI"] = AboutUI;
 			viewClassMap["main.ui.ProgressUI"] = ProgressUI;
 			viewClassMap["main.ui.SetViewUI"] = SetViewUI;
 			createView(uiXML);
