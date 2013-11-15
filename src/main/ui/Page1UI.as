@@ -146,7 +146,7 @@ package main.ui {
 			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" var="tab_photoType" buttonMode="true"/>
 			      <Button skin="png.flat.btn_edit" x="268" y="83" var="btn_infoEdit" buttonMode="true"/>
 			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true" disabled="true"/>
-			      <Button skin="png.flat.btn_delete" x="268" y="150" var="btn_infoDelete" buttonMode="true" disabled="true"/>
+			      <Button skin="png.flat.btn_delete" x="268" y="150" var="btn_infoDelete" buttonMode="true" disabled="false"/>
 			      <Image x="34" y="405" width="246.6" height="185" var="photoView"/>
 			      <Container x="11" y="614" width="289" height="14" centerX="0">
 			        <Container centerX="0">

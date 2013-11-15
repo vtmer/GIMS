@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="21,1,7,0,about;19,0,7,1,setView;16,0,7,1,progress;20,0,7,0,whiteMask;18,1,7,1,image2;17,1,7,1,button2;12,1,7,0,control;11,1,7,0,drawer;15,1,7,1,mask;14,1,7,0,list;3,1,7,1,image;1,1,7,0,button;6,1,7,1,search;5,1,7,1,label;4,1,7,0,navigation;13,1,7,0,remove;2,1,7,0,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="21,0,0,1,about;19,0,0,1,setView;16,0,0,1,progress;20,0,0,0,whiteMask;18,1,0,1,image2;17,1,0,1,button2;12,1,0,0,control;11,1,0,0,drawer;15,1,0,1,mask;14,1,0,0,list;3,1,0,1,image;1,1,0,0,button;6,1,0,1,search;5,1,0,1,label;4,1,0,0,navigation;13,1,0,0,remove;2,1,0,0,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
   <Container layers="1,1,0" layer="13" width="1025" height="92" left="12" top="12" alpha="0" x="12" y="12" var="block_remove" mouseEnabled="true" buttonMode="false">
     <Image url="png.flat.blank" layer="1" width="1025" height="92" x="0" y="0"/>
@@ -85,7 +85,7 @@
       <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1" var="tab_photoType" buttonMode="true"/>
       <Button skin="png.flat.btn_edit" x="268" y="83" layer="2" var="btn_infoEdit" buttonMode="true"/>
       <Button skin="png.flat.btn_send" x="268" y="117" layer="2" var="btn_infoSend" buttonMode="true" disabled="true"/>
-      <Button skin="png.flat.btn_delete" x="268" y="150" layer="2" var="btn_infoDelete" buttonMode="true" disabled="true"/>
+      <Button skin="png.flat.btn_delete" x="268" y="150" layer="2" var="btn_infoDelete" buttonMode="true" disabled="false"/>
       <Image x="34" y="405" layer="3" width="246.6" height="185" var="photoView"/>
       <Container layers="1,1,0" layer="2" x="11" y="614" width="289" height="14" centerX="0">
         <Container layers="1,1,0" layer="1" centerX="0">

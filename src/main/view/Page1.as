@@ -56,6 +56,7 @@ package main.view
 		private var isArrange:Boolean = false;
 		private var photoViewFile:File;
 		private var currentOutputFile:File;
+		private var userIdArray:Array=new Array();
 		
 		public function Page1()
 		{
@@ -94,6 +95,30 @@ package main.view
 			firstRun();
 			//关于
 			btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
+			//导出excel
+			//exportToExcelByDb();
+			//序号重排列
+			
+		
+		}
+		
+		private function sortAgain():void
+		{
+			for (var i:int = 0; i < list.array.length; i++)
+			{
+				if (i < 10)
+				{
+					userIdArray[i] = "00" + (i+1).toString();
+				}
+				else if (9 < i < 100)
+				{
+					userIdArray[i] = "0" + (i+1).toString();
+				}
+				else
+				{
+					userIdArray[i] = (i+1).toString();
+				}
+			}
 		}
 		
 		private function onAboutBtn(e:MouseEvent):void
@@ -169,7 +194,7 @@ package main.view
 					input_isTown.visible = true;
 					Label_newInfo.text = "姓名：<br>是否大学城校区：<br>宿舍：<br>联系电话：<br>邮箱：";
 					break;
-				case 1: 
+				case 1:
 					
 					tab_isTown.visible = false;
 					image_isTown.visible = false;
@@ -330,8 +355,8 @@ package main.view
 				for (var j:int = 0; j < list.array.length; j++)
 				{
 					
-					adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
-					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
+					adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j]);
+					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j]);
 					
 				}
 			}
@@ -418,15 +443,9 @@ package main.view
 		private function infoView(index:int):void
 		{
 			
-			//01-10
-			if (editUser.userId < 10)
-			{
-				label_name.text = "0" + editUser.userId.toString() + "   " + editUser.userName;
-			}
-			else
-			{
-				label_name.text = editUser.userId.toString() + "   " + editUser.userName;
-			}
+	
+				label_name.text = userIdArray[index].toString() + "   " + editUser.userName;
+
 			
 			label_info.text = "宿舍：" + editUser.userDormitory + "-" + editUser.userDorNumber.toString() + "\n电话：" + editUser.userPhone.toString() + "\nEmail：" + editUser.userEmail + "\n相片信息\n电子版：" + editUser.userPhotoId + "\n冲洗版：" + editUser.userPrintPhotoId + "\n\n备注：";
 			
@@ -612,14 +631,7 @@ package main.view
 				var userIsFinish:Clip = item.getChildByName("userIsFinish") as Clip;
 				var selectedCheck:CheckBox = item.getChildByName("selectedCheck") as CheckBox;
 				
-				if (userData.userId < 10)
-				{
-					userId.text = "0" + userData.userId.toString();
-				}
-				else
-				{
-					userId.text = userData.userId.toString();
-				}
+				userId.text = userIdArray[index];
 				
 				if (userData.userDormitory == null)
 				{
@@ -798,6 +810,7 @@ package main.view
 				case DataActionEventKind.KIND_DATA_CHANGE:
 					
 					list.array = event.data as Array;
+					sortAgain();
 					trace("数据变更");
 					break;
 			}
@@ -851,10 +864,14 @@ package main.view
 					}
 					break;
 				case DataActionEventKind.KIND_FILTER: 
-					database.setIsTownIndex(tab_isTown.selectedIndex);
+					if (tab_isTown.selectedIndex == 1)
+						database.setIsTownIndex("WHERE user_isTown=1");
+					else
+						database.setIsTownIndex("");
 					editUser = list.array[0];
 					database.update(editUser);
 					break;
+			
 			}
 		}
 		

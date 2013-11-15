@@ -34,11 +34,11 @@ package main.database
 		protected var selectSql:SQLStatement = new SQLStatement();
 		protected var tableSql:SQLStatement = new SQLStatement();
 		
-		private var isTownIndex:int=0;
+		private var isTown:String="";
 
-		public function setIsTownIndex(index:int):void
+		public function setIsTownIndex(Where:String):void
 		{
-              isTownIndex=index;
+              isTown=Where;
 			  selectText = "SELECT " + 
 				  "user_id as userId, " + 
 				  "user_name as userName, " + 
@@ -50,8 +50,7 @@ package main.database
 				  "user_photoId as userPhotoId, " + 
 				  "user_printPhotoId as userPrintPhotoId " + 
 				  "FROM userinfo "+
-				  "WHERE user_isTown="+
-				  isTownIndex.toString();
+				  isTown;
 			  selectSql.text = selectText;
 		}
 
@@ -84,8 +83,7 @@ package main.database
 										"user_photoId as userPhotoId, " + 
 										"user_printPhotoId as userPrintPhotoId " + 
 										"FROM userinfo "+
-										"WHERE user_isTown="+
-										isTownIndex.toString();
+										isTown;
 										
 		protected var tableText:String = "CREATE TABLE IF NOT EXISTS userinfo(" + 
 										"user_id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
