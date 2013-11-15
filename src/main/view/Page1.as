@@ -716,6 +716,7 @@ package main.view
 			{
 				drawer.visible = false;
 				_isDrawerIn = true;
+				scrollBarView.value = list.array.length+6;
 			}
 			else
 			{
