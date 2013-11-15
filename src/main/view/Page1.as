@@ -54,6 +54,7 @@ package main.view
 		private var selectedListItemArray:Array;
 		private var isFirstRun:Boolean = true;
 		private var isArrange:Boolean = false;
+		private var photoViewFile:File;
 		
 		public function Page1()
 		{
@@ -440,8 +441,8 @@ package main.view
 			}
 			tab_circle.labels = photoNum.toString();
 			
-			outputFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
-			photoView.url = outputFile.url;
+			photoViewFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			photoView.url = photoViewFile.url;
 		}
 		
 		//改变相片编号指示器
@@ -465,8 +466,8 @@ package main.view
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
-			outputFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
-			photoView.url = outputFile.url;
+			photoViewFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			photoView.url = photoViewFile.url;
 		}
 		
 		//编辑信息
