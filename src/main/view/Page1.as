@@ -1,5 +1,6 @@
 package main.view
 {
+	import com.as3xls.xls.ExcelFile;
 	import com.as3xls.xls.Sheet;
 	import flash.display.NativeWindowResize;
 	import flash.events.Event;
@@ -9,7 +10,11 @@ package main.view
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
 	import flash.filesystem.File;
+	import flash.filesystem.FileMode;
+	import flash.filesystem.FileStream;
+	import flash.net.FileReference;
 	import flash.text.ime.CompositionAttributeRange;
+	import flash.utils.ByteArray;
 	import flash.utils.Timer;
 	import morn.core.components.Box;
 	import morn.core.components.List;
@@ -60,6 +65,7 @@ package main.view
 		private var photoViewFile:File;
 		private var currentOutputFile:File;
 		private var userIdArray:Array = new Array();
+		private var versonLabel:String="0.6.3";
 		
 		public function Page1()
 		{
@@ -95,15 +101,35 @@ package main.view
 			//筛选非本校区
 			isTown();
 			//选择项组
-			selectedListItem();
+			//selectedListItem();
 			//第一次运行
 			firstRun();
 			//关于
 			btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
 			//导入导出
 			btn_io.addEventListener(MouseEvent.MOUSE_DOWN, onIOBtn);
+			//读取版本号
+			//setVerson();
 		
 		}
+		
+		//private function setVerson():void
+		//{
+			//var file:File = File.applicationDirectory.resolvePath("META-INF/AIR/application.xml");
+			//
+			//var fileStream:FileStream = new FileStream();
+			//fileStream.addEventListener(Event.COMPLETE, processXMLData);
+			//fileStream.openAsync(file, FileMode.READ);
+			//var prefsXML:XML;
+			//
+			//function processXMLData(event:Event):void
+			//{
+				//prefsXML = XML(fileStream.readUTFBytes(fileStream.bytesAvailable));
+				//fileStream.close();
+				//versonLabel = prefsXML[versonLabel];
+				//
+			//}
+		//}
 		
 		private function onIOBtn(e:MouseEvent):void
 		{
@@ -123,7 +149,7 @@ package main.view
 		private function onOutputBtn(e:MouseEvent):void
 		{
 			//导出excel
-			//exportToExcelByDb();
+			exportToExcelByList(list);
 			//导出数据库
 			ouputDb();
 		}
@@ -131,68 +157,85 @@ package main.view
 		private function ouputDb():void
 		{
 			var dbFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
-			var desklop:File = File.desktopDirectory.resolvePath("userInfo.db");
-			dbFile.copyTo(desklop, true);
+			var outputDbFile:File = outputFile.resolvePath("数据库文件/userInfo.db");
+			dbFile.copyTo(outputDbFile, true);
 		}
 		
-		//private function exportToExcelByList(list:List, xlsName:String = "导出表格"):void
-		//{
-		//var _sheet:Sheet = new Sheet();
-		//var _fields:Array = ["No.", "姓名", "是否本校", "宿舍", "电话", "邮箱", "电子版相片ID", "冲洗版相片ID"];
-		//var rowCount:int = list.array.length;
-		//var columnCount:int = 8;
-		//_sheet.resize(rowCount + 1, columnCount);
-		//
-		//循环所有数据r+1行c列单元格
-		//for (var r:int = 0; r < rowCount; r++)
-		//{
-		//var record:Object = iList.getItemAt(r);
-		//把数据写入某行某列
-		//for (var c:uint = 0; c < _fields.length; c++)
-		//{
-		//switch(c) {
-		//case 1:	
-		//_sheet.setCell(r + 1, c, photoIdArray[r]);
-		//break;
-		//case 2:
-		//_sheet.setCell(r + 1, c, list.array[r].userName);
-		//break;
-		//case 3:
-		//var isTownText:String = "是";
-		//if (list.array[r].userIsTown == 1) {
-		//isTownText = "否";
-		//}				
-		//_sheet.setCell(r + 1, c, isTownText);				
-		//break;
-		//
-		//case 4:
-		//if (userData.userDormitory == null)
-		//{
-		//_sheet.setCell(r + 1, c, "无");
-		//}
-		//else
-		//{
-		//_sheet.setCell(r + 1, c, list.array[r].userDormitory + "-" + list.array[r].userDorNumber.toString());
-		//}
-		//break;
-		//
-		//case 5:
-		//_sheet.setCell(r + 1, c, list.array[r].userPhone);
-		//break;
-		//case 6:
-		//_sheet.setCell(r + 1, c, list.array[r].userEmail);
-		//break;
-		//case 7:
-		//_sheet.setCell(r + 1, c, list.array[r].photoId);
-		//break;
-		//case 8:
-		//_sheet.setCell(r + 1, c, list.array[r].printPhotoId);
-		//break;
-		//
-		//
-		//
-		//}
-		//}
+		private function exportToExcelByList(list:List, xlsName:String = "导出表格")
+		{
+			var _sheet:Sheet = new Sheet();
+			var _fields:Array = ["No.", "姓名", "是否本校", "宿舍", "电话", "邮箱", "电子版相片ID", "冲洗版相片ID"];
+			var rowCount:int = list.array.length;
+			var columnCount:int = 8;
+			_sheet.resize(rowCount + 1, columnCount);
+			
+			//循环所有列添加表头项
+			for (var i:uint = 0; i < _fields.length; i++)
+			{
+				_sheet.setCell(0, i, _fields[i]); //设置单元格 参数:1、行号；2、列号；3、单元格的值
+				
+			}
+			
+			//循环所有数据,r+1行c列单元格
+			for (var r:int = 0; r < rowCount; r++)
+			{
+				
+				//把数据写入某行某列
+				for (var c:uint = 0; c < _fields.length; c++)
+				{
+					switch (c)
+					{
+						case 0: 
+							_sheet.setCell(r + 1, c, userIdArray[r]);
+							break;
+						case 1: 
+							_sheet.setCell(r + 1, c, list.array[r].userName);
+							break;
+						case 2: 
+							var isTownText:String = "是";
+							if (list.array[r].userIsTown == 1)
+							{
+								isTownText = "否";
+							}
+							_sheet.setCell(r + 1, c, isTownText);
+							break;
+						
+						case 3: 
+							if (userData.userDormitory == null)
+							{
+								_sheet.setCell(r + 1, c, "无");
+							}
+							else
+							{
+								_sheet.setCell(r + 1, c, list.array[r].userDormitory + "-" + list.array[r].userDorNumber.toString());
+							}
+							break;
+						
+						case 4: 
+							_sheet.setCell(r + 1, c, list.array[r].userPhone);
+							break;
+						case 5: 
+							_sheet.setCell(r + 1, c, list.array[r].userEmail);
+							break;
+						case 6: 
+							_sheet.setCell(r + 1, c, list.array[r].userPhotoId);
+							break;
+						case 7: 
+							_sheet.setCell(r + 1, c, list.array[r].userPrintPhotoId);
+							break;
+					
+					}
+				}
+			}
+			
+			var xls:ExcelFile = new ExcelFile();
+			xls.sheets.addItem(_sheet);
+			var bytes:ByteArray = xls.saveToByteArray();
+			var fr:FileReference = new FileReference();
+			fr.save(bytes, xlsName + ".xls");
+			return fr;
+		
+		}
 		
 		private function onInputBtn(e:MouseEvent):void
 		{
@@ -235,6 +278,7 @@ package main.view
 		
 		private function onAboutBtn(e:MouseEvent):void
 		{
+			AboutVIew.Version.text = versonLabel;
 			AboutVIew.visible = true;
 			whiteMask.visible = true;
 			AboutVIew.btn_closeAboutView.addEventListener(MouseEvent.MOUSE_DOWN, onCloseAboutViewBtn);
@@ -496,13 +540,13 @@ package main.view
 				{
 					if (isAllSelected)
 					{
-						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j],list.array[j].userName);
-						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j],list.array[j].userName);
+						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j], list.array[j].userName);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j], list.array[j].userName);
 					}
 					else
 					{
-						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId,list.array[j].userName);
-						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId,list.array[j].userName);
+						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId, list.array[j].userName);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId, list.array[j].userName);
 					}
 					
 				}
@@ -511,7 +555,7 @@ package main.view
 		}
 		
 		//分割匹配
-		private function adaptation(photoId:String, photoType:String, index:int, userId:String,userName:String):void
+		private function adaptation(photoId:String, photoType:String, index:int, userId:String, userName:String):void
 		{
 			
 			photoIdArray = photoId.split(",");
@@ -522,7 +566,7 @@ package main.view
 				if (contents[index].name == photoFileName)
 				{
 					
-					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId +" "+ userName + "/" + photoFileName);
+					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId + " " + userName + "/" + photoFileName);
 					
 					//if (contents[index].exists)
 					//{
@@ -633,7 +677,7 @@ package main.view
 			}
 			tab_circle.labels = photoNum.toString();
 			
-			photoViewFile = outputFile.resolvePath(photoType + "/" +editUser.userName+ " "+editUser.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userName + " " + editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		
@@ -658,7 +702,7 @@ package main.view
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
-			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userName+ " "+editUser.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userName + " " + editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		
