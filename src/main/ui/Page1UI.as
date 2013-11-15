@@ -4,6 +4,7 @@ package main.ui {
 	import main.ui.AboutUI;
 	import main.ui.ProgressUI;
 	import main.ui.SetViewUI;
+	import main.ui.TipsViewUI;
 	public class Page1UI extends View {
 		public var bg:Image;
 		public var block_remove:Container;
@@ -58,6 +59,7 @@ package main.ui {
 		public var dialog_progress:ProgressUI;
 		public var setView:SetViewUI;
 		public var AboutVIew:AboutUI;
+		public var TipsView:TipsViewUI;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
@@ -116,7 +118,7 @@ package main.ui {
 			  </List>
 			  <Image url="png.flat.mask" x="216" y="705" width="793" height="24" var="block_mask" visible="false"/>
 			  <Container x="186" y="43" var="drawer" visible="false" disabled="false" mouseEnabled="false">
-			    <Image url="png.flat.information" visible="true" x="488"/>
+			    <Image url="png.flat.information" visible="true" x="488" y="0" width="362" height="698"/>
 			    <Label text="_____________________________________________" x="501" y="51" color="0xc9cdcc"/>
 			    <Label text=">>" x="497" y="350" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
 			    <Image url="png.flat.blank" x="493" y="6" width="22" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
@@ -159,19 +161,21 @@ package main.ui {
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
 			  <Button skin="png.flat.btn_sort" x="433" y="210" buttonMode="true" disabled="true"/>
-			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect" disabled="true"/>
+			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect" disabled="false"/>
 			  <Image url="png.flat.sort_down" x="558" y="233" var="sort_down" visible="false"/>
 			  <Image url="png.flat.sort_up" x="558" y="226" width="8" height="4" var="sort_up" visible="false"/>
 			  <Image url="png.flat.whiteMask" x="12" y="12" width="1025" height="745" mouseEnabled="true" var="whiteMask" visible="false"/>
 			  <Progress x="295" y="305" var="dialog_progress" visible="false" runtime="main.ui.ProgressUI"/>
 			  <SetView x="321" y="256" var="setView" visible="false" runtime="main.ui.SetViewUI"/>
 			  <About x="287" y="244" var="AboutVIew" visible="false" runtime="main.ui.AboutUI"/>
+			  <TipsView x="293" y="234" visible="false" var="TipsView" runtime="main.ui.TipsViewUI"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
 			viewClassMap["main.ui.AboutUI"] = AboutUI;
 			viewClassMap["main.ui.ProgressUI"] = ProgressUI;
 			viewClassMap["main.ui.SetViewUI"] = SetViewUI;
+			viewClassMap["main.ui.TipsViewUI"] = TipsViewUI;
 			createView(uiXML);
 		}
 	}

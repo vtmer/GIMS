@@ -54,9 +54,10 @@ package main.view
 		private var selectedListItemArray:Array;
 		private var isFirstRun:Boolean = true;
 		private var isArrange:Boolean = false;
+		private var isAllSelected:Boolean = false;
 		private var photoViewFile:File;
 		private var currentOutputFile:File;
-		private var userIdArray:Array=new Array();
+		private var userIdArray:Array = new Array();
 		
 		public function Page1()
 		{
@@ -79,6 +80,8 @@ package main.view
 			btn_infoDelete.addEventListener(MouseEvent.MOUSE_DOWN, infoDelete);
 			//匹配整理
 			btn_arrange.addEventListener(MouseEvent.MOUSE_DOWN, arrange);
+			//最后一次整理
+			btn_allSelect.clickHandler = new Handler(lastArrange);
 			//搜索
 			input_search.addEventListener(FocusEvent.FOCUS_IN, inputSearch);
 			//表单提示信息
@@ -98,8 +101,20 @@ package main.view
 			//导出excel
 			//exportToExcelByDb();
 			//序号重排列
-			
 		
+		}
+		
+		private function lastArrange():void
+		{
+			if (btn_allSelect.selected)
+			{
+				isAllSelected = true;
+				trace("全选中");
+			}
+			else
+			{
+				isAllSelected = false;
+			}
 		}
 		
 		private function sortAgain():void
@@ -108,15 +123,15 @@ package main.view
 			{
 				if (i < 10)
 				{
-					userIdArray[i] = "00" + (i+1).toString();
+					userIdArray[i] = "00" + (i + 1).toString();
 				}
 				else if (9 < i < 100)
 				{
-					userIdArray[i] = "0" + (i+1).toString();
+					userIdArray[i] = "0" + (i + 1).toString();
 				}
 				else
 				{
-					userIdArray[i] = (i+1).toString();
+					userIdArray[i] = (i + 1).toString();
 				}
 			}
 		}
@@ -290,7 +305,9 @@ package main.view
 			
 			if (isArrange)
 			{
+				
 				arrangeFiles();
+				
 			}
 			else
 			{
@@ -298,6 +315,21 @@ package main.view
 				photoFile.browseForDirectory("请选择相片所在目录");
 				photoFile.addEventListener(Event.SELECT, photoFileSelected);
 			}
+		}
+		
+		private function onEnterTipsBtn(e:MouseEvent):void
+		{
+			TipsView.visible = false;
+			whiteMask.visible = false;
+			photoFile.getDirectoryListingAsync();
+			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
+			progress();
+		}
+		
+		private function onCloseTipsBtn(e:MouseEvent):void
+		{
+			TipsView.visible = false;
+			whiteMask.visible = false;
 		}
 		
 		private function photoFileSelected(e:Event):void
@@ -309,9 +341,20 @@ package main.view
 		
 		private function arrangeFiles():void
 		{
-			photoFile.getDirectoryListingAsync();
-			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
-			progress();
+			if (isAllSelected)
+			{
+				TipsView.visible = true;
+				whiteMask.visible = true;
+				TipsView.btn_closeTipsView.addEventListener(MouseEvent.MOUSE_DOWN, onCloseTipsBtn);
+				TipsView.btn_enterTips.addEventListener(MouseEvent.MOUSE_DOWN, onEnterTipsBtn);
+				
+			}
+			else
+			{
+				photoFile.getDirectoryListingAsync();
+				photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
+				progress();
+			}
 		}
 		
 		private function progress():void
@@ -354,9 +397,16 @@ package main.view
 				trace(progressRateNum);
 				for (var j:int = 0; j < list.array.length; j++)
 				{
-					
-					adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j]);
-					adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j]);
+					if (isAllSelected)
+					{
+						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j]);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j]);
+					}
+					else
+					{
+						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
+					}
 					
 				}
 			}
@@ -443,9 +493,7 @@ package main.view
 		private function infoView(index:int):void
 		{
 			
-	
-				label_name.text = userIdArray[index].toString() + "   " + editUser.userName;
-
+			label_name.text = userIdArray[index].toString() + "   " + editUser.userName;
 			
 			label_info.text = "宿舍：" + editUser.userDormitory + "-" + editUser.userDorNumber.toString() + "\n电话：" + editUser.userPhone.toString() + "\nEmail：" + editUser.userEmail + "\n相片信息\n电子版：" + editUser.userPhotoId + "\n冲洗版：" + editUser.userPrintPhotoId + "\n\n备注：";
 			
@@ -662,8 +710,8 @@ package main.view
 						userIsFinish.frame = 1;
 					}
 				}
-					//判断是否选择
-				
+				//判断是否选择
+				selectedCheck.selected = isAllSelected;
 			}
 		}
 		

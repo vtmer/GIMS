@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="21,0,0,1,about;19,0,0,1,setView;16,0,0,1,progress;20,0,0,0,whiteMask;18,1,0,1,image2;17,1,0,1,button2;12,1,0,0,control;11,1,0,0,drawer;15,1,0,1,mask;14,1,0,0,list;3,1,0,1,image;1,1,0,0,button;6,1,0,1,search;5,1,0,1,label;4,1,0,0,navigation;13,1,0,0,remove;2,1,0,0,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="22,1,0,0,TipsView;21,0,0,1,about;19,0,0,1,setView;16,0,0,1,progress;20,0,0,0,whiteMask;18,1,0,1,image2;17,1,0,0,button2;12,1,0,0,control;11,1,0,0,drawer;15,1,0,1,mask;14,1,0,0,list;3,1,0,1,image;1,1,0,0,button;6,1,0,1,search;5,1,0,1,label;4,1,0,0,navigation;13,1,0,0,remove;2,1,0,0,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
   <Container layers="1,1,0" layer="13" width="1025" height="92" left="12" top="12" alpha="0" x="12" y="12" var="block_remove" mouseEnabled="true" buttonMode="false">
     <Image url="png.flat.blank" layer="1" width="1025" height="92" x="0" y="0"/>
@@ -54,8 +54,8 @@
     <VScrollBar skin="png.flat.vscroll" x="771" layer="1" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
   </List>
   <Image url="png.flat.mask" x="216" y="705" layer="15" width="793" height="24" var="block_mask" visible="false"/>
-  <Container layers="5,1,0,0,info;4,0,0,0,new;3,1,0,1,block;1,1,0,1,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false" mouseEnabled="false">
-    <Image url="png.flat.information" layer="1" visible="true" x="488"/>
+  <Container layers="5,1,3,0,info;4,0,3,0,new;3,1,3,1,block;1,1,3,0,bg" layer="11" x="186" y="43" var="drawer" visible="false" disabled="false" mouseEnabled="false">
+    <Image url="png.flat.information" layer="1" visible="true" x="488" y="0" width="362" height="698"/>
     <Label text="_____________________________________________" x="501" y="51" layer="1" color="0xc9cdcc"/>
     <Label text=">>" x="497" y="350" layer="1" bold="true" color="0x999999" font="SimSun" size="12" width="19" height="19"/>
     <Image url="png.flat.blank" x="493" y="6" layer="3" width="22" height="716" visible="true" var="btn_block" buttonMode="true" alpha="0"/>
@@ -98,11 +98,12 @@
     <Image url="png.flat.blank" x="0" y="0" layer="1" width="12" height="12"/>
   </Container>
   <Button skin="png.flat.btn_sort" x="433" y="210" layer="17" buttonMode="true" disabled="true"/>
-  <CheckBox skin="png.flat.checkbox" x="230" y="222" layer="17" buttonMode="true" var="btn_allSelect" disabled="true"/>
+  <CheckBox skin="png.flat.checkbox" x="230" y="222" layer="17" buttonMode="true" var="btn_allSelect" disabled="false"/>
   <Image url="png.flat.sort_down" x="558" y="233" layer="18" var="sort_down" visible="false"/>
   <Image url="png.flat.sort_up" x="558" y="226" layer="18" width="8" height="4" var="sort_up" visible="false"/>
   <Image url="png.flat.whiteMask" x="12" y="12" layer="20" width="1025" height="745" mouseEnabled="true" var="whiteMask" visible="false"/>
   <UIView source="Progress.xml" x="295" y="305" layer="16" var="dialog_progress" visible="false"/>
   <UIView source="SetView.xml" x="321" y="256" layer="19" var="setView" visible="false"/>
   <UIView source="About.xml" x="287" y="244" layer="21" var="AboutVIew" visible="false"/>
+  <UIView source="TipsView.xml" x="293" y="234" layer="22" visible="false" var="TipsView"/>
 </View>
