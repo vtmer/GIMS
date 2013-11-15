@@ -55,6 +55,7 @@ package main.view
 		private var isFirstRun:Boolean = true;
 		private var isArrange:Boolean = false;
 		private var photoViewFile:File;
+		private var currentOutputFile:File;
 		
 		public function Page1()
 		{
@@ -320,18 +321,18 @@ package main.view
 				if (contents[index].name == photoFileName)
 				{
 					
-					outputFile = outputFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
+					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
 					
 					//if (contents[index].exists)
 					//{
 						//
-						contents[index].copyTo(outputFile, true);
+						contents[index].copyTo(currentOutputFile, true);
 						//
-						//sameFile = outputFile.resolvePath("");
+						//sameFile = currentOutputFile.resolvePath("");
 					//}
 					//else
 					//{
-						//sameFile.copyTo(outputFile, true);
+						//sameFile.copyTo(currentOutputFile, true);
 					//}
 				}
 			}
@@ -607,16 +608,16 @@ package main.view
 				userEmail.text = userData.userEmail;
 				
 				//判断是否匹配
-				if (isArrange)
+				if (!isFirstRun)
 				{
-					var testFile:File = photoFile.resolvePath("电子版/" + Number(userData.userId));
-					var testFile2:File = photoFile.resolvePath("冲洗版/" + Number(userData.userId));
+					var testFile:File = outputFile.resolvePath("电子版/" + Number(userData.userId));
+					var testFile2:File = outputFile.resolvePath("冲洗版/" + Number(userData.userId));
 					
 					if (testFile.exists && testFile2.exists)
 					{
 						userIsFinish.frame = 0;
 						trace(index + "存在");
-					}
+					} 
 					else
 					{
 						userIsFinish.frame = 1;
