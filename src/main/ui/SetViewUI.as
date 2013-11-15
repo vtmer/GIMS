@@ -24,7 +24,7 @@ package main.ui {
 			  </Box>
 			  <Box x="36" y="9" var="setInfo" visible="false">
 			    <Label text="_____________________________________________________________" y="218" font="Arial" color="0xcccccc"/>
-			    <Button label="SAVE" skin="png.flat.btn_enter" x="332" y="260" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_saveSet"/>
+			    <Button label="SAVE" skin="png.flat.btn_enter" x="332" y="260" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_saveSet" buttonMode="true"/>
 			    <Label text="初始设置" size="26" font="Microsoft YaHei" color="0x222222" x="12" y="42"/>
 			    <Label text="所在校区：" x="13" y="122" font="Microsoft YaHei" size="14" color="0x222222"/>
 			    <Label text="相片整理输出位置：" x="13" y="172" color="0x222222" font="Microsoft YaHei" size="14"/>
@@ -33,10 +33,10 @@ package main.ui {
 			      <RadioButton label="龙洞校区" skin="png.flat.radio" x="209" labelColors="0x333333" labelFont="Microsoft YaHei" labelSize="13" name="item2"/>
 			      <RadioButton label="东风路校区" skin="png.flat.radio" x="105" labelColors="0x333333" labelFont="Microsoft YaHei" labelSize="13" name="item1"/>
 			    </RadioGroup>
-			    <Button label="" skin="png.flat.btn_close" x="417" var="btn_closeSetView"/>
-			    <Button label="选择文件夹..." skin="png.flat.btn_cancel" x="153" y="169" labelFont="Microsoft YaHei" labelColors="0x666666" labelSize="12" var="btn_browse" width="102" height="30"/>
-			    <TextInput text="C:/" skin="png.flat.textinput" x="145" y="172" width="220" height="26" autoSize="none" font="Microsoft YaHei" size="12" color="0x666666" margin=",2,," var="input_filesPath" visible="false" disabled="true"/>
-			    <Button label="更改" skin="png.flat.btn_cancel" x="370" y="170" width="44" height="30" var="btn_changeFilesPath" visible="false"/>
+			    <Button label="" skin="png.flat.btn_close" x="417" var="btn_closeSetView" buttonMode="true"/>
+			    <Button label="选择文件夹..." skin="png.flat.btn_cancel" x="153" y="169" labelFont="Microsoft YaHei" labelColors="0x666666" labelSize="12" var="btn_browse" width="102" height="30" buttonMode="true"/>
+			    <TextInput text="C:/" skin="png.flat.textinput" x="145" y="172" width="220" height="26" autoSize="none" font="Microsoft YaHei" size="12" color="0x666666" margin=",2,," var="input_filesPath" visible="false" disabled="true" selectable="true"/>
+			    <Button label="更改" skin="png.flat.btn_cancel" x="370" y="170" width="44" height="30" var="btn_changeFilesPath" visible="false" buttonMode="true"/>
 			  </Box>
 			</Dialog>;
 		public function SetViewUI(){}

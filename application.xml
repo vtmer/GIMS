@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/3.8">
   <id>com.vtmer.gims</id>
-  <versionNumber>0.1</versionNumber>
+  <versionNumber>0.2</versionNumber>
   <filename>gims</filename>
   <description>广东工业大学女生节团委数字中心活动“美丽瞬间”的照片管理系统</description>
-  <name>gims</name>
+  <name>GIMS</name>
   <copyright>Copyright © 2013 Vtmer Studio. All rights reserved.</copyright>
   <initialWindow>
     <content>gims.swf</content>
@@ -15,11 +15,11 @@
     <aspectRatio>portrait</aspectRatio>
     <renderMode>auto</renderMode>
     <width>1048</width>
-    <height>792</height>
+    <height>768</height>
     <maximizable>true</maximizable>
     <minimizable>true</minimizable>
-    <minSize>1048 792</minSize>
-    <resizable>false</resizable>
+    <minSize>1048 768</minSize>
+    <resizable>true</resizable>
   </initialWindow>
   <icon>
     <image16x16>icons/gims16.png</image16x16>

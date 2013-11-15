@@ -1,4 +1,4 @@
-<Dialog sceneWidth="499" sceneHeight="333" sceneColor="0xffffff" sceneBg="" layers="3,0,0,0,set;2,1,0,0,first;1,1,0,1,bg" x="0" y="0">
+<Dialog sceneWidth="499" sceneHeight="333" sceneColor="0xffffff" sceneBg="" layers="3,1,0,0,set;2,0,0,0,first;1,1,0,1,bg" x="0" y="0">
   <Image url="png.flat.setDialog" x="0" y="0" layer="1"/>
   <Box layers="1,1,0" layer="2" x="36" y="51" var="firstRunInfo" visible="true">
     <Button label="NEXT" skin="png.flat.btn_enter" x="332" y="218" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_next"/>
@@ -8,9 +8,9 @@
     <Label text="_____________________________________________________________" y="176" layer="1" font="Arial" color="0xcccccc"/>
     <Label text="（首次运行请设置好相片整理输出目录~）" x="44" y="124" layer="1" width="246" height="22" font="Microsoft YaHei" size="13" color="0x333333" bold="true"/>
   </Box>
-  <Box layers="3,1,2,0,第 3 层;2,1,2,0,第 2 层;1,1,2,0,第 1 层" layer="3" x="36" y="9" var="setInfo" visible="false">
+  <Box layers="3,0,0,1,第 3 层;2,1,0,0,第 2 层;1,1,0,0,第 1 层" layer="3" x="36" y="9" var="setInfo" visible="false">
     <Label text="_____________________________________________________________" y="218" layer="1" font="Arial" color="0xcccccc"/>
-    <Button label="SAVE" skin="png.flat.btn_enter" x="332" y="260" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_saveSet"/>
+    <Button label="SAVE" skin="png.flat.btn_enter" x="332" y="260" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_saveSet" buttonMode="true"/>
     <Label text="初始设置" layer="1" size="26" font="Microsoft YaHei" color="0x222222" x="12" y="42"/>
     <Label text="所在校区：" x="13" y="122" layer="1" font="Microsoft YaHei" size="14" color="0x222222"/>
     <Label text="相片整理输出位置：" x="13" y="172" layer="1" color="0x222222" font="Microsoft YaHei" size="14"/>
@@ -19,9 +19,9 @@
       <RadioButton label="龙洞校区" skin="png.flat.radio" x="209" layer="1" labelColors="0x333333" labelFont="Microsoft YaHei" labelSize="13" name="item2"/>
       <RadioButton label="东风路校区" skin="png.flat.radio" x="105" layer="1" labelColors="0x333333" labelFont="Microsoft YaHei" labelSize="13" name="item1"/>
     </RadioGroup>
-    <Button label="" skin="png.flat.btn_close" x="417" layer="1" var="btn_closeSetView"/>
-    <Button label="选择文件夹..." skin="png.flat.btn_cancel" x="153" y="169" layer="2" labelFont="Microsoft YaHei" labelColors="0x666666" labelSize="12" var="btn_browse" width="102" height="30"/>
-    <TextInput text="C:/" skin="png.flat.textinput" x="145" y="172" layer="3" width="220" height="26" autoSize="none" font="Microsoft YaHei" size="12" color="0x666666" margin=",2,," var="input_filesPath" visible="false" disabled="true"/>
-    <Button label="更改" skin="png.flat.btn_cancel" x="370" y="170" layer="3" width="44" height="30" var="btn_changeFilesPath" visible="false"/>
+    <Button label="" skin="png.flat.btn_close" x="417" layer="1" var="btn_closeSetView" buttonMode="true"/>
+    <Button label="选择文件夹..." skin="png.flat.btn_cancel" x="153" y="169" layer="2" labelFont="Microsoft YaHei" labelColors="0x666666" labelSize="12" var="btn_browse" width="102" height="30" buttonMode="true"/>
+    <TextInput text="C:/" skin="png.flat.textinput" x="145" y="172" layer="3" width="220" height="26" autoSize="none" font="Microsoft YaHei" size="12" color="0x666666" margin=",2,," var="input_filesPath" visible="false" disabled="true" selectable="true"/>
+    <Button label="更改" skin="png.flat.btn_cancel" x="370" y="170" layer="3" width="44" height="30" var="btn_changeFilesPath" visible="false" buttonMode="true"/>
   </Box>
 </Dialog>

@@ -60,9 +60,9 @@ package main.ui {
 		public var AboutVIew:AboutUI;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
-			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
-			  <Container width="900" height="20" left="12" top="12" alpha="0" x="12" y="12" var="block_remove">
-			    <Image url="png.flat.blank" width="900" height="24" x="0" y="0"/>
+			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
+			  <Container width="1025" height="92" left="12" top="12" alpha="0" x="12" y="12" var="block_remove" mouseEnabled="true" buttonMode="false">
+			    <Image url="png.flat.blank" width="1025" height="92" x="0" y="0"/>
 			  </Container>
 			  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" buttonMode="true" var="tab_isTown"/>
 			  <Label text="个人信息" x="214" y="146" font="Microsoft YaHei" size="18" color="0x333333"/>
@@ -74,15 +74,15 @@ package main.ui {
 			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
-			  <Button skin="png.flat.btn_contact" x="65" y="724" buttonMode="true"/>
-			  <Button skin="png.flat.btn_question" x="93" y="724" buttonMode="true" var="btn_quesent"/>
+			  <Button skin="png.flat.btn_contact" x="65" y="690" buttonMode="true"/>
+			  <Button skin="png.flat.btn_question" x="93" y="690" buttonMode="true" var="btn_quesent"/>
 			  <Container right="20" top="12" var="windows_btn">
 			    <Button skin="png.flat.btn_close" x="76" buttonMode="true" var="btn_close" toolTip="关闭"/>
-			    <Button skin="png.flat.btn_max" x="38" buttonMode="true" var="btn_max" toolTip="最大化" disabled="true"/>
+			    <Button skin="png.flat.btn_max" x="38" buttonMode="true" var="btn_max" toolTip="最大化" disabled="false"/>
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
-			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原" disabled="true"/>
+			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原" disabled="false"/>
 			  </Container>
-			  <Button skin="png.flat.btn_set" x="120" y="724" var="btn_set"/>
+			  <Button skin="png.flat.btn_set" x="120" y="690" var="btn_set"/>
 			  <Image url="png.flat.logo" x="33" y="36"/>
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
@@ -145,8 +145,8 @@ package main.ui {
 			      <Label text="冲洗版" x="154" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
 			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" var="tab_photoType" buttonMode="true"/>
 			      <Button skin="png.flat.btn_edit" x="268" y="83" var="btn_infoEdit" buttonMode="true"/>
-			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true"/>
-			      <Button skin="png.flat.btn_delete" x="268" y="151" var="btn_infoDelete" buttonMode="true"/>
+			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true" disabled="true"/>
+			      <Button skin="png.flat.btn_delete" x="268" y="150" var="btn_infoDelete" buttonMode="true" disabled="true"/>
 			      <Image x="34" y="405" width="246.6" height="185" var="photoView"/>
 			      <Container x="11" y="614" width="289" height="14" centerX="0">
 			        <Container centerX="0">
@@ -155,14 +155,14 @@ package main.ui {
 			      </Container>
 			    </Box>
 			  </Container>
-			  <Container var="block_resize" right="12" bottom="12" width="12" height="12" alpha="0">
+			  <Container var="block_resize" right="12" bottom="12" width="11" height="12" alpha="0" mouseEnabled="true" x="1025" y="744">
 			    <Image url="png.flat.blank" x="0" y="0" width="12" height="12"/>
 			  </Container>
 			  <Button skin="png.flat.btn_sort" x="433" y="210" buttonMode="true" disabled="true"/>
 			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect" disabled="true"/>
 			  <Image url="png.flat.sort_down" x="558" y="233" var="sort_down" visible="false"/>
 			  <Image url="png.flat.sort_up" x="558" y="226" width="8" height="4" var="sort_up" visible="false"/>
-			  <Image url="png.flat.whiteMask" x="12" y="12" width="1024" height="769" mouseEnabled="true" var="whiteMask" visible="false"/>
+			  <Image url="png.flat.whiteMask" x="12" y="12" width="1025" height="745" mouseEnabled="true" var="whiteMask" visible="false"/>
 			  <Progress x="295" y="305" var="dialog_progress" visible="false" runtime="main.ui.ProgressUI"/>
 			  <SetView x="321" y="256" var="setView" visible="false" runtime="main.ui.SetViewUI"/>
 			  <About x="287" y="244" var="AboutVIew" visible="false" runtime="main.ui.AboutUI"/>

@@ -93,17 +93,17 @@ package main.view
 			//第一次运行
 			firstRun();
 			//关于
-            btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
+			btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
 		}
 		
-		private function onAboutBtn(e:MouseEvent):void 
+		private function onAboutBtn(e:MouseEvent):void
 		{
 			AboutVIew.visible = true;
 			whiteMask.visible = true;
 			AboutVIew.btn_closeAboutView.addEventListener(MouseEvent.MOUSE_DOWN, onCloseAboutViewBtn);
 		}
 		
-		private function onCloseAboutViewBtn(e:MouseEvent):void 
+		private function onCloseAboutViewBtn(e:MouseEvent):void
 		{
 			AboutVIew.visible = false;
 			whiteMask.visible = false;
@@ -124,9 +124,11 @@ package main.view
 				setView.btn_next.addEventListener(MouseEvent.MOUSE_DOWN, onNextBtn);
 				setView.btn_saveSet.disabled = true;
 				setView.btn_closeSetView.disabled = true;
-			}else {
-			    setView.btn_saveSet.disabled = false;
-				setView.btn_closeSetView.disabled = false;	
+			}
+			else
+			{
+				setView.btn_saveSet.disabled = false;
+				setView.btn_closeSetView.disabled = false;
 			}
 		}
 		
@@ -162,19 +164,21 @@ package main.view
 			{
 				case 0: 
 					tab_isTown.visible = true;
-					
+					image_isTown.visible = true;
 					input_dor.labels = "东十二,东十三,西五,西六";
 					input_isTown.visible = true;
 					Label_newInfo.text = "姓名：<br>是否大学城校区：<br>宿舍：<br>联系电话：<br>邮箱：";
 					break;
 				case 1: 
+					
 					tab_isTown.visible = false;
 					image_isTown.visible = false;
 					input_dor.labels = "东,南,北,综南,综北";
 					input_isTown.visible = false;
 					Label_newInfo.text = "姓名：<br><br>宿舍：<br>联系电话：<br>邮箱：";
 					break;
-				case 2: 
+				case 2:
+					
 					tab_isTown.visible = false;
 					image_isTown.visible = false;
 					input_dor.labels = "A1,A2,A3,A4,A5,A6,B1,F,G1,G2,G3,G4,G5,G6";
@@ -305,6 +309,7 @@ package main.view
 			if (progressRateNum == 100)
 			{
 				dialog_progress.visible = false;
+				whiteMask.visible = false;
 				dialog_progress.removeEventListener(Event.ENTER_FRAME, progressEF);
 			}
 		}
@@ -349,15 +354,15 @@ package main.view
 					
 					//if (contents[index].exists)
 					//{
-						//
-						contents[index].copyTo(currentOutputFile, true);
+					//
+					contents[index].copyTo(currentOutputFile, true);
 						//
 						//sameFile = currentOutputFile.resolvePath("");
-					//}
-					//else
-					//{
+						//}
+						//else
+						//{
 						//sameFile.copyTo(currentOutputFile, true);
-					//}
+						//}
 				}
 			}
 		
@@ -440,13 +445,11 @@ package main.view
 			switch (index)
 			{
 				//电子版
-				case 0:
-					
+				case 0: 
 					getPhoto(infoData.userPhotoId, "电子版");
 					break;
 				//冲洗版
-				case 1:
-					
+				case 1: 
 					getPhoto(infoData.userPrintPhotoId, "冲洗版");
 					break;
 			}
@@ -641,7 +644,7 @@ package main.view
 					{
 						userIsFinish.frame = 0;
 						trace(index + "存在");
-					} 
+					}
 					else
 					{
 						userIsFinish.frame = 1;
@@ -725,6 +728,7 @@ package main.view
 			//InputText();
 			
 			editUser.userName = input_name.text;
+			trace(input_isTown.selectedIndex);
 			editUser.userIsTown = Number(input_isTown.selectedIndex);
 			editUser.userDormitory = input_dor.selectedLabel;
 			editUser.userDorNumber = Number(input_dorNum.text);
@@ -741,7 +745,10 @@ package main.view
 			{
 				drawer.visible = false;
 				_isDrawerIn = true;
-				scrollBarView.value = list.array.length+6;
+				if (list.array.length > 10)
+				{
+					scrollBarView.value = list.array.length + 6;
+				}
 			}
 			else
 			{
