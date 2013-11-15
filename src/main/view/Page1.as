@@ -52,12 +52,14 @@ package main.view
 		private var progressRateNum:int;
 		private var progressBarMaxWidth:int = 573;
 		private var selectedListItemArray:Array;
+		private var isFirstRun:Boolean = true;
+		private var isArrange:Boolean = false;
 		
 		public function Page1()
 		{
 			//初始化
+			outputFile = new File();
 			photoFile = new File();
-			photoFile.url = "file:///D:/新建文件夹/东区";
 			
 			database = new UserDatabase();
 			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
@@ -67,6 +69,8 @@ package main.view
 			btn_block.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			btn_new.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			block_blank.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
+			//toolBar按钮
+			btn_set.addEventListener(MouseEvent.MOUSE_DOWN, onSetBtnDown);
 			//drawer按钮
 			btn_infoEdit.addEventListener(MouseEvent.MOUSE_DOWN, infoEdit);
 			btn_infoDelete.addEventListener(MouseEvent.MOUSE_DOWN, infoDelete);
@@ -84,6 +88,99 @@ package main.view
 			isTown();
 			//选择项组
 			selectedListItem();
+			//第一次运行
+			firstRun();
+		}
+		
+		//第一次运行&设置
+		private function onSetBtnDown(e:MouseEvent):void
+		{
+			setViewInfo();
+		}
+		
+		private function firstRun():void
+		{
+			if (isFirstRun)
+			{
+				whiteMask.visible = true;
+				setView.visible = true;
+				setView.btn_next.addEventListener(MouseEvent.MOUSE_DOWN, onNextBtn);
+				
+			}
+		}
+		
+		private function onNextBtn(e:MouseEvent):void
+		{
+			isFirstRun = false;
+			setView.firstRunInfo.visible = false;
+			setView.setInfo.visible = true;
+			setViewInfo();
+			setView.btn_browse.addEventListener(MouseEvent.MOUSE_DOWN, onBrowseBtn);
+			setView.btn_saveSet.addEventListener(MouseEvent.MOUSE_DOWN, onSaveBtn);
+			setView.btn_closeSetView.addEventListener(MouseEvent.MOUSE_DOWN, onCloseSetBtn);
+			setView.btn_changeFilesPath.addEventListener(MouseEvent.MOUSE_DOWN, onBrowseBtn);
+		}
+		
+		private function setViewInfo():void
+		{
+			setView.visible = true;
+			whiteMask.visible = true;
+		
+		}
+		
+		private function onCloseSetBtn(e:MouseEvent):void
+		{
+			setView.visible = false;
+			whiteMask.visible = false;
+		}
+		
+		private function onSaveBtn(e:MouseEvent):void
+		{
+			//响应校区选择
+			switch (setView.districtSelect.selectedIndex)
+			{
+				case 0: 
+					tab_isTown.visible = true;
+					
+					input_dor.labels = "东十二,东十三,西五,西六";
+					input_isTown.visible = true;
+					Label_newInfo.text = "姓名：<br>是否大学城校区：<br>宿舍：<br>联系电话：<br>邮箱：";
+					break;
+				case 1: 
+					tab_isTown.visible = false;
+					image_isTown.visible = false;
+					input_dor.labels = "东,南,北,综南,综北";
+					input_isTown.visible = false;
+					Label_newInfo.text = "姓名：<br><br>宿舍：<br>联系电话：<br>邮箱：";
+					break;
+				case 2: 
+					tab_isTown.visible = false;
+					image_isTown.visible = false;
+					input_dor.labels = "A1,A2,A3,A4,A5,A6,B1,F,G1,G2,G3,G4,G5,G6";
+					input_isTown.visible = false;
+					Label_newInfo.text = "姓名：<br><br>宿舍：<br>联系电话：<br>邮箱：";
+					break;
+			}
+			
+			setView.visible = false;
+			whiteMask.visible = false;
+		
+		}
+		
+		private function onBrowseBtn(e:MouseEvent):void
+		{
+			outputFile.browseForDirectory("选择相片输出目录");
+			outputFile.addEventListener(Event.SELECT, directorySelected);
+		
+		}
+		
+		private function directorySelected(e:Event):void
+		{
+			outputFile = e.target as File;
+			setView.btn_browse.visible = false;
+			setView.input_filesPath.visible = true;
+			setView.input_filesPath.text = outputFile.nativePath;
+			setView.btn_changeFilesPath.visible = true;
 		}
 		
 		private function selectedListItem():void
@@ -136,6 +233,28 @@ package main.view
 		
 		//整理相片
 		private function arrange(e:MouseEvent):void
+		{
+			
+			if (isArrange)
+			{
+				arrangeFiles();
+			}
+			else
+			{
+				photoFile = new File();
+				photoFile.browseForDirectory("请选择相片所在目录");
+				photoFile.addEventListener(Event.SELECT, photoFileSelected);
+			}
+		}
+		
+		private function photoFileSelected(e:Event):void
+		{
+			photoFile = e.target as File;
+			isArrange = true;
+			arrangeFiles();
+		}
+		
+		private function arrangeFiles():void
 		{
 			photoFile.getDirectoryListingAsync();
 			photoFile.addEventListener(FileListEvent.DIRECTORY_LISTING, directoryListiningHandler);
@@ -200,19 +319,19 @@ package main.view
 				if (contents[index].name == photoFileName)
 				{
 					
-					outputFile = photoFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
+					outputFile = outputFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
 					
-					if (contents[index].exists)
-					{
-						
+					//if (contents[index].exists)
+					//{
+						//
 						contents[index].copyTo(outputFile, true);
-						
-						sameFile = outputFile.resolvePath("");
-					}
-					else
-					{
-						sameFile.copyTo(outputFile, true);
-					}
+						//
+						//sameFile = outputFile.resolvePath("");
+					//}
+					//else
+					//{
+						//sameFile.copyTo(outputFile, true);
+					//}
 				}
 			}
 		
@@ -321,7 +440,7 @@ package main.view
 			}
 			tab_circle.labels = photoNum.toString();
 			
-			outputFile = photoFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			outputFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
 			photoView.url = outputFile.url;
 		}
 		
@@ -346,7 +465,7 @@ package main.view
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
-			outputFile = photoFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
+			outputFile = outputFile.resolvePath(photoType + "/" + infoData.userId + "/" + photoFileName);
 			photoView.url = outputFile.url;
 		}
 		
@@ -401,15 +520,21 @@ package main.view
 			//滚轮时
 			list.addEventListener(MouseEvent.MOUSE_WHEEL, onRollWheelHander);
 			//双击编辑
-			list.addEventListener(MouseEvent.DOUBLE_CLICK, onListDoubleClick);
+			//render.doubleClickEnabled = true;
+			//render.addEventListener(MouseEvent.DOUBLE_CLICK,onListDoubleClick);
 		
 		}
 		
-		private function onListDoubleClick(e:MouseEvent):void
-		{
-			trace("双击");
-				editInfoChange(listSelectIndex);
-		}
+		//private function onListDoubleClick(e:MouseEvent):void
+		//{
+		//trace("双击");
+		//box_new.visible = true;
+		//box_info.visible = false;
+		//_isNewInfo = false;
+		//editInfoChange(listSelectIndex);
+		//label_title.text = "编辑信息";
+		//editInfoChange(listSelectIndex);
+		//}
 		
 		//滚动条
 		private function onRollWheelHander(e:MouseEvent):void
@@ -481,19 +606,21 @@ package main.view
 				userEmail.text = userData.userEmail;
 				
 				//判断是否匹配
-				var testFile:File = photoFile.resolvePath("电子版/" + Number(index + 1));
-				var testFile2:File = photoFile.resolvePath("冲洗版/" + Number(index + 1));
-				
-				if (testFile.exists && testFile2.exists)
+				if (isArrange)
 				{
-					userIsFinish.frame = 0;
-					trace(index + "存在");
+					var testFile:File = photoFile.resolvePath("电子版/" + Number(userData.userId));
+					var testFile2:File = photoFile.resolvePath("冲洗版/" + Number(userData.userId));
+					
+					if (testFile.exists && testFile2.exists)
+					{
+						userIsFinish.frame = 0;
+						trace(index + "存在");
+					}
+					else
+					{
+						userIsFinish.frame = 1;
+					}
 				}
-				else
-				{
-					userIsFinish.frame = 1;
-				}
-				
 					//判断是否选择
 				
 			}
@@ -569,7 +696,7 @@ package main.view
 		private function enterDown(e:MouseEvent):void
 		{
 			//代码录入测试数据（数字为添加数量）:按整理后新建并点击确认
-			InputText();
+			//InputText();
 			
 			editUser.userName = input_name.text;
 			editUser.userIsTown = Number(input_isTown.selectedIndex);
@@ -581,13 +708,13 @@ package main.view
 			editUser.userPrintPhotoId = input_printPhotoId.text;
 			
 			onActionHandler(DataActionEventKind.KIND_SAVE);
-			trace("提交编辑信息" + listSelectIndex);
+			trace("提交编辑信息" + input_isTown.selectedIndex);
 			
 			//是否为新建信息做出响应
 			if (label_title.text == "新建")
 			{
-				//drawer.visible = false;
-				//_isDrawerIn = true;
+				drawer.visible = false;
+				_isDrawerIn = true;
 			}
 			else
 			{

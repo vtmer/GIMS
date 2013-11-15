@@ -2,6 +2,7 @@
 package main.ui {
 	import morn.core.components.*;
 	import main.ui.ProgressUI;
+	import main.ui.SetViewUI;
 	public class Page1UI extends View {
 		public var bg:Image;
 		public var block_remove:Container;
@@ -16,6 +17,7 @@ package main.ui {
 		public var btn_max:Button;
 		public var btn_min:Button;
 		public var btn_restore:Button;
+		public var btn_set:Button;
 		public var list:List;
 		public var render:Box;
 		public var selectedCheckBox:CheckBox;
@@ -26,6 +28,7 @@ package main.ui {
 		public var block_blank:Image;
 		public var box_new:Box;
 		public var label_title:Label;
+		public var Label_newInfo:Label;
 		public var input_name:TextInput;
 		public var input_phone:TextInput;
 		public var input_dorNum:TextInput;
@@ -49,6 +52,9 @@ package main.ui {
 		public var btn_allSelect:CheckBox;
 		public var sort_down:Image;
 		public var sort_up:Image;
+		public var whiteMask:Image;
+		public var setView:SetViewUI;
+		public var image_isTown:Box;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg"/>
@@ -65,19 +71,16 @@ package main.ui {
 			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
-			  <Button skin="png.flat.btn_contact" x="76" y="724" buttonMode="true"/>
-			  <Button skin="png.flat.btn_question" x="104" y="724" buttonMode="true"/>
+			  <Button skin="png.flat.btn_contact" x="65" y="724" buttonMode="true"/>
+			  <Button skin="png.flat.btn_question" x="93" y="724" buttonMode="true"/>
 			  <Container right="20" top="12" var="windows_btn">
 			    <Button skin="png.flat.btn_close" x="76" buttonMode="true" var="btn_close" toolTip="关闭"/>
 			    <Button skin="png.flat.btn_max" x="38" buttonMode="true" var="btn_max" toolTip="最大化"/>
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
 			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原"/>
 			  </Container>
+			  <Button skin="png.flat.btn_set" x="120" y="724" var="btn_set"/>
 			  <Image url="png.flat.logo" x="33" y="36"/>
-			  <Image url="png.flat.icon5" x="214" y="48" mouseEnabled="false"/>
-			  <Image url="png.flat.text_home" x="248" y="42" mouseEnabled="false"/>
-			  <Image url="png.flat.text_other" x="418" y="42" mouseEnabled="false"/>
-			  <Image url="png.flat.icon6" x="379" y="48" mouseEnabled="false"/>
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
 			    <Image url="png.flat.icon1" x="20" mouseEnabled="false"/>
@@ -89,16 +92,16 @@ package main.ui {
 			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			  </Box>
-			  <List x="231" y="248" var="list" repeatY="10" repeatX="1" mouseChildren="true" mouseEnabled="true">
-			    <Box name="render" var="render" width="777" height="48" buttonMode="true" mouseChildren="true" mouseEnabled="false">
+			  <List x="231" y="248" var="list" repeatY="10" repeatX="1" mouseChildren="true">
+			    <Box name="render" var="render" width="777" height="48" buttonMode="true" mouseEnabled="true" mouseChildren="false">
 			      <Label x="106" y="0" width="100" height="48" align="left" color="0x666666" font="Microsoft YaHei" size="12" bold="false" isHtml="false" margin="13,14,," name="userName"/>
 			      <Label x="206" y="0" width="141" margin="13,14,," size="12" color="0x666666" font="Microsoft YaHei" align="left" name="userDor" height="49"/>
 			      <Label x="346" y="0" width="201" height="48" margin="13,14,," color="0x666666" align="left" font="Microsoft YaHei" size="12" name="userPhone"/>
-			      <Label x="544" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
-			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true" name="selectedCheck" var="selectedCheckBox" mouseEnabled="true"/>
+			      <Label x="543" width="231" height="48" size="12" margin="13,14,," font="Microsoft YaHei" color="0x666666" y="-2" name="userEmail"/>
+			      <CheckBox skin="png.flat.checkbox" y="18" buttonMode="true" name="selectedCheck" mouseEnabled="true" var="selectedCheckBox"/>
 			      <Label x="68" width="37" height="48" margin=",14,," color="0x666666" size="12" font="Microsoft YaHei" align="center" name="userId"/>
-			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="1" clipWidth="14" clipX="2" name="userIsFinish"/>
-			      <Clip url="png.flat.clip_selectBox" x="-13" y="0" width="789" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="false" mouseEnabled="false" buttonMode="true"/>
+			      <Clip url="png.flat.clip_condition" x="39" y="20" frame="1" clipWidth="14" clipX="2" name="userIsFinish" buttonMode="false"/>
+			      <Clip url="png.flat.clip_selectBox" x="26" y="0" width="750" height="48" name="selectBox" clipX="1" clipY="2" mouseChildren="false" mouseEnabled="false" buttonMode="true"/>
 			    </Box>
 			    <VScrollBar skin="png.flat.vscroll" x="771" width="6" height="481" name="scrollBar" var="scrollBarView" visible="false" alpha="0"/>
 			  </List>
@@ -111,14 +114,14 @@ package main.ui {
 			    <Image url="png.flat.blank" y="63" width="231" height="102" alpha="0" var="block_blank"/>
 			    <Box x="513" y="29" var="box_new">
 			      <Label text="新建" x="2" size="24" font="Microsoft YaHei" color="0x333333" var="label_title"/>
-			      <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="2" y="54" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333"/>
+			      <Label text="姓名：&lt;br>是否大学城校区：&lt;br>宿舍：&lt;br>联系电话：&lt;br>邮箱：" x="2" y="54" multiline="true" wordWrap="false" width="108" height="189" isHtml="true" leading="23" size="12" font="Microsoft YaHei" color="0x333333" var="Label_newInfo"/>
 			      <Label text="...................................................................................." y="250" color="0xc9cdcc"/>
 			      <Label text="相片编码：" x="2" y="284" color="0x333333" font="Microsoft YaHei" size="12"/>
 			      <TextInput skin="png.flat.textinput" x="44" y="50" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" text="请输入姓名" var="input_name"/>
 			      <TextInput text="请输入长号或者短号" skin="png.flat.textinput" x="67" y="170" width="214" height="28" margin="5,5,," color="0xc9cdcc" font="Microsoft YaHei" size="12" selectable="true" align="left" var="input_phone"/>
 			      <TextInput skin="png.flat.textinput" x="142" y="130" width="139" height="28" color="0xc9cdcc" margin="5,5,," font="Microsoft YaHei" size="12" selectable="true" align="left" text="宿舍号" var="input_dorNum"/>
 			      <TextInput text="请输入Email" skin="png.flat.textinput" x="44" y="210" height="28" width="237" align="left" margin="5,5,," color="0xc9cdcc" size="12" font="Microsoft YaHei" selectable="true" var="input_email"/>
-			      <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="44" y="130" buttonMode="true" labelColors="0x333333" var="input_dor"/>
+			      <ComboBox labels="东十二,东十三,西五,西六" skin="png.flat.combobox" x="44" y="130" buttonMode="true" labelColors="0x333333" var="input_dor" visibleNum="14"/>
 			      <TextInput text="冲洗版相片编码" skin="png.flat.textinput" x="64" y="327" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_printPhotoId"/>
 			      <TextInput text="电子版相片编码" skin="png.flat.textinput" x="64" y="280" width="217" height="28" margin="5,5,," color="0xc9cdcc" selectable="true" var="input_photoId"/>
 			      <Button label="确认" skin="png.flat.btn_enter" x="200" y="384" labelColors="0xffffff" labelFont="Microsoft YaHei" labelSize="14" buttonMode="true" var="btn_enter"/>
@@ -151,10 +154,19 @@ package main.ui {
 			  <CheckBox skin="png.flat.checkbox" x="230" y="222" buttonMode="true" var="btn_allSelect"/>
 			  <Image url="png.flat.sort_down" x="558" y="233" var="sort_down" visible="false"/>
 			  <Image url="png.flat.sort_up" x="558" y="226" width="8" height="4" var="sort_up" visible="false"/>
+			  <Image url="png.flat.whiteMask" x="12" y="12" width="1024" height="769" mouseEnabled="true" var="whiteMask" visible="false"/>
+			  <SetView x="321" y="256" var="setView" visible="false" runtime="main.ui.SetViewUI"/>
+			  <Box x="214" y="42" var="image_isTown">
+			    <Image url="png.flat.icon5" y="6" mouseEnabled="false"/>
+			    <Image url="png.flat.text_home" x="34" mouseEnabled="false"/>
+			    <Image url="png.flat.text_other" x="204" mouseEnabled="false"/>
+			    <Image url="png.flat.icon6" x="165" y="6" mouseEnabled="false"/>
+			  </Box>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
 			viewClassMap["main.ui.ProgressUI"] = ProgressUI;
+			viewClassMap["main.ui.SetViewUI"] = SetViewUI;
 			createView(uiXML);
 		}
 	}
