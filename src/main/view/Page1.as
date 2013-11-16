@@ -1,5 +1,6 @@
 package main.view
 {
+	import com.as3xls.xls.Sheet;
 	import flash.display.NativeWindowResize;
 	import flash.events.Event;
 	import flash.events.FileListEvent;
@@ -11,6 +12,7 @@ package main.view
 	import flash.text.ime.CompositionAttributeRange;
 	import flash.utils.Timer;
 	import morn.core.components.Box;
+	import morn.core.components.List;
 	
 	import air.update.logging.Level;
 	
@@ -98,10 +100,105 @@ package main.view
 			firstRun();
 			//关于
 			btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
+			//导入导出
+			btn_io.addEventListener(MouseEvent.MOUSE_DOWN, onIOBtn);
+		
+		}
+		
+		private function onIOBtn(e:MouseEvent):void
+		{
+			IOView.visible = true;
+			whiteMask.visible = true;
+			IOView.btn_input.addEventListener(MouseEvent.MOUSE_DOWN, onInputBtn);
+			IOView.btn_output.addEventListener(MouseEvent.MOUSE_DOWN, onOutputBtn);
+			IOView.btn_closeIOView.addEventListener(MouseEvent.MOUSE_DOWN, onCloseIOViewBtn);
+		}
+		
+		private function onCloseIOViewBtn(e:MouseEvent):void
+		{
+			IOView.visible = false;
+			whiteMask.visible = false;
+		}
+		
+		private function onOutputBtn(e:MouseEvent):void
+		{
 			//导出excel
 			//exportToExcelByDb();
-			//序号重排列
+			//导出数据库
+			ouputDb();
+		}
 		
+		private function ouputDb():void
+		{
+			var dbFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
+			var desklop:File = File.desktopDirectory.resolvePath("userInfo.db");
+			dbFile.copyTo(desklop, true);
+		}
+		
+		//private function exportToExcelByList(list:List, xlsName:String = "导出表格"):void
+		//{
+		//var _sheet:Sheet = new Sheet();
+		//var _fields:Array = ["No.", "姓名", "是否本校", "宿舍", "电话", "邮箱", "电子版相片ID", "冲洗版相片ID"];
+		//var rowCount:int = list.array.length;
+		//var columnCount:int = 8;
+		//_sheet.resize(rowCount + 1, columnCount);
+		//
+		//循环所有数据r+1行c列单元格
+		//for (var r:int = 0; r < rowCount; r++)
+		//{
+		//var record:Object = iList.getItemAt(r);
+		//把数据写入某行某列
+		//for (var c:uint = 0; c < _fields.length; c++)
+		//{
+		//switch(c) {
+		//case 1:	
+		//_sheet.setCell(r + 1, c, photoIdArray[r]);
+		//break;
+		//case 2:
+		//_sheet.setCell(r + 1, c, list.array[r].userName);
+		//break;
+		//case 3:
+		//var isTownText:String = "是";
+		//if (list.array[r].userIsTown == 1) {
+		//isTownText = "否";
+		//}				
+		//_sheet.setCell(r + 1, c, isTownText);				
+		//break;
+		//
+		//case 4:
+		//if (userData.userDormitory == null)
+		//{
+		//_sheet.setCell(r + 1, c, "无");
+		//}
+		//else
+		//{
+		//_sheet.setCell(r + 1, c, list.array[r].userDormitory + "-" + list.array[r].userDorNumber.toString());
+		//}
+		//break;
+		//
+		//case 5:
+		//_sheet.setCell(r + 1, c, list.array[r].userPhone);
+		//break;
+		//case 6:
+		//_sheet.setCell(r + 1, c, list.array[r].userEmail);
+		//break;
+		//case 7:
+		//_sheet.setCell(r + 1, c, list.array[r].photoId);
+		//break;
+		//case 8:
+		//_sheet.setCell(r + 1, c, list.array[r].printPhotoId);
+		//break;
+		//
+		//
+		//
+		//}
+		//}
+		
+		private function onInputBtn(e:MouseEvent):void
+		{
+			//var dbFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
+			//var desklop:File = File.desktopDirectory.resolvePath("userInfo.db");
+			//desklop.copyTo(dbFile, true);
 		}
 		
 		private function lastArrange():void
@@ -399,13 +496,13 @@ package main.view
 				{
 					if (isAllSelected)
 					{
-						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j]);
-						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j]);
+						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j],list.array[j].userName);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j],list.array[j].userName);
 					}
 					else
 					{
-						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
-						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
+						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId,list.array[j].userName);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId,list.array[j].userName);
 					}
 					
 				}
@@ -414,7 +511,7 @@ package main.view
 		}
 		
 		//分割匹配
-		private function adaptation(photoId:String, photoType:String, index:int, userId:String):void
+		private function adaptation(photoId:String, photoType:String, index:int, userId:String,userName:String):void
 		{
 			
 			photoIdArray = photoId.split(",");
@@ -425,7 +522,7 @@ package main.view
 				if (contents[index].name == photoFileName)
 				{
 					
-					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
+					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId +" "+ userName + "/" + photoFileName);
 					
 					//if (contents[index].exists)
 					//{
@@ -536,7 +633,7 @@ package main.view
 			}
 			tab_circle.labels = photoNum.toString();
 			
-			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" +editUser.userName+ " "+editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		
@@ -561,7 +658,7 @@ package main.view
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
-			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userName+ " "+editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		

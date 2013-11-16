@@ -1,18 +1,18 @@
-<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="22,1,0,0,TipsView;21,0,0,1,about;19,0,0,1,setView;16,0,0,1,progress;20,0,0,0,whiteMask;18,1,0,1,image2;17,1,0,0,button2;12,1,0,0,control;11,1,0,0,drawer;15,1,0,1,mask;14,1,0,0,list;3,1,0,1,image;1,1,0,0,button;6,1,0,1,search;5,1,0,1,label;4,1,0,0,navigation;13,1,0,0,remove;2,1,0,0,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="23,0,11,0,IOView;22,0,11,1,TipsView;21,0,11,1,about;19,0,11,1,setView;16,0,11,1,progress;20,0,11,0,whiteMask;18,1,11,1,image2;17,1,11,0,button2;12,1,11,0,control;11,0,11,0,drawer;15,1,11,1,mask;14,1,11,0,list;3,1,11,1,image;1,1,11,0,button;6,1,11,1,search;5,1,11,1,label;4,1,11,0,navigation;13,1,11,0,remove;2,1,11,0,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
   <Container layers="1,1,0" layer="13" width="1025" height="92" left="12" top="12" alpha="0" x="12" y="12" var="block_remove" mouseEnabled="true" buttonMode="false">
     <Image url="png.flat.blank" layer="1" width="1025" height="92" x="0" y="0"/>
   </Container>
-  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4" buttonMode="true" var="tab_isTown"/>
+  <Tab labels="," skin="png.flat.tab_navigation" x="186" y="12" layer="4" buttonMode="true" var="tab_isTown" layers="1,1,0,0,第 1 层"/>
   <Label text="个人信息" x="214" y="146" layer="5" font="Microsoft YaHei" size="18" color="0x333333"/>
   <Image url="png.flat.search_bar" x="415" y="146" layer="6"/>
   <Image url="png.flat.search" x="418.3" y="150" layer="6"/>
   <Image url="png.flat.search_close" x="742" y="157" layer="6"/>
   <TextInput x="446" y="149" layer="6" width="282" height="22" align="left" font="Microsoft YaHei" size="12" var="input_search"/>
   <Button skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
-  <Button skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
   <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
-  <Button skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true" disabled="false"/>
   <Button skin="png.flat.btn_contact" x="65" y="690" layer="1" buttonMode="true"/>
   <Button skin="png.flat.btn_question" x="93" y="690" layer="1" buttonMode="true" var="btn_quesent"/>
   <Container layers="1,1,0" layer="1" right="20" top="12" var="windows_btn">
@@ -26,13 +26,13 @@
   <Image url="png.flat.table" x="217" y="209" layer="3"/>
   <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
     <Image url="png.flat.icon1" x="20" layer="1" mouseEnabled="false"/>
-    <Image url="png.flat.icon2" x="18" y="104" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon4" x="18" y="104" layer="1" mouseEnabled="false"/>
     <Image url="png.flat.icon3" x="19" y="216" layer="1" mouseEnabled="false"/>
-    <Image url="png.flat.icon4" x="18" y="324" layer="1" mouseEnabled="false"/>
+    <Image url="png.flat.icon2" x="18" y="324" layer="1" mouseEnabled="false"/>
     <Label text="新建" x="17" y="28" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
-    <Label text="整理相片" x="3" y="136" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="整理相片" x="3" y="352" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
     <Label text="一键发送" x="3" y="244" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
-    <Label text="导入/导出" y="352" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
+    <Label text="导入/导出" y="136" layer="1" font="Microsoft YaHei" color="0xffffff" size="14"/>
   </Box>
   <Box layers="1,1,0" layer="3" x="214" y="42" var="image_isTown" mouseEnabled="false">
     <Image url="png.flat.icon5" y="6" layer="1" mouseEnabled="false"/>
@@ -106,4 +106,5 @@
   <UIView source="SetView.xml" x="321" y="256" layer="19" var="setView" visible="false"/>
   <UIView source="About.xml" x="287" y="244" layer="21" var="AboutVIew" visible="false"/>
   <UIView source="TipsView.xml" x="293" y="234" layer="22" visible="false" var="TipsView"/>
+  <UIView source="IOView.xml" x="304" y="258" layer="23" var="IOView" visible="false"/>
 </View>

@@ -2,6 +2,7 @@
 package main.ui {
 	import morn.core.components.*;
 	import main.ui.AboutUI;
+	import main.ui.IOViewUI;
 	import main.ui.ProgressUI;
 	import main.ui.SetViewUI;
 	import main.ui.TipsViewUI;
@@ -11,9 +12,9 @@ package main.ui {
 		public var tab_isTown:Tab;
 		public var input_search:TextInput;
 		public var btn_new:Button;
-		public var btn_arrange:Button;
-		public var btn_send:Button;
 		public var btn_io:Button;
+		public var btn_send:Button;
+		public var btn_arrange:Button;
 		public var btn_quesent:Button;
 		public var windows_btn:Container;
 		public var btn_close:Button;
@@ -60,6 +61,7 @@ package main.ui {
 		public var setView:SetViewUI;
 		public var AboutVIew:AboutUI;
 		public var TipsView:TipsViewUI;
+		public var IOView:IOViewUI;
 		protected var uiXML:XML =
 			<View sceneAlpha="0" visible="true" disabled="false">
 			  <Image url="png.flat.bg" x="0" y="0" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
@@ -73,9 +75,9 @@ package main.ui {
 			  <Image url="png.flat.search_close" x="742" y="157"/>
 			  <TextInput x="446" y="149" width="282" height="22" align="left" font="Microsoft YaHei" size="12" var="input_search"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="104" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
-			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true"/>
+			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
-			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true" disabled="true"/>
+			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true" disabled="false"/>
 			  <Button skin="png.flat.btn_contact" x="65" y="690" buttonMode="true"/>
 			  <Button skin="png.flat.btn_question" x="93" y="690" buttonMode="true" var="btn_quesent"/>
 			  <Container right="20" top="12" var="windows_btn">
@@ -89,13 +91,13 @@ package main.ui {
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
 			    <Image url="png.flat.icon1" x="20" mouseEnabled="false"/>
-			    <Image url="png.flat.icon2" x="18" y="104" mouseEnabled="false"/>
+			    <Image url="png.flat.icon4" x="18" y="104" mouseEnabled="false"/>
 			    <Image url="png.flat.icon3" x="19" y="216" mouseEnabled="false"/>
-			    <Image url="png.flat.icon4" x="18" y="324" mouseEnabled="false"/>
+			    <Image url="png.flat.icon2" x="18" y="324" mouseEnabled="false"/>
 			    <Label text="新建" x="17" y="28" font="Microsoft YaHei" color="0xffffff" size="14"/>
-			    <Label text="整理相片" x="3" y="136" font="Microsoft YaHei" color="0xffffff" size="14"/>
+			    <Label text="整理相片" x="3" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			    <Label text="一键发送" x="3" y="244" font="Microsoft YaHei" color="0xffffff" size="14"/>
-			    <Label text="导入/导出" y="352" font="Microsoft YaHei" color="0xffffff" size="14"/>
+			    <Label text="导入/导出" y="136" font="Microsoft YaHei" color="0xffffff" size="14"/>
 			  </Box>
 			  <Box x="214" y="42" var="image_isTown" mouseEnabled="false">
 			    <Image url="png.flat.icon5" y="6" mouseEnabled="false"/>
@@ -169,10 +171,12 @@ package main.ui {
 			  <SetView x="321" y="256" var="setView" visible="false" runtime="main.ui.SetViewUI"/>
 			  <About x="287" y="244" var="AboutVIew" visible="false" runtime="main.ui.AboutUI"/>
 			  <TipsView x="293" y="234" visible="false" var="TipsView" runtime="main.ui.TipsViewUI"/>
+			  <IOView x="304" y="258" var="IOView" visible="false" runtime="main.ui.IOViewUI"/>
 			</View>;
 		public function Page1UI(){}
 		override protected function createChildren():void {
 			viewClassMap["main.ui.AboutUI"] = AboutUI;
+			viewClassMap["main.ui.IOViewUI"] = IOViewUI;
 			viewClassMap["main.ui.ProgressUI"] = ProgressUI;
 			viewClassMap["main.ui.SetViewUI"] = SetViewUI;
 			viewClassMap["main.ui.TipsViewUI"] = TipsViewUI;
