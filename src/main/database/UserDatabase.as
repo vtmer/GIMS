@@ -26,7 +26,9 @@ package main.database
 	{
 		protected var dbFile:File=File.applicationStorageDirectory.resolvePath("userInfo.db"); 
 		//protected var dbFile:File=File.desktopDirectory.resolvePath("userInfo.db"); 
+		protected var inputDbFile:File;
 		protected var conn:SQLConnection;
+		protected var inputConn:SQLConnection;
 		protected var resultSql:Responder;
 		protected var insertSql:SQLStatement = new SQLStatement();
 		protected var updateSql:SQLStatement = new SQLStatement();
@@ -35,10 +37,23 @@ package main.database
 		protected var tableSql:SQLStatement = new SQLStatement();
 		
 		private var isTown:String="";
-
-		public function setIsTownIndex(Where:String):void
+         
+		//设置导入的数据库文件
+		public function setInputDbFile(pathFile:File):void {
+			inputDbFile = pathFile;
+			attachDb();
+		}
+		
+		//导入数据库
+		protected function attachDb():void {
+			inputConn.open(inputDbFile, SQLMode.READ);
+			conn.attach("userInfo.userinfo", inputDbFile);
+			
+			trace("添加数据库");
+		}
+		public function setIsTownIndex(where:String):void
 		{
-              isTown=Where;
+              isTown=where;
 			  selectText = "SELECT " + 
 				  "user_id as userId, " + 
 				  "user_name as userName, " + 

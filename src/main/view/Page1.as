@@ -12,6 +12,7 @@ package main.view
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.net.FileFilter;
 	import flash.net.FileReference;
 	import flash.text.ime.CompositionAttributeRange;
 	import flash.utils.ByteArray;
@@ -46,6 +47,7 @@ package main.view
 		private var editUser:UserInfo;
 		private var listSelectIndex:int;
 		private var database:UserDatabase;
+		private var inputDatabase:UserDatabase;
 		private var userData:UserInfo;
 		private var infoData:UserInfo;
 		private var photoFile:File;
@@ -65,7 +67,8 @@ package main.view
 		private var photoViewFile:File;
 		private var currentOutputFile:File;
 		private var userIdArray:Array = new Array();
-		private var versonLabel:String="0.6.3";
+		private var versonLabel:String = "0.6";
+		private var dbFile:File;
 		
 		public function Page1()
 		{
@@ -115,20 +118,15 @@ package main.view
 		
 		//private function setVerson():void
 		//{
-			//var file:File = File.applicationDirectory.resolvePath("META-INF/AIR/application.xml");
-			//
-			//var fileStream:FileStream = new FileStream();
-			//fileStream.addEventListener(Event.COMPLETE, processXMLData);
-			//fileStream.openAsync(file, FileMode.READ);
-			//var prefsXML:XML;
-			//
-			//function processXMLData(event:Event):void
-			//{
-				//prefsXML = XML(fileStream.readUTFBytes(fileStream.bytesAvailable));
-				//fileStream.close();
-				//versonLabel = prefsXML[versonLabel];
-				//
-			//}
+		//var prefsXML:XML;
+		//var file:File = File.applicationDirectory.resolvePath("application.xml");
+		//
+		//var fileStream:FileStream = new FileStream();
+		//fileStream.open(file, FileMode.READ);
+		//prefsXML = XML(fileStream.readUTFBytes(fileStream.bytesAvailable));
+		//trace(prefsXML);
+		//trace(prefsXML.id[0]);
+		//fileStream.close();
 		//}
 		
 		private function onIOBtn(e:MouseEvent):void
@@ -164,68 +162,129 @@ package main.view
 		private function exportToExcelByList(list:List, xlsName:String = "导出表格")
 		{
 			var _sheet:Sheet = new Sheet();
-			var _fields:Array = ["No.", "姓名", "是否本校", "宿舍", "电话", "邮箱", "电子版相片ID", "冲洗版相片ID"];
+			
 			var rowCount:int = list.array.length;
 			var columnCount:int = 8;
 			_sheet.resize(rowCount + 1, columnCount);
 			
-			//循环所有列添加表头项
-			for (var i:uint = 0; i < _fields.length; i++)
+			switch (setView.districtSelect.selectedIndex)
 			{
-				_sheet.setCell(0, i, _fields[i]); //设置单元格 参数:1、行号；2、列号；3、单元格的值
-				
-			}
-			
-			//循环所有数据,r+1行c列单元格
-			for (var r:int = 0; r < rowCount; r++)
-			{
-				
-				//把数据写入某行某列
-				for (var c:uint = 0; c < _fields.length; c++)
-				{
-					switch (c)
+				case 0: 
+					var _fields:Array = ["No.", "姓名", "是否本校", "宿舍", "电话", "邮箱", "电子版相片ID", "冲洗版相片ID"];
+					//循环所有列添加表头项
+					for (var i:uint = 0; i < _fields.length; i++)
 					{
-						case 0: 
-							_sheet.setCell(r + 1, c, userIdArray[r]);
-							break;
-						case 1: 
-							_sheet.setCell(r + 1, c, list.array[r].userName);
-							break;
-						case 2: 
-							var isTownText:String = "是";
-							if (list.array[r].userIsTown == 1)
-							{
-								isTownText = "否";
-							}
-							_sheet.setCell(r + 1, c, isTownText);
-							break;
+						_sheet.setCell(0, i, _fields[i]); //设置单元格 参数:1、行号；2、列号；3、单元格的值
 						
-						case 3: 
-							if (userData.userDormitory == null)
-							{
-								_sheet.setCell(r + 1, c, "无");
-							}
-							else
-							{
-								_sheet.setCell(r + 1, c, list.array[r].userDormitory + "-" + list.array[r].userDorNumber.toString());
-							}
-							break;
-						
-						case 4: 
-							_sheet.setCell(r + 1, c, list.array[r].userPhone);
-							break;
-						case 5: 
-							_sheet.setCell(r + 1, c, list.array[r].userEmail);
-							break;
-						case 6: 
-							_sheet.setCell(r + 1, c, list.array[r].userPhotoId);
-							break;
-						case 7: 
-							_sheet.setCell(r + 1, c, list.array[r].userPrintPhotoId);
-							break;
-					
 					}
-				}
+					
+					//循环所有数据,r+1行c列单元格
+					for (var r:int = 0; r < rowCount; r++)
+					{
+						
+						//把数据写入某行某列
+						for (var c:uint = 0; c < _fields.length; c++)
+						{
+							switch (c)
+							{
+								case 0: 
+									_sheet.setCell(r + 1, c, userIdArray[r]);
+									break;
+								case 1: 
+									_sheet.setCell(r + 1, c, list.array[r].userName);
+									break;
+								case 2: 
+									var isTownText:String = "是";
+									if (list.array[r].userIsTown == 1)
+									{
+										isTownText = "否";
+									}
+									_sheet.setCell(r + 1, c, isTownText);
+									break;
+								
+								case 3: 
+									if (userData.userDormitory == null)
+									{
+										_sheet.setCell(r + 1, c, "无");
+									}
+									else
+									{
+										_sheet.setCell(r + 1, c, list.array[r].userDormitory + "-" + list.array[r].userDorNumber.toString());
+									}
+									break;
+								
+								case 4: 
+									_sheet.setCell(r + 1, c, list.array[r].userPhone);
+									break;
+								case 5: 
+									_sheet.setCell(r + 1, c, list.array[r].userEmail);
+									break;
+								case 6: 
+									_sheet.setCell(r + 1, c, list.array[r].userPhotoId);
+									break;
+								case 7: 
+									_sheet.setCell(r + 1, c, list.array[r].userPrintPhotoId);
+									break;
+							
+							}
+						}
+					}
+					break;
+				case 1: 
+				case 2: 
+					var _fields:Array = ["No.", "姓名", "宿舍", "电话", "邮箱", "电子版相片ID", "冲洗版相片ID"];
+					//循环所有列添加表头项
+					for (var i:uint = 0; i < _fields.length; i++)
+					{
+						_sheet.setCell(0, i, _fields[i]); //设置单元格 参数:1、行号；2、列号；3、单元格的值
+						
+					}
+					
+					//循环所有数据,r+1行c列单元格
+					for (var r:int = 0; r < rowCount; r++)
+					{
+						
+						//把数据写入某行某列
+						for (var c:uint = 0; c < _fields.length; c++)
+						{
+							switch (c)
+							{
+								case 0: 
+									_sheet.setCell(r + 1, c, userIdArray[r]);
+									break;
+								case 1: 
+									_sheet.setCell(r + 1, c, list.array[r].userName);
+									break;
+								
+								case 2: 
+									if (userData.userDormitory == null)
+									{
+										_sheet.setCell(r + 1, c, "无");
+									}
+									else
+									{
+										_sheet.setCell(r + 1, c, list.array[r].userDormitory + "-" + list.array[r].userDorNumber.toString());
+									}
+									break;
+								
+								case 3: 
+									_sheet.setCell(r + 1, c, list.array[r].userPhone);
+									break;
+								case 4: 
+									_sheet.setCell(r + 1, c, list.array[r].userEmail);
+									break;
+								case 5: 
+									_sheet.setCell(r + 1, c, list.array[r].userPhotoId);
+									break;
+								case 6: 
+									_sheet.setCell(r + 1, c, list.array[r].userPrintPhotoId);
+									break;
+							
+							}
+						}
+					}
+					break;
+			
 			}
 			
 			var xls:ExcelFile = new ExcelFile();
@@ -239,9 +298,22 @@ package main.view
 		
 		private function onInputBtn(e:MouseEvent):void
 		{
-			//var dbFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
+			var dbFilter:FileFilter = new FileFilter("Database", "*.db");
+			
+			dbFile = new File();
+			dbFile.browseForOpen("选择要导入的数据库文件", [dbFilter]);
+			dbFile.addEventListener(Event.SELECT, selectedDbFile);
+		
 			//var desklop:File = File.desktopDirectory.resolvePath("userInfo.db");
 			//desklop.copyTo(dbFile, true);
+		}
+		
+		private function selectedDbFile(e:Event):void
+		{
+			database.setInputDbFile(dbFile);
+			IOView.visible = false;
+			whiteMask.visible = false;
+		
 		}
 		
 		private function lastArrange():void
