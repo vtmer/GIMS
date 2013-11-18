@@ -68,7 +68,7 @@ package main.view
 		private var currentOutputFile:File;
 		private var userIdArray:Array = new Array();
 		private var versonLabel:String = "0.6";
-		private var dbFile:File;
+		private var xlsFile:File;
 		
 		public function Page1()
 		{
@@ -154,9 +154,9 @@ package main.view
 		
 		private function ouputDb():void
 		{
-			var dbFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
+			var xlsFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
 			var outputDbFile:File = outputFile.resolvePath("数据库文件/userInfo.db");
-			dbFile.copyTo(outputDbFile, true);
+			xlsFile.copyTo(outputDbFile, true);
 		}
 		
 		private function exportToExcelByList(list:List, xlsName:String = "导出表格")
@@ -298,21 +298,35 @@ package main.view
 		
 		private function onInputBtn(e:MouseEvent):void
 		{
-			var dbFilter:FileFilter = new FileFilter("Database", "*.db");
+			var xlsFilter:FileFilter = new FileFilter("导出表格", "*.xls");
 			
-			dbFile = new File();
-			dbFile.browseForOpen("选择要导入的数据库文件", [dbFilter]);
-			dbFile.addEventListener(Event.SELECT, selectedDbFile);
+			xlsFile = new File();
+			xlsFile.browseForOpen("选择要导入的表格文件", [xlsFilter]);
+			xlsFile.addEventListener(Event.SELECT, selectedDbFile);
 		
-			//var desklop:File = File.desktopDirectory.resolvePath("userInfo.db");
-			//desklop.copyTo(dbFile, true);
 		}
 		
 		private function selectedDbFile(e:Event):void
 		{
-			database.setInputDbFile(dbFile);
+			//读取xls文件
+			var stream:FileStream = new FileStream();
+			stream.open(xlsFile, FileMode.READ);
+			var ba:ByteArray = new ByteArray();
+			stream.readBytes(ba);
+			stream.close();
+			
+			var xls:ExcelFile = new ExcelFile();
+			xls.loadFromByteArray(ba);
+			var sheet:Sheet = xls.sheets[0];
+			
 			IOView.visible = false;
 			whiteMask.visible = false;
+			//由表格插入数据
+			insertByXls(sheet);
+		}
+		
+		private function insertByXls(sheet:Sheet):void
+		{
 		
 		}
 		
