@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/3.8">
   <id>com.vtmer.gims</id>
-  <versionNumber>0.2</versionNumber>
+  <versionNumber>0.6.3</versionNumber>
   <filename>gims</filename>
   <description>广东工业大学女生节团委数字中心活动“美丽瞬间”的照片管理系统</description>
   <name>GIMS</name>
@@ -33,6 +33,6 @@
 	More options:
 	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
 	-->
-  <versionLabel>alpha</versionLabel>
+  <versionLabel>0.6.3</versionLabel>
   <supportedLanguages>zh</supportedLanguages>
 </application>

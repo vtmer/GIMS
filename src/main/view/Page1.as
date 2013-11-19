@@ -69,6 +69,9 @@ package main.view
 		private var userIdArray:Array = new Array();
 		private var versonLabel:String = "0.6";
 		private var xlsFile:File;
+		private var currentRepeat:uint;
+		private var sheet:Sheet;
+		private var inputXls:ExcelFile;
 		
 		public function Page1()
 		{
@@ -301,13 +304,15 @@ package main.view
 			var xlsFilter:FileFilter = new FileFilter("导出表格", "*.xls");
 			
 			xlsFile = new File();
+			
 			xlsFile.browseForOpen("选择要导入的表格文件", [xlsFilter]);
-			xlsFile.addEventListener(Event.SELECT, selectedDbFile);
+			xlsFile.addEventListener(Event.SELECT, fileSelected);
 		
 		}
 		
-		private function selectedDbFile(e:Event):void
+		private function fileSelected(e:Event):void
 		{
+			trace("已选择文件");
 			//读取xls文件
 			var stream:FileStream = new FileStream();
 			stream.open(xlsFile, FileMode.READ);
@@ -315,19 +320,57 @@ package main.view
 			stream.readBytes(ba);
 			stream.close();
 			
-			var xls:ExcelFile = new ExcelFile();
-			xls.loadFromByteArray(ba);
-			var sheet:Sheet = xls.sheets[0];
+			inputXls = new ExcelFile();
+			
+			inputXls.loadFromByteArray(ba);
+			sheet = inputXls.sheets[0];
 			
 			IOView.visible = false;
 			whiteMask.visible = false;
-			//由表格插入数据
-			insertByXls(sheet);
+			
+			//延时调用
+			var repeatCount:uint = sheet.rows - 1;
+			var timer:Timer = new Timer(1000, repeatCount);
+			timer.addEventListener(TimerEvent.TIMER, repeatTimerHandler);
+			timer.start();
+			currentRepeat = 1;
+		
 		}
 		
+		private function repeatTimerHandler(e:TimerEvent):void
+		{
+			
+			insertByXls(sheet);
+		
+		}
+		
+		//由表格插入数据
 		private function insertByXls(sheet:Sheet):void
 		{
-		
+			currentRepeat++;
+			editUser.userName = String(sheet.getCell(currentRepeat, 2));
+			if (String(sheet.getCell(currentRepeat, 3)) == "是")
+				editUser.userIsTown = 0;
+			else
+				editUser.userIsTown = 1;
+			if (String(sheet.getCell(currentRepeat, 4)) != "无")
+			{
+				var stringArray:Array;
+				stringArray = String(sheet.getCell(currentRepeat, 4)).split("-");
+				editUser.userDormitory = stringArray[0];
+				editUser.userDorNumber = Number(stringArray[1]);
+			}
+			else
+			{
+				editUser.userDormitory = null;
+				editUser.userDorNumber = 0;
+			}
+			editUser.userPhone = Number(sheet.getCell(currentRepeat, 5));
+			editUser.userEmail = String(sheet.getCell(currentRepeat, 6));
+			editUser.userPhotoId = String(sheet.getCell(currentRepeat, 7));
+			editUser.userPrintPhotoId = String(sheet.getCell(currentRepeat, 8));
+			
+			onActionHandler(DataActionEventKind.KIND_SAVE);
 		}
 		
 		private function lastArrange():void
@@ -343,6 +386,7 @@ package main.view
 			}
 		}
 		
+		//重排序
 		private function sortAgain():void
 		{
 			for (var i:int = 0; i < list.array.length; i++)
