@@ -15,7 +15,7 @@ package main.ui {
 			<Dialog x="0" y="0">
 			  <Image url="png.flat.setDialog" x="0" y="0"/>
 			  <Box x="36" y="51" var="firstRunInfo" visible="true">
-			    <Button label="NEXT" skin="png.flat.btn_enter" x="332" y="218" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_next"/>
+			    <Button label="NEXT" skin="png.flat.btn_enter" x="332" y="218" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" var="btn_next" buttonMode="true"/>
 			    <Label text="欢迎使用GIMS" size="26" font="Microsoft YaHei" color="0x222222" x="12" selectable="true"/>
 			    <Label x="15" y="61" wordWrap="true" width="399" height="71" font="Microsoft YaHei" size="14" text="       GIMS是针对校团委数字中心——美丽瞬间活动而开发的信息管理系统。GIMS不仅可以自动录入女生信息而且可以智能整理相片，大大解放劳动力，提高生产力，造福后代子孙！" color="0x222222" selectable="true"/>
 			    <Label text="——维生数工作室" x="15" y="143" font="Microsoft YaHei" size="14" color="0x222222" width="401" height="27" align="right" selectable="true"/>

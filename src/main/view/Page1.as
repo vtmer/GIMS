@@ -69,6 +69,7 @@ package main.view
 		private var userIdArray:Array = new Array();
 		private var versonLabel:String = "0.6";
 		private var xlsFile:File;
+		private var dbFile:File;
 		private var currentRepeat:uint;
 		private var sheet:Sheet;
 		private var inputXls:ExcelFile;
@@ -143,6 +144,7 @@ package main.view
 		
 		private function onCloseIOViewBtn(e:MouseEvent):void
 		{
+			database.openDb();
 			IOView.visible = false;
 			whiteMask.visible = false;
 		}
@@ -157,9 +159,9 @@ package main.view
 		
 		private function ouputDb():void
 		{
-			var xlsFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
+			var outputFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
 			var outputDbFile:File = outputFile.resolvePath("数据库文件/userInfo.db");
-			xlsFile.copyTo(outputDbFile, true);
+			outputFile.copyTo(outputDbFile, true);
 		}
 		
 		private function exportToExcelByList(list:List, xlsName:String = "导出表格")
@@ -301,77 +303,87 @@ package main.view
 		
 		private function onInputBtn(e:MouseEvent):void
 		{
-			var xlsFilter:FileFilter = new FileFilter("导出表格", "*.xls");
 			
-			xlsFile = new File();
 			
-			xlsFile.browseForOpen("选择要导入的表格文件", [xlsFilter]);
-			xlsFile.addEventListener(Event.SELECT, fileSelected);
+			var dbFilter:FileFilter = new FileFilter("数据库文件", "*.db");
+			
+			dbFile = new File();
+			
+			dbFile.browseForOpen("选择要导入的数据库文件", [dbFilter]);
+			dbFile.addEventListener(Event.SELECT, fileSelected);
 		
 		}
 		
 		private function fileSelected(e:Event):void
 		{
-			trace("已选择文件");
+			database.cloceDb();
+			
+			var localDbFile = File.applicationStorageDirectory.resolvePath("userInfo.db");
+			dbFile.copyTo(localDbFile, true);
+			
+			
+			//database.setInputDbFile(dbFile);
+			
 			//读取xls文件
-			var stream:FileStream = new FileStream();
-			stream.open(xlsFile, FileMode.READ);
-			var ba:ByteArray = new ByteArray();
-			stream.readBytes(ba);
-			stream.close();
-			
-			inputXls = new ExcelFile();
-			
-			inputXls.loadFromByteArray(ba);
-			sheet = inputXls.sheets[0];
-			
-			IOView.visible = false;
-			whiteMask.visible = false;
-			
+			//var stream:FileStream = new FileStream();
+			//stream.open(xlsFile, FileMode.READ);
+			//var ba:ByteArray = new ByteArray();
+			//stream.readBytes(ba);
+			//stream.close();
+			//
+			//inputXls = new ExcelFile();
+			//
+			//inputXls.loadFromByteArray(ba);
+			//sheet = inputXls.sheets[0];
+			//
+			//IOView.visible = false;
+			//whiteMask.visible = false;
+			//
 			//延时调用
-			var repeatCount:uint = sheet.rows - 1;
-			var timer:Timer = new Timer(1000, repeatCount);
-			timer.addEventListener(TimerEvent.TIMER, repeatTimerHandler);
-			timer.start();
-			currentRepeat = 1;
+			//var repeatCount:uint = sheet.rows - 1;
+			//var timer:Timer = new Timer(1000, repeatCount);
+			//timer.addEventListener(TimerEvent.TIMER, repeatTimerHandler);
+			//timer.start();
+			//currentRepeat = 1;
 		
 		}
 		
-		private function repeatTimerHandler(e:TimerEvent):void
-		{
-			
-			insertByXls(sheet);
-		
-		}
+		//private function repeatTimerHandler(e:TimerEvent):void
+		//{
+			//
+			//insertByXls(sheet);
+		//
+		//
+		//}
 		
 		//由表格插入数据
-		private function insertByXls(sheet:Sheet):void
-		{
-			currentRepeat++;
-			editUser.userName = String(sheet.getCell(currentRepeat, 2));
-			if (String(sheet.getCell(currentRepeat, 3)) == "是")
-				editUser.userIsTown = 0;
-			else
-				editUser.userIsTown = 1;
-			if (String(sheet.getCell(currentRepeat, 4)) != "无")
-			{
-				var stringArray:Array;
-				stringArray = String(sheet.getCell(currentRepeat, 4)).split("-");
-				editUser.userDormitory = stringArray[0];
-				editUser.userDorNumber = Number(stringArray[1]);
-			}
-			else
-			{
-				editUser.userDormitory = null;
-				editUser.userDorNumber = 0;
-			}
-			editUser.userPhone = Number(sheet.getCell(currentRepeat, 5));
-			editUser.userEmail = String(sheet.getCell(currentRepeat, 6));
-			editUser.userPhotoId = String(sheet.getCell(currentRepeat, 7));
-			editUser.userPrintPhotoId = String(sheet.getCell(currentRepeat, 8));
-			
-			onActionHandler(DataActionEventKind.KIND_SAVE);
-		}
+		//private function insertByXls(sheet:Sheet):void
+		//{
+			//currentRepeat++;
+			//editUser.userName = String(sheet.getCell(currentRepeat, 2));
+			//if (String(sheet.getCell(currentRepeat, 3)) == "是")
+				//editUser.userIsTown = 0;
+			//else
+				//editUser.userIsTown = 1;
+			//if (String(sheet.getCell(currentRepeat, 4)) != "无")
+			//{
+				//var stringArray:Array;
+				//stringArray = String(sheet.getCell(currentRepeat, 4)).split("-");
+				//editUser.userDormitory = stringArray[0];
+				//editUser.userDorNumber = Number(stringArray[1]);
+			//}
+			//else
+			//{
+				//editUser.userDormitory = null;
+				//editUser.userDorNumber = 0;
+			//}
+			//editUser.userPhone = Number(sheet.getCell(currentRepeat, 5));
+			//editUser.userEmail = String(sheet.getCell(currentRepeat, 6));
+			//editUser.userPhotoId = String(sheet.getCell(currentRepeat, 7));
+			//editUser.userPrintPhotoId = String(sheet.getCell(currentRepeat, 8));
+			//
+			//onActionHandler(DataActionEventKind.KIND_SAVE);
+		//}
 		
 		private function lastArrange():void
 		{
@@ -670,13 +682,13 @@ package main.view
 				{
 					if (isAllSelected)
 					{
-						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j], list.array[j].userName);
-						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j], list.array[j].userName);
+						adaptation(list.array[j].userPhotoId, "电子版", i, userIdArray[j]);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, userIdArray[j]);
 					}
 					else
 					{
-						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId, list.array[j].userName);
-						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId, list.array[j].userName);
+						adaptation(list.array[j].userPhotoId, "电子版", i, list.array[j].userId);
+						adaptation(list.array[j].userPrintPhotoId, "冲洗版", i, list.array[j].userId);
 					}
 					
 				}
@@ -685,7 +697,7 @@ package main.view
 		}
 		
 		//分割匹配
-		private function adaptation(photoId:String, photoType:String, index:int, userId:String, userName:String):void
+		private function adaptation(photoId:String, photoType:String, index:int, userId:String):void
 		{
 			
 			photoIdArray = photoId.split(",");
@@ -696,7 +708,7 @@ package main.view
 				if (contents[index].name == photoFileName)
 				{
 					
-					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId + " " + userName + "/" + photoFileName);
+					currentOutputFile = outputFile.resolvePath(photoType + "/" + userId + "/" + photoFileName);
 					
 					//if (contents[index].exists)
 					//{
@@ -807,7 +819,7 @@ package main.view
 			}
 			tab_circle.labels = photoNum.toString();
 			
-			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userName + " " + editUser.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		
@@ -832,7 +844,7 @@ package main.view
 		{
 			trace(photoIdArray);
 			photoFileName = photoIdArray[index] + ".jpg";
-			photoViewFile = outputFile.resolvePath(photoType + "/" + editUser.userName + " " + editUser.userId + "/" + photoFileName);
+			photoViewFile = outputFile.resolvePath(photoType + "/" +  editUser.userId + "/" + photoFileName);
 			photoView.url = photoViewFile.url;
 		}
 		

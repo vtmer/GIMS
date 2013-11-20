@@ -30,6 +30,7 @@ package main.database
 		protected var conn:SQLConnection;
 		protected var inputConn:SQLConnection;
 		protected var resultSql:Responder;
+		protected var insertDbSql:SQLStatement=new SQLStatement();
 		protected var insertSql:SQLStatement = new SQLStatement();
 		protected var updateSql:SQLStatement = new SQLStatement();
 		protected var deleteSql:SQLStatement = new SQLStatement();
@@ -40,17 +41,21 @@ package main.database
          
 		//设置导入的数据库文件
 		public function setInputDbFile(pathFile:File):void {
-			inputDbFile = pathFile;
-			attachDb();
+			
+			conn.attach("userInfo1.userinfo", pathFile);
+			insertDbSql.clearParameters();
+			insertDbSql.execute( -1, resultSql);
+			trace("附加数据库成功");
 		}
 		
-		//导入数据库
-		protected function attachDb():void {
-			inputConn.open(inputDbFile, SQLMode.READ);
-			conn.attach("userInfo.userinfo", inputDbFile);
-			
-			trace("添加数据库");
+        public function cloceDb():void {
+			conn.close();
 		}
+		
+		public function openDb():void {
+			conn.openAsync(dbFile, dbFile.exists ? SQLMode.UPDATE : SQLMode.CREATE);
+		}
+		
 		public function setIsTownIndex(where:String):void
 		{
               isTown=where;
@@ -68,7 +73,12 @@ package main.database
 				  isTown;
 			  selectSql.text = selectText;
 		}
-
+		
+       //（sql语句报错不存在userInfo1.userinfo)
+		protected var insertDbText:String = "INSERT INTO userinfo(" +
+		"user_name,user_isTown,user_dormitory,user_dorNumber,user_phone,user_email,user_photoId,user_printPhotoId) select " +
+		"user_name,user_isTown,user_dormitory,user_dorNumber,user_phone,user_email,user_photoId,user_printPhotoId" +
+		" FROM " + "userInfo1.userinfo";
 		
 		protected var insertText:String = "INSERT INTO userinfo(" +
 		"'user_name', 'user_isTown', 'user_dormitory', 'user_dorNumber', 'user_phone','user_email','user_photoId','user_printPhotoId') VALUES(" +
@@ -130,6 +140,7 @@ package main.database
 			deleteSql.sqlConnection = conn;
 			selectSql.sqlConnection = conn;
 			tableSql.sqlConnection = conn;
+			insertDbSql.sqlConnection=conn;
 			
 			tableSql.addEventListener(SQLEvent.RESULT, onTableCreatedHandler);
 			tableSql.addEventListener(SQLErrorEvent.ERROR, onErrorHandler);
@@ -139,6 +150,7 @@ package main.database
 			deleteSql.text = deleteText;
 			selectSql.text = selectText;
 			tableSql.text = tableText;
+			insertDbSql.text=insertDbText;
 			
 			selectSql.itemClass = UserInfo;
 			
@@ -200,6 +212,7 @@ package main.database
 			selectSql.execute( -1, resultSql);
 			
 		}
+		
 		
 		//插入数据
 		public function insert(user:UserInfo):void {
