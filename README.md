@@ -1,11 +1,11 @@
-GIMS
+![ICON](http://vtmerhome.com/demo/gims/icon_48.png)GIMS
 ====
 
-Girls' Day Information Management System, for GDUT Girls' Day.
+Girls' Day Information Management System
 
 女生节信息管理系统，是一个用于管理照片信息的桌面应用程序，在女生节[广东工业大学团委数字中心](http://weibo.com/gdutonline)的“美丽瞬间”活动中使用。
 
-采用[Adobe Air](http://www.adobe.com/cn/products/air.html)+[Morn UI](http://www.mornui.com/)开发
+采用[Adobe Air](http://www.adobe.com/cn/products/air.html)+[Morn UI](http://www.mornui.com/)的Flash开发技术。
 
 美丽瞬间
 ====
@@ -20,7 +20,8 @@ Girls' Day Information Management System, for GDUT Girls' Day.
 1. 新建信息。
 2. 根据照片ID匹配相片文件及（压缩）整理相片。
 3. 不同电脑间相互导入、导出照片信息。
-4. 一键邮件发送（待开发）。
+4. 一键邮件发送。
+
 
 ###Designed By
 
@@ -30,4 +31,14 @@ Girls' Day Information Management System, for GDUT Girls' Day.
 
 @[Shengbanx](http://shengbanx.github.io)
 
-@2013[维生数工作室](http://vtmer.com)
+###想说的话：
+开发需要暂停一段时间了，很感谢MornUI带给我三个多星期的愉快开发过程，以及感谢Morn交流群里一群flash开发者带来的欢乐，虽老不正经，但有问问题时就会立即热心地解答，很喜欢这个氛围，也是我唯一一个没有屏蔽的技术交流群...
+
+
+嗯，还是很喜欢flash~
+
+shengbanx
+
+2013年12月10日
+
+© 2013 [Vtmer 维生数工作室](http://vtmer.com).
