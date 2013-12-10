@@ -1,4 +1,4 @@
-<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="23,0,11,0,IOView;22,0,11,1,TipsView;21,0,11,1,about;19,0,11,1,setView;16,0,11,1,progress;20,0,11,0,whiteMask;18,1,11,1,image2;17,1,11,0,button2;12,1,11,0,control;11,0,11,0,drawer;15,1,11,1,mask;14,1,11,0,list;3,1,11,1,image;1,1,11,0,button;6,1,11,1,search;5,1,11,1,label;4,1,11,0,navigation;13,1,11,0,remove;2,1,11,0,background" visible="true" disabled="false">
+<View sceneWidth="1048" sceneHeight="768" sceneColor="0xffffff" sceneAlpha="0" sceneBg="" layers="23,0,18,0,IOView;22,0,18,1,TipsView;21,0,18,1,about;19,0,18,1,setView;16,0,18,1,progress;20,0,18,0,whiteMask;18,0,18,1,image2;17,1,18,0,button2;12,0,18,0,control;11,0,18,0,drawer;15,0,18,1,mask;14,0,18,0,list;3,0,18,1,image;1,1,18,0,button;6,0,18,1,search;5,0,18,1,label;4,1,18,0,navigation;13,0,18,0,remove;2,1,18,0,background" visible="true" disabled="false">
   <Image url="png.flat.bg" x="0" y="0" layer="2" sizeGrid="186,104,26,26" var="bg" width="1048" height="769"/>
   <Container layers="1,1,0" layer="13" width="1025" height="92" left="12" top="12" alpha="0" x="12" y="12" var="block_remove" mouseEnabled="true" buttonMode="false">
     <Image url="png.flat.blank" layer="1" width="1025" height="92" x="0" y="0"/>
@@ -11,7 +11,7 @@
   <TextInput x="446" y="149" layer="6" width="282" height="22" align="left" font="Microsoft YaHei" size="12" var="input_search"/>
   <Button skin="png.flat.btn_metro" x="12" y="104" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
   <Button skin="png.flat.btn_metro" x="12" y="212" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
-  <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
+  <Button skin="png.flat.btn_metro" x="12" y="320" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="false"/>
   <Button skin="png.flat.btn_metro" x="12" y="428" layer="1" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true" disabled="false"/>
   <Button skin="png.flat.btn_contact" x="65" y="690" layer="1" buttonMode="true"/>
   <Button skin="png.flat.btn_question" x="93" y="690" layer="1" buttonMode="true" var="btn_quesent"/>
@@ -21,7 +21,7 @@
     <Button label="" skin="png.flat.btn_min" layer="1" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
     <Button skin="png.flat.btn_restore" x="38" layer="1" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原" disabled="false"/>
   </Container>
-  <Button skin="png.flat.btn_set" x="120" y="690" layer="1" var="btn_set"/>
+  <Button skin="png.flat.btn_set" x="120" y="690" layer="1" var="btn_set" width="18" height="18" buttonMode="true"/>
   <Image url="png.flat.logo" x="33" y="36" layer="3"/>
   <Image url="png.flat.table" x="217" y="209" layer="3"/>
   <Box layers="1,1,0" layer="3" x="66" y="136" mouseChildren="false" mouseEnabled="false">
@@ -84,7 +84,7 @@
       <Label text="冲洗版" x="154" y="353" layer="1" font="Microsoft YaHei" size="13" color="0x333333"/>
       <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" layer="1" var="tab_photoType" buttonMode="true"/>
       <Button skin="png.flat.btn_edit" x="268" y="83" layer="2" var="btn_infoEdit" buttonMode="true"/>
-      <Button skin="png.flat.btn_send" x="268" y="117" layer="2" var="btn_infoSend" buttonMode="true" disabled="true"/>
+      <Button skin="png.flat.btn_send" x="268" y="117" layer="2" var="btn_infoSend" buttonMode="true" disabled="false"/>
       <Button skin="png.flat.btn_delete" x="268" y="150" layer="2" var="btn_infoDelete" buttonMode="true" disabled="false"/>
       <Image x="34" y="405" layer="3" width="246.6" height="185" var="photoView"/>
       <Container layers="1,1,0" layer="2" x="11" y="614" width="289" height="14" centerX="0">

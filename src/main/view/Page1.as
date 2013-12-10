@@ -2,6 +2,9 @@ package main.view
 {
 	import com.as3xls.xls.ExcelFile;
 	import com.as3xls.xls.Sheet;
+	import flash.display.BitmapData;
+	import flash.display.Loader;
+	import flash.display.LoaderInfo;
 	import flash.display.NativeWindowResize;
 	import flash.events.Event;
 	import flash.events.FileListEvent;
@@ -34,6 +37,10 @@ package main.view
 	import morn.core.components.Label;
 	import morn.core.components.TextInput;
 	import morn.core.handlers.Handler;
+	
+	import org.bytearray.smtp.encoding.JPEGEncoder;
+	import org.bytearray.smtp.events.SMTPEvent;
+	import org.bytearray.smtp.mailer.SMTPMailer;
 	
 	/**
 	 * ...
@@ -73,17 +80,59 @@ package main.view
 		private var currentRepeat:uint;
 		private var sheet:Sheet;
 		private var inputXls:ExcelFile;
+		private var smtpMailer:SMTPMailer;
+		private var photoFiles:File;
 		
 		public function Page1()
 		{
 			//初始化
-			outputFile = new File();
-			photoFile = new File();
+			init();
 			
-			database = new UserDatabase();
-			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
 			//窗口操作
 			windowsBtn();
+			
+			//按钮事件
+			buttonEvent();
+			
+			//搜索功能
+			input_search.addEventListener(FocusEvent.FOCUS_IN, inputSearch);
+			
+			//表单提示信息功能
+			inputFieldTips();
+			
+			//表单确认功能
+			inputEnter();
+			
+			//list渲染
+			initList();
+			
+			//筛选非本校区
+			isTown();
+			
+			//选择项组
+			//selectedListItem();
+			
+			//第一次运行
+		    firstRun();
+			
+			//读取版本号
+			//setVerson();
+			//发送邮件
+			//btn_send.addEventListener(MouseEvent.MOUSE_DOWN, sendEmail);
+			//btn_infoSend.addEventListener(MouseEvent.MOUSE_DOWN, sendEmail);
+			
+		}
+		
+		private function init():void 
+		{
+			outputFile = new File();
+			photoFile = new File();
+			database = new UserDatabase();
+			database.addEventListener(DataActionEvent.DATA_ACTION_EVENT, onDataActionHandler);
+		}
+		
+		private function buttonEvent():void 
+		{
 			//drawer动画
 			btn_block.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
 			btn_new.addEventListener(MouseEvent.MOUSE_DOWN, IOAnimation);
@@ -95,29 +144,12 @@ package main.view
 			btn_infoDelete.addEventListener(MouseEvent.MOUSE_DOWN, infoDelete);
 			//匹配整理
 			btn_arrange.addEventListener(MouseEvent.MOUSE_DOWN, arrange);
-			//最后一次整理
-			btn_allSelect.clickHandler = new Handler(lastArrange);
-			//搜索
-			input_search.addEventListener(FocusEvent.FOCUS_IN, inputSearch);
-			//表单提示信息
-			inputFieldTips();
-			//表单确认
-			inputEnter();
-			//list
-			initList();
-			//筛选非本校区
-			isTown();
-			//选择项组
-			//selectedListItem();
-			//第一次运行
-			firstRun();
 			//关于
 			btn_quesent.addEventListener(MouseEvent.MOUSE_DOWN, onAboutBtn);
 			//导入导出
 			btn_io.addEventListener(MouseEvent.MOUSE_DOWN, onIOBtn);
-			//读取版本号
-			//setVerson();
-		
+			//最后一次整理
+			btn_allSelect.clickHandler = new Handler(lastArrange);
 		}
 		
 		//private function setVerson():void
@@ -133,6 +165,44 @@ package main.view
 		//fileStream.close();
 		//}
 		
+		//private function sendEmail(e:MouseEvent):void {
+			//smtpMailer = new SMTPMailer("smtp.163.com", 25);
+			//smtpMailer.authenticate("testas3smtp", "13152468");
+			//smtpMailer.addEventListener(SMTPEvent.AUTHENTICATED, onAuthSuccess);
+		//}
+		//
+		//private function onAuthSuccess(e:SMTPEvent):void 
+		//{
+			//trace("onAuthSucess");
+			//getPhotoData(editUser.userPhotoId, "电子版");
+			//
+		//}
+		//
+		//private function getPhotoData(photoId:String, photoType:String):void
+		//{
+			//photoIdArray = photoId.split(",");
+			//photoFileName = photoIdArray[0] + ".jpg";
+			//
+			//photoFiles = outputFile.resolvePath(photoType + "/" +  userIdArray[listSelectIndex] + "/" + photoFileName);
+			//var byteArr:ByteArray = photoFiles.data;
+			//var ldr:Loader = new Loader();
+			//ldr.loadBytes(byteArr);
+			//ldr.contentLoaderInfo.addEventListener(Event.INIT, initLdrOK);
+		//}
+		//
+		//private function initLdrOK(e:Event):void 
+		//{
+			//var ldrInfo:LoaderInfo = e.currentTarget as LoaderInfo;
+			//ldrInfo.removeEventListener(Event.INIT, initLdrOK);
+			//var ldr:Loader = ldrInfo.loader;
+			//var bmd:BitmapData = new BitmapData(ldr.width, ldr.height);
+			//bmd.draw(ldr);
+			//var jpg:JPEGEncoder = new JPEGEncoder(50);
+			//var jpgBArr:ByteArray = jpg.encode(bmd);
+			//smtpMailer.sendAttachedMail("testas3Smtp@163.com", "609665233", "（测试）您的女生节相片", "测试", jpgBArr, photoFileName);
+		//}
+
+		//导入导出功能
 		private function onIOBtn(e:MouseEvent):void
 		{
 			IOView.visible = true;
@@ -157,6 +227,7 @@ package main.view
 			ouputDb();
 		}
 		
+		//导出数据库
 		private function ouputDb():void
 		{
 			var outputFile:File = File.applicationStorageDirectory.resolvePath("userInfo.db");
@@ -164,6 +235,7 @@ package main.view
 			outputFile.copyTo(outputDbFile, true);
 		}
 		
+		//导出Excel表格
 		private function exportToExcelByList(list:List, xlsName:String = "导出表格")
 		{
 			var _sheet:Sheet = new Sheet();
@@ -385,6 +457,7 @@ package main.view
 			//onActionHandler(DataActionEventKind.KIND_SAVE);
 		//}
 		
+		//最后一次整理
 		private function lastArrange():void
 		{
 			if (btn_allSelect.selected)
@@ -398,7 +471,7 @@ package main.view
 			}
 		}
 		
-		//重排序
+		//重排序正确显示序号
 		private function sortAgain():void
 		{
 			for (var i:int = 0; i < list.array.length; i++)
@@ -418,6 +491,8 @@ package main.view
 			}
 		}
 		
+		
+		//关于页面
 		private function onAboutBtn(e:MouseEvent):void
 		{
 			AboutVIew.Version.text = versonLabel;

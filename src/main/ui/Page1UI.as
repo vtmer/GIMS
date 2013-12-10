@@ -76,7 +76,7 @@ package main.ui {
 			  <TextInput x="446" y="149" width="282" height="22" align="left" font="Microsoft YaHei" size="12" var="input_search"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="104" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," buttonMode="true" var="btn_new" visible="true"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="212" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_io" buttonMode="true"/>
-			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="true"/>
+			  <Button skin="png.flat.btn_metro" x="12" y="320" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_send" buttonMode="true" disabled="false"/>
 			  <Button skin="png.flat.btn_metro" x="12" y="428" labelColors="0xffffff" labelSize="14" labelFont="Microsoft YaHei" labelMargin=",18,," var="btn_arrange" buttonMode="true" disabled="false"/>
 			  <Button skin="png.flat.btn_contact" x="65" y="690" buttonMode="true"/>
 			  <Button skin="png.flat.btn_question" x="93" y="690" buttonMode="true" var="btn_quesent"/>
@@ -86,7 +86,7 @@ package main.ui {
 			    <Button label="" skin="png.flat.btn_min" buttonMode="true" width="stageHeight-" var="btn_min" toolTip="最小化"/>
 			    <Button skin="png.flat.btn_restore" x="38" visible="false" buttonMode="true" var="btn_restore" y="0" toolTip="还原" disabled="false"/>
 			  </Container>
-			  <Button skin="png.flat.btn_set" x="120" y="690" var="btn_set"/>
+			  <Button skin="png.flat.btn_set" x="120" y="690" var="btn_set" width="18" height="18" buttonMode="true"/>
 			  <Image url="png.flat.logo" x="33" y="36"/>
 			  <Image url="png.flat.table" x="217" y="209"/>
 			  <Box x="66" y="136" mouseChildren="false" mouseEnabled="false">
@@ -149,7 +149,7 @@ package main.ui {
 			      <Label text="冲洗版" x="154" y="353" font="Microsoft YaHei" size="13" color="0x333333"/>
 			      <Tab labels="," skin="png.flat.tab_selete" x="97" y="355" var="tab_photoType" buttonMode="true"/>
 			      <Button skin="png.flat.btn_edit" x="268" y="83" var="btn_infoEdit" buttonMode="true"/>
-			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true" disabled="true"/>
+			      <Button skin="png.flat.btn_send" x="268" y="117" var="btn_infoSend" buttonMode="true" disabled="false"/>
 			      <Button skin="png.flat.btn_delete" x="268" y="150" var="btn_infoDelete" buttonMode="true" disabled="false"/>
 			      <Image x="34" y="405" width="246.6" height="185" var="photoView"/>
 			      <Container x="11" y="614" width="289" height="14" centerX="0">
